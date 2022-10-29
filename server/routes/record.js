@@ -10,35 +10,30 @@ router.post('/post', (req, res) => {
     })
 
     data.save();
+    res.status(200).json(data);
 });
 
-recordRoutes.route("/update/:id").post(function (req, response) {
-    let db_connect = dbo.getDb();
-    let myquery = { _id: ObjectId(req.params.id) };
-    let newvalues = {
-      $set: {
-        name: req.body.name,
-        position: req.body.position,
-        level: req.body.level,
-      },
-    };
-    db_connect
-      .collection("learningSystem")
-      .updateOne(myquery, newvalues, function (err, res) {
-        if (err) throw err;
-        console.log("1 document updated");
-        response.json(res);
-      });
-   });
-    
-recordRoutes.route("/:id").delete((req, response) => {
-let db_connect = dbo.getDb();
-let myquery = { _id: ObjectId(req.params.id) };
-db_connect.collection("learningSystem").deleteOne(myquery, function (err, obj) {
-    if (err) throw err;
-    console.log("1 document deleted");
-    response.json(obj);
-});
+router.get('/getOne/:id', async (req, res) => {
+    try{
+        const data = await Model.findById(req.params.id);
+        res.json(data);
+    }
+    catch(error){
+        res.status(500).json({message: error.message})
+    }
 });
 
-module.exports = recordRoutes;
+router.put('/tryput/:id', async (req, res) => {
+    var idOfObject = req.params.id;
+    Model.findByIdAndUpdate(idOfObject, {Name: 'Chicken Burger'}, function(err, docs) {
+        if (err){
+            console.log(err);
+        }
+        else{
+            console.log("Updated : ", idOfObject);
+        }
+    })
+    res.status(500).json({Name: 'Chicken Burger'});
+})
+
+module.exports = router;
