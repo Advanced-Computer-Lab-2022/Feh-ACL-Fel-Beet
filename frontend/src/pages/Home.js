@@ -8,7 +8,7 @@ const Home = () => {
     
   useEffect(() => {
     const fetchCourses = async () => {
-      const response = await fetch('/allCourses')
+      const response = await fetch('http://localhost:5000/allCourses')
       
       const json = await response.json()
       console.log(response)
@@ -24,7 +24,7 @@ const Home = () => {
   return (
     <div className="home">
       <div className="courses">
-        
+        blah aw ay haga
         {courses && courses.map((course) => (
           <CourseDetails course={course} key={course._id} />
         ))}

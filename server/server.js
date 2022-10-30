@@ -3,6 +3,7 @@ require("dotenv").config({path: "./config.env"});
 const express = require("express");
 const Routes = require('./routes/record')
 const port = process.env.PORT || 5000;
+const cors = require("cors")
 
 //get driver connection
 const dbo = require("./db/conn");
@@ -11,6 +12,7 @@ const mongoose = require('mongoose')
 
 //express app
 const app = express();
+app.use(cors({origin:"*"}))
 
 //middleware
 app.use(express.json());
