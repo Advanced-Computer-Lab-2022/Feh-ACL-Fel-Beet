@@ -1,17 +1,19 @@
 const express = require("express");
 const router = express.Router();
-const Model = require("../models/Courses");
+const CourseModel = require("../models/Courses");
 module.exports = router;
 
-router.post('/post', (req, res) => {
-    const data = new Model({
-        Name: 'Yousef',
-        Professor: 'Korayem'
-    })
-
-    data.save();
-    res.status(200).json(data);
-});
+// POST a new entry
+router.post('/post', async (req, res) => {
+    const {Name,Professor,Country,Subject,Price,Hours,Rating,Subs,Exercises,Hours_subs,Link} = req.body
+    
+    try {
+      const course = await CourseModel.create({Name,Professor,Country,Subject,Price,Hours,Rating,Subs,Exercises,Hours_subs,Link})
+      res.status(200).json(course)
+    } catch (error) {
+      res.status(400).json({error: error.message})
+    }
+  })
 
 router.get('/getOne/:id', async (req, res) => {
     try{
