@@ -1,10 +1,33 @@
-const Home = () => {
+import { useEffect, useState } from "react"
 
-    return (
-      <div className="home">
-        <h2>Home</h2>
+// components
+import CourseDetails from "../components/CourseDetails.js"
+
+const Home = () => {
+  const [courses, setCourses] = useState(null)
+
+  useEffect(() => {
+    const fetchCourses = async () => {
+      const response = await fetch('/allCourses')
+      const json = await response.json()
+
+      if (response.ok) {
+        setCourses(json)
+      }
+    }
+
+    fetchCourses()
+  }, [])
+
+  return (
+    <div className="home">
+      <div className="courses">
+        {courses && courses.map((course) => (
+          <CourseDetails course={course} key={course._id} />
+        ))}
       </div>
-    )
-  }
-  
-  export default Home
+    </div>
+  )
+}
+
+export default Home
