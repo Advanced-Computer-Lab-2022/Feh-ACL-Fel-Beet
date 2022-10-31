@@ -24,8 +24,10 @@ app.use((req, res, next) => {
 //routes
 const basicRoutes = require("./routes/record");
 const adminRoutes = require("./routes/admin");
+const instructorRoutes = require('./routes/instructor');
 app.use(basicRoutes);
 app.use(adminRoutes);
+app.use(instructorRoutes);
 
 
 // connect to db
