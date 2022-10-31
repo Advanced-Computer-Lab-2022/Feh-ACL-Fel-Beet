@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 
 // components
 import CourseDetails from "../components/CourseDetails.js"
+import ManualAdditionForm from "../components/ManualAdditionForm.js"
 
 const Home = () => {
   const [courses, setCourses] = useState(null)
@@ -28,6 +29,9 @@ const Home = () => {
         {courses && courses.map((course) => (
           <CourseDetails course={course} key={course._id} />
         ))}
+      </div>
+      <div className="ManualAdditionForm">
+          <ManualAdditionForm />
       </div>
     </div>
   )
