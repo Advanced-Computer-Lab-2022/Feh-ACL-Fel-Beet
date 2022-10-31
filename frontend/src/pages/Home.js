@@ -24,7 +24,7 @@ const Home = () => {
   return (
     <div className="home">
       <div className="courses">
-        blah aw ay haga
+        Courses:
         {courses && courses.map((course) => (
           <CourseDetails course={course} key={course._id} />
         ))}
