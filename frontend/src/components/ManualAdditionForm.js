@@ -1,6 +1,6 @@
 import {useState} from "react"
 
-const ManualAdditionForm = (type) => {
+function ManualAdditionForm({type}) {
     const [Username, setUsername] = useState('')
     const [Password, setPassword] = useState('')
     const [error, setError] = useState(null)
@@ -27,6 +27,13 @@ const ManualAdditionForm = (type) => {
                     headers: {'Content-Type': 'application/json'}
                 })
                 break;
+            case "corporate trainee":
+                response = await fetch('http://localhost:5000/createCorporateTrainee', {
+                    method: 'POST',
+                    body: JSON.stringify(data),
+                    headers: {'Content-Type': 'application/json'}
+                })
+                break;
         }
 
         const json = await response.json()
@@ -38,7 +45,7 @@ const ManualAdditionForm = (type) => {
             setUsername("");
             setPassword("");
             setError(null);
-            console.log({type} + "added");
+            console.log(type + " added");
         }
     }
 

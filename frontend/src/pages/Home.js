@@ -31,7 +31,9 @@ const Home = () => {
         ))}
       </div>
       <div className="ManualAdditionForm">
-          <ManualAdditionForm />
+          <ManualAdditionForm type="admin"/>
+          <ManualAdditionForm type="instructor"/>
+          <ManualAdditionForm type="corporate trainee"/>
       </div>
     </div>
   )
