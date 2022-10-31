@@ -1,6 +1,17 @@
 require("dotenv").config({path: "./config.env"});
 
 const express = require("express");
+const mongoose = require('mongoose');
+const cors = require("cors");
+
+const adminRoutes = require('./routes/admin');
+
+app.use(cors());
+app.use(express.json());
+//app.use(require("./routes/record"));
+app.use('/', adminRoutes);
+
+const express = require("express");
 const Routes = require('./routes/record')
 const port = process.env.PORT || 5000;
 const cors = require("cors")
@@ -41,5 +52,3 @@ mongoose.connect(process.env.ATLAS_URI)
   .catch((err) => {
     console.log(err)
   }) 
-
-
