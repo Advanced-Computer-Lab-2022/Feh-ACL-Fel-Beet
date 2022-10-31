@@ -63,29 +63,29 @@ function CourseCreation() {
     return(
         <form className="courseCreationForm" onSubmit={handleSubmit}>
             <h3>Create a New Course</h3>
-            <label>Name</label>
+            <label>Name </label>
             <input type="text" onChange={(e) => setName(e.target.value)} value={Name}></input>
-            <label>Professor</label>
+            <label><br></br>Professor </label>
             <input type="text" onChange={(e) => setProfessor(e.target.value)} value={Professor}></input>
-            <label>Country</label>
+            <label><br></br>Country </label>
             <input type="text" onChange={(e) => setCountry(e.target.value)} value={Country}></input>
-            <label>Subject</label>
+            <label><br></br>Subject </label>
             <input type="text" onChange={(e) => setSubject(e.target.value)} value={Subject}></input>
-            <label>Price</label>
+            <label><br></br>Price </label>
             <input type="text" onChange={(e) => setPrice(e.target.value)} value={Price}></input>
-            <label>Hours</label>
+            <label><br></br>Hours </label>
             <input type="text" onChange={(e) => setHours(e.target.value)} value={Hours}></input>
-            <label>Rating</label>
+            <label><br></br>Rating </label>
             <input type="text" onChange={(e) => setRating(e.target.value)} value={Rating}></input>
-            <label>Subs</label>
+            <label><br></br>Subs </label>
             <input type="text" onChange={(e) => setSubs(e.target.value)} value={Subs}></input>
-            <label>Exercises</label>
+            <label><br></br>Exercises </label>
             <input type="text" onChange={(e) => setExercises(e.target.value)} value={Exercises}></input>
-            <label>Hours_subs</label>
+            <label><br></br>Hours_subs </label>
             <input type="text" onChange={(e) => setHours_subs(e.target.value)} value={Hours_subs}></input>
-            <label>Link</label>
+            <label><br></br>Link </label>
             <input type="text" onChange={(e) => setLink(e.target.value)} value={Link}></input>
-            <button>Add Course</button>
+            <br></br><button>Add Course </button>
             {error && <div className="error">{error}</div>}
         </form>
     )
