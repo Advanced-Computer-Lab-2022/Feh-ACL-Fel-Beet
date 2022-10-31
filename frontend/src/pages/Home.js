@@ -2,7 +2,8 @@ import { useEffect, useState } from "react"
 
 // components
 import CourseDetails from "../components/CourseDetails.js"
-import ManualAdditionForm from "../components/ManualAdditionForm.js"
+import ManualAdditionForm from "../components/ManualUserAdditionForm.js"
+import CourseCreation from "../components/CourseCreation.js"
 
 const Home = () => {
   const [courses, setCourses] = useState(null)
@@ -34,6 +35,7 @@ const Home = () => {
           <ManualAdditionForm type="admin"/>
           <ManualAdditionForm type="instructor"/>
           <ManualAdditionForm type="corporate trainee"/>
+          <CourseCreation />
       </div>
     </div>
   )

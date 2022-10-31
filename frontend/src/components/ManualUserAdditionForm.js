@@ -1,6 +1,6 @@
 import {useState} from "react"
 
-function ManualAdditionForm({type}) {
+function ManualUserAdditionForm({type}) {
     const [Username, setUsername] = useState('')
     const [Password, setPassword] = useState('')
     const [error, setError] = useState(null)
@@ -62,4 +62,4 @@ function ManualAdditionForm({type}) {
     )
 }
 
-export default ManualAdditionForm
+export default ManualUserAdditionForm
