@@ -1,14 +1,13 @@
 const express = require("express");
 const router = express.Router();
-const CourseModel = require("../models/Courses");
-module.exports = router;
 
 const {
     getCourses,
     getCourse,
     createCourse,
     deleteCourse,
-    updateCourse
+    updateCourse,
+    viewInstructorCourses
   } = require('../controllers/courseController')
 
 // POST a new entry
@@ -25,5 +24,8 @@ router.get('/allCourses', getCourses)
 
 //delete a couse by ID
 router.delete('/delete/:id', deleteCourse)
+
+//VIEW INSTRUCTOR COURSES
+router.post('/viewInstructorCourses', viewInstructorCourses)
 
 module.exports = router;
