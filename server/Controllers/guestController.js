@@ -1,1 +1,1 @@
-const Guest = require('../models/')
+const Guest = require('../Models/guestModel')

@@ -4,4 +4,4 @@ const { addNewCorporateTrainee } = require('../Controllers/corporateTraineeContr
 
 router.post('/addCorporateTrainee', addNewCorporateTrainee)
 
-modules.export = router
+module.exports = router

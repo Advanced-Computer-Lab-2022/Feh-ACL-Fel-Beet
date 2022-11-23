@@ -1,19 +1,10 @@
 require("dotenv").config({path: "./config.env"});
-
 const express = require("express");
 const port = process.env.PORT || 5000;
-const cors = require("cors");
-
-//get driver connection
-const dbo = require("./db/conn");
+const app = express();
 const mongoose = require('mongoose')
 
-
-//express app
-const app = express();
-app.use(cors({origin:"*"}))
-
-//middleware
+//MIDDLEWARE
 app.use(express.json());
 app.use((req, res, next) => {
     console.log(req.path, req.method)
@@ -21,26 +12,26 @@ app.use((req, res, next) => {
   }
 )
   
-//routes
-const basicRoutes = require("./routes/record");
-const adminRoutes = require("./routes/admin");
-const instructorRoutes = require('./routes/instructor');
-app.use(basicRoutes);
+//ROUTES
+const courseRoutes = require("./Routes/courseRoutes");
+const adminRoutes = require("./Routes/adminRoutes");
+const instructorRoutes = require('./Routes/instructorRoutes');
+const corporateTraineeRoutes = require('./Routes/corporateTraineeRoutes')
+const guestRoutes = require('./Routes/guestRoutes')
+app.use(courseRoutes);
 app.use(adminRoutes);
 app.use(instructorRoutes);
+app.use(corporateTraineeRoutes);
+app.use(guestRoutes);
 
-
-// connect to db
+//DB CONNECTION & LISTENING TO PORT
 mongoose.connect(process.env.ATLAS_URI)
-  .then(() => {
-    console.log('connected to database')
-    // listen to port
-    app.listen(port, () => {
-        //perform a databse connection when the server starts
-        dbo.connectToServer();
-        console.log(`Server is running on port: ${port}`);
-    });
-  })
-  .catch((err) => {
-    console.log(err)
-  }) 
+.then(() => {
+    console.log("Connected to MongoDB.")
+    app.listen(port , () => {
+        console.log("Listening on port", port)
+    })
+})
+.catch((error) => {
+    console.log(error)
+})

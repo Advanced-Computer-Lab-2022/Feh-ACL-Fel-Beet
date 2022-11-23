@@ -1,4 +1,4 @@
-const IndividualTrainee = require('../models/individualTraineeModel')
+const IndividualTrainee = require('../Models/individualTraineeModel')
 
 
 module.exports = {}

@@ -1,4 +1,4 @@
-const Instructor = require('../models/instructorModel');
+const Instructor = require('../Models/instructorModel');
 
 //ADD NEW INSTRUCTOR
 const addNewInstructor = async (req, res) => {

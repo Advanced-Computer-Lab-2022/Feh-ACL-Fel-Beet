@@ -1,4 +1,4 @@
-const CorporateTrainee = require("../models/corporateTraineeModel")
+const CorporateTrainee = require("../Models/corporateTraineeModel")
 
 const addNewCorporateTrainee = async (req, res) => {
     const { Username, Password } = req.body;
