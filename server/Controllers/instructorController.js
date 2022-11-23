@@ -1,16 +1,17 @@
-const Course = require('../models/Courses');
-const mongoose = require('mongoose');
+const Instructor = require('../models/instructorModel');
 
-const viewInstructorCourses = async (req, res) => {
-    const { Professor } = req.body
+//ADD NEW INSTRUCTOR
+const addNewInstructor = async (req, res) => {
+    const { Username, Password } = req.body;
 
-    const course = await Course.find({'Professor': Professor});
-
-    if (!course) {
-        return res.status(404).json({error: 'No courses for you'})
+    try{
+        const instructor = await Instructor.create({ Username, Password});
+        res.status(200).json(instructor);
+    } catch(error){
+        res.status(400).json({ error: error.message });  
     }
+};
 
-    res.status(200).json(course)
-}
-
-module.exports = viewInstructorCourses;
+module.exports = {
+    addNewInstructor
+};

@@ -1,0 +1,1 @@
+const Guest = require('../models/')
