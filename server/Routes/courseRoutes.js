@@ -8,24 +8,19 @@ const {
     deleteCourse,
     updateCourse,
     viewInstructorCourses
-  } = require('../controllers/courseController')
+  } = require('../Controllers/courseController')
 
-// POST a new entry
-router.post('/post', createCourse)
-
-//get a course by ID
-router.get('/getOne/:id', getCourse);
-
-//update a course by ID
-router.patch('/patch/:id', updateCourse)
-
-//get all courses 
+// VIEW ALL COURSES
 router.get('/allCourses', getCourses)
-
-//delete a couse by ID
-router.delete('/delete/:id', deleteCourse)
-
-//VIEW INSTRUCTOR COURSES
+// GET COURSE FROM ID
+router.get('/get/:id', getCourse);
+// CREATE COURSE
+router.post('/create', createCourse)
+// VIEW INSTRUCTOR COURSES
 router.post('/viewInstructorCourses', viewInstructorCourses)
+// UPDATE COURSE
+router.patch('/update/:id', updateCourse) 
+// DELETE COURSE
+router.delete('/delete/:id', deleteCourse)
 
 module.exports = router;

@@ -1,7 +1,8 @@
 const express = require('express')
 const router = express.Router()
-const { addNewCorporateTrainee } = require('../Controllers/corporateTraineeController')
+const { add, login } = require('../Controllers/corporateTraineeController')
 
-router.post('/addCorporateTrainee', addNewCorporateTrainee)
+router.post('/add', add)
+router.post('/login', login)
 
 module.exports = router

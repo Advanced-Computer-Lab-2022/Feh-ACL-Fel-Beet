@@ -5,6 +5,7 @@ const GuestSchema = new Schema({
   Username: {
     type: String,
     required: true,
+    unique: true
   },
   Password: {
     type: String,
@@ -21,6 +22,7 @@ const GuestSchema = new Schema({
   Email: {
     type: String,
     required: true,
+    unique: true
   },
     Phone_Number: {
     type: String,

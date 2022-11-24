@@ -5,6 +5,7 @@ const coursesSchema = new Schema({
   Name: {
     type: String,
     required: true,
+    unique: true
   },
   Professor: {
     type: String,

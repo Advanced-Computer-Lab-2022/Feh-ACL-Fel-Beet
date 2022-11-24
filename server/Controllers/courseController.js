@@ -1,10 +1,43 @@
 const Course = require('../Models/courseModel')
 
-//VIEW INSTRUCTOR COURSES
-const viewInstructorCourses = async (req, res) => {
+//FILTER COURSE METHODS
+const filterByInstructor = async (req, res) => {
   const { Professor } = req.body
 
   const course = await Course.find({'Professor': Professor});
+
+  if (!course) {
+      return res.status(404).json({error: 'No courses for you'})
+  }
+
+  res.status(200).json(course)
+}
+const filterByName = async (req, res) => {
+  const { Name } = req.body
+
+  const course = await Course.find({'Name': Name});
+
+  if (!course) {
+      return res.status(404).json({error: 'No courses for you'})
+  }
+
+  res.status(200).json(course)
+}
+const filterByPrice = async (req, res) => {
+  const { Price } = req.body
+
+  const course = await Course.find({'Price': Price});
+
+  if (!course) {
+      return res.status(404).json({error: 'No courses for you'})
+  }
+
+  res.status(200).json(course)
+}
+const filterBySubject = async (req, res) => {
+  const { Subject } = req.body
+
+  const course = await Course.find({'Subject': Subject});
 
   if (!course) {
       return res.status(404).json({error: 'No courses for you'})
@@ -91,5 +124,8 @@ module.exports = {
   createCourse,
   deleteCourse,
   updateCourse,
-  viewInstructorCourses
+  filterByInstructor,
+  filterByName,
+  filterByPrice,
+  filterBySubject
 }

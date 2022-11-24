@@ -1,17 +1,16 @@
 import { useEffect, useState } from "react"
 
 // components
-import CourseDetails from "../components/CourseDetails.js"
-import ManualAdditionForm from "../components/ManualUserAdditionForm.js"
-import CourseCreation from "../components/CourseCreation.js"
+import CourseDetails from "../components/CourseDetails"
+import ManualAdditionForm from "../components/ManualUserAdditionForm"
+import CourseCreation from "../components/CourseCreation"
 
 const Home = () => {
   const [courses, setCourses] = useState(null)
     
   useEffect(() => {
     const fetchCourses = async () => {
-      const response = await fetch('http://localhost:5000/allCourses')
-      
+      const response = await fetch('http://localhost:5000/course/allCourses')
       const json = await response.json()
       console.log(response)
 
@@ -26,7 +25,7 @@ const Home = () => {
   return (
     <div className="home">
       <div className="courses">
-        blah aw ay haga
+        <p>Courses</p>
         {courses && courses.map((course) => (
           <CourseDetails course={course} key={course._id} />
         ))}

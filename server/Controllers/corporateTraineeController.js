@@ -1,6 +1,26 @@
 const CorporateTrainee = require("../Models/corporateTraineeModel")
 
-const addNewCorporateTrainee = async (req, res) => {
+//LOGIN
+const login = async (req, res) => {
+    const { Username, Password } = req.body;
+
+    try{
+        const corporateTrainee = await CorporateTrainee.findOne({
+            Username: Username,
+            Password: Password
+        })
+        if(corporateTrainee == null){
+            res.status(200).json({error: "Invalid credentials"})
+        }else{
+            res.status(200).json(corporateTrainee)
+        }
+    } catch (error) {
+        res.status(400).json({error: error.message})
+    }
+}
+
+// ADD CORPORATE TRAINEE
+const add = async (req, res) => {
     const { Username, Password } = req.body;
 
     try{
@@ -12,5 +32,6 @@ const addNewCorporateTrainee = async (req, res) => {
 };
 
 module.exports = {
-    addNewCorporateTrainee
+    add,
+    login
 }

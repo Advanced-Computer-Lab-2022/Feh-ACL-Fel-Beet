@@ -1,7 +1,25 @@
 const Instructor = require('../Models/instructorModel');
 
+//LOGIN
+const login = async (req, res) => {
+    const { Username, Password } = req.body;
+
+    try{
+        const instructor = await Instructor.findOne({
+            Username: Username,
+            Password: Password
+        })
+        if(instructor == null){
+            res.status(200).json({error: "Invalid credentials"})
+        }else{
+            res.status(200).json(instructor)
+        }
+    } catch (error) {
+        res.status(400).json({error: error.message})
+    }
+}
 //ADD NEW INSTRUCTOR
-const addNewInstructor = async (req, res) => {
+const add = async (req, res) => {
     const { Username, Password } = req.body;
 
     try{
@@ -13,5 +31,6 @@ const addNewInstructor = async (req, res) => {
 };
 
 module.exports = {
-    addNewInstructor
+    add,
+    login
 };

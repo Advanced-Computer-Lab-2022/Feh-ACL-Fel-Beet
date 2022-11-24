@@ -1,7 +1,7 @@
 const Admin = require('../Models/adminModel');
 
 //ADD NEW ADMIN
-const addNewAdmin = async (req, res) => {
+const add = async (req, res) => {
     const { Username, Password } = req.body;
         
     try{
@@ -13,5 +13,5 @@ const addNewAdmin = async (req, res) => {
 };
 
 module.exports = { 
-    addNewAdmin
+    add
 };

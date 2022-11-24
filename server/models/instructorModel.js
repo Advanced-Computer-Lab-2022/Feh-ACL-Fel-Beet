@@ -4,14 +4,16 @@ const Schema = mongoose.Schema;
 const instructorSchema = new Schema({
     Username: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     Password: {
         type: String,
         required: true
     },
     Email: {
-        type: String
+        type: String,
+        unique: true
     },
     FirstName: {
         type: String

@@ -4,7 +4,8 @@ const Schema = mongoose.Schema;
 const individualTraineeSchema = new Schema({
     Username: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     Password: {
         type: String,
@@ -12,7 +13,8 @@ const individualTraineeSchema = new Schema({
     },
     Email: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     FirstName: {
         type: String,
