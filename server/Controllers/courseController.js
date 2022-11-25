@@ -1,6 +1,7 @@
 const Course = require('../Models/courseModel')
 
-//FILTER COURSE METHODS
+// FILTER COURSE METHODS
+// INSTRUCTOR
 const filterByInstructor = async (req, res) => {
   const { Professor } = req.body
 
@@ -12,6 +13,7 @@ const filterByInstructor = async (req, res) => {
 
   res.status(200).json(course)
 }
+// NAME
 const filterByName = async (req, res) => {
   const { Name } = req.body
 
@@ -23,6 +25,7 @@ const filterByName = async (req, res) => {
 
   res.status(200).json(course)
 }
+// PRICE
 const filterByPrice = async (req, res) => {
   const { Price } = req.body
 
@@ -34,6 +37,7 @@ const filterByPrice = async (req, res) => {
 
   res.status(200).json(course)
 }
+// SUBJECT
 const filterBySubject = async (req, res) => {
   const { Subject } = req.body
 
@@ -45,16 +49,8 @@ const filterBySubject = async (req, res) => {
 
   res.status(200).json(course)
 }
-
-// get all courses
-const getCourses = async (req, res) => {
-  const courses = await Course.find({}).sort({createdAt: -1})
-
-  res.status(200).json(courses)
-}
-
-// get a single course
-const getCourse = async (req, res) => {
+// ID
+const filterByID = async (req, res) => {
   const { id } = req.params
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -70,7 +66,14 @@ const getCourse = async (req, res) => {
   res.status(200).json(course)
 }
 
-// create a new course
+// GET ALL COURSES
+const getCourses = async (req, res) => {
+  const courses = await Course.find({}).sort({createdAt: -1})
+
+  res.status(200).json(courses)
+}
+
+// CREATE COURSE
 const createCourse = async (req, res) => {
     const {Name,Professor,Country,Subject,Price,Hours,Rating,Subs,Exercises,Hours_subs,Link} = req.body
     
@@ -82,7 +85,7 @@ const createCourse = async (req, res) => {
     }
   }
 
-// delete a course
+// DELETE A COURSE
 const deleteCourse =async (req, res) => {
     const { id } = req.params
   
@@ -99,33 +102,13 @@ const deleteCourse =async (req, res) => {
     res.status(200).json(course)
   }
 
-// update a course
-const updateCourse = async (req, res) => {
-    const { id } = req.params
-  
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(400).json({error: 'No such course'})
-    }
-  
-    const course = await Course.findOneAndUpdate({_id: id}, {
-      ...req.body
-    })
-  
-    if (!course) {
-      return res.status(400).json({error: 'No such course'})
-    }
-  
-    res.status(200).json(course)
-  }
-
 module.exports = {
   getCourses,
-  getCourse,
   createCourse,
   deleteCourse,
-  updateCourse,
   filterByInstructor,
   filterByName,
   filterByPrice,
-  filterBySubject
+  filterBySubject,
+  filterByID
 }

@@ -2,24 +2,26 @@ const express = require("express");
 const router = express.Router();
 
 const {
-    getCourses,
-    getCourse,
-    createCourse,
-    deleteCourse,
-    updateCourse,
-    viewInstructorCourses
+  getCourses,
+  createCourse,
+  deleteCourse,
+  filterByInstructor,
+  filterByName,
+  filterByPrice,
+  filterBySubject,
+  filterByID
   } = require('../Controllers/courseController')
 
 // VIEW ALL COURSES
 router.get('/allCourses', getCourses)
-// GET COURSE FROM ID
-router.get('/get/:id', getCourse);
 // CREATE COURSE
 router.post('/create', createCourse)
-// VIEW INSTRUCTOR COURSES
-router.post('/viewInstructorCourses', viewInstructorCourses)
-// UPDATE COURSE
-router.patch('/update/:id', updateCourse) 
+// FILTER COURSE
+router.post('/findByInstructor', filterByInstructor)
+router.post('/findByName', filterByName)
+router.post('/findByPrice', filterByPrice)
+router.post('/findBySubject', filterBySubject)
+router.post('/findByID', filterByID)
 // DELETE COURSE
 router.delete('/delete/:id', deleteCourse)
 
