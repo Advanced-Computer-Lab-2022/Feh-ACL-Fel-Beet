@@ -126,6 +126,36 @@ const deleteCourse = async (req, res) => {
   res.status(200).json(course);
 };
 
+const rateCourse = async (req, res) => {
+  const { courseId, rating, text } = req.params;
+
+  if (req.session.user?.corporateTrainee) {
+    const user = req.session.user?.corporateTrainee;
+    const course = await Course.findOne({ _id: courseId });
+    if (!course) return res.status(400).send("no course exsits");
+    const Reviews = [
+      ...course.Reviews,
+      { value: rating, text, reviewerCorp: user._id },
+    ];
+    const Rating = Reviews.reduce((s, r) => s + r.rating, 0) / Reviews.length;
+
+    await Course.updateOne({ _id: courseId }, { Reviews, Rating });
+    return res.status(200).send("ok");
+  } else if (req.session.user?.individualTrainee) {
+    const user = req.session.user?.individualTrainee;
+    const course = await Course.findOne({ _id: courseId });
+    if (!course) return res.status(400).send("no course exsitst");
+    const Reviews = [
+      ...course.Reviews,
+      { value: rating, text, reviewerIndi: user._id },
+    ];
+    const Rating = Reviews.reduce((s, r) => s + r.rating, 0) / Reviews.length;
+
+    await Course.updateOne({ _id: courseId }, { Reviews, Rating });
+    return res.status(200).send("ok");
+  } else res.status(400).send("not enought permissions");
+};
+
 module.exports = {
   getCourses,
   createCourse,
@@ -135,4 +165,5 @@ module.exports = {
   filterByPrice,
   filterBySubject,
   filterByID,
+  rateCourse,
 };
