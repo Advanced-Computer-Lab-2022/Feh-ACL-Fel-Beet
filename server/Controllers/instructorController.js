@@ -1,4 +1,5 @@
 const Instructor = require("../Models/instructorModel");
+const mongoose = require('mongoose');
 
 //LOGIN (login)
 const login = async (req, res) => {
@@ -62,8 +63,23 @@ const rateInstructor = async (req, res) => {
     } else res.status(400).send("not enought permissions");
   };
 
+const editInstructor = async (req, res) => {
+  const { id } = req.params
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({error: 'No such instructor'})
+  }
+
+  const instructor = await Instructor.findOneAndUpdate({_id: id}, { ...req.body })
+  if (!instructor) {
+    return res.status(400).json({error: 'No such instructor'})
+  }
+
+  res.status(200).json(instructor)
+}
+
 module.exports = {
   add,
   login,
   rateInstructor,
+  editInstructor
 };

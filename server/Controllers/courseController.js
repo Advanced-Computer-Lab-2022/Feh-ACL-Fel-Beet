@@ -1,4 +1,5 @@
 const Course = require("../Models/courseModel");
+const mongoose = require('mongoose');
 
 // FILTER COURSE METHODS
 // INSTRUCTOR
@@ -156,6 +157,24 @@ const rateCourse = async (req, res) => {
   } else res.status(400).send("not enought permissions");
 };
 
+const updateCourse = async (req, res) => {
+  const { id } = req.params
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({error: 'No such course'})
+  }
+
+  const course = await Course.findOneAndUpdate({_id: id}, {
+    ...req.body
+  })
+
+  if (!course) {
+    return res.status(400).json({error: 'No such course'})
+  }
+
+  res.status(200).json(course)
+}
+
 module.exports = {
   getCourses,
   createCourse,
@@ -166,4 +185,5 @@ module.exports = {
   filterBySubject,
   filterByID,
   rateCourse,
+  updateCourse
 };
