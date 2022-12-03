@@ -18,6 +18,7 @@ const login = async (req, res) => {
         res.status(400).json({error: error.message})
     }
 }
+//
 
 // ADD CORPORATE TRAINEE
 const add = async (req, res) => {
