@@ -32,7 +32,18 @@ const add = async (req, res) => {
   }
 };
 
+// View Ratings & Reviews
+const viewRatingsAndReviews = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const instructor = await Instructor.findById(id);
+    res.status(200).json({reviews: instructor.Reviews, rating: instructor.Rating});
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+}
 
+// Rate Instructor
 const rateInstructor = async (req, res) => {
     const { instructorId, rating, text } = req.body;
   
@@ -81,5 +92,6 @@ module.exports = {
   add,
   login,
   rateInstructor,
-  editInstructor
+  editInstructor,
+  viewRatingsAndReviews
 };
