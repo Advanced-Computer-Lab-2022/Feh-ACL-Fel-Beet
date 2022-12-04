@@ -9,7 +9,8 @@ const {
   filterByName,
   filterByPrice,
   filterBySubject,
-  filterByID
+  filterByID,
+  updateCourse
   } = require('../Controllers/courseController')
 
 // VIEW ALL COURSES
@@ -24,5 +25,7 @@ router.post('/findBySubject', filterBySubject)
 router.post('/findByID', filterByID)
 // DELETE COURSE
 router.delete('/delete/:id', deleteCourse)
+// UPDATE COURSE
+router.patch('/edit/:id', updateCourse)
 
 module.exports = router;
