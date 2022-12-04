@@ -1,4 +1,6 @@
 const Instructor = require("../Models/instructorModel");
+const Emails = require("../Models/emailModel")
+const Reviews = require("../Models/reviewsModel")
 const mongoose = require('mongoose');
 
 //LOGIN (login)
@@ -32,12 +34,37 @@ const add = async (req, res) => {
   }
 };
 
+// Send Email
+const sendEmail = async (req, res) => {
+  const { body, id } = req.body
+
+  try {
+      const email = await Emails.create({Body: body, belongsTo: id})
+      res.status(200).json(email)
+    } catch (error) {
+      res.status(400).json({ error: error.message });
+    }
+}
+
+// Send Email
+const writeReview = async (req, res) => {
+  const { body, id } = req.body
+
+  try {
+      const review = await Reviews.create({Body: body, belongsTo: id})
+      res.status(200).json(review)
+    } catch (error) {
+      res.status(400).json({ error: error.message });
+    }
+}
+
 // View Ratings & Reviews
 const viewRatingsAndReviews = async (req, res) => {
   const { id } = req.params;
   try {
     const instructor = await Instructor.findById(id);
-    res.status(200).json({reviews: instructor.Reviews, rating: instructor.Rating});
+    const reviews = await Reviews.find({belongsTo: mongoose.Types.ObjectId(id)})
+    res.status(200).json({reviews: reviews, rating: instructor.Rating});
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -93,5 +120,7 @@ module.exports = {
   login,
   rateInstructor,
   editInstructor,
-  viewRatingsAndReviews
+  viewRatingsAndReviews,
+  sendEmail,
+  writeReview
 };
