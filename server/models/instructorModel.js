@@ -1,8 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const instructorSchema = new Schema(
-  {
+const instructorSchema = new Schema({
     Username: {
       type: String,
       required: true,
@@ -12,23 +11,34 @@ const instructorSchema = new Schema(
       type: String,
       required: true,
     },
-    FirstName: {
+    firstName: {
       type: String,
     },
-    LastName: {
+    lastName: {
       type: String,
     },
     Gender: {
       type: String,
     },
     Rating: {
-      type: Number,
-      required: true,
-      default: 0,
+      totalRating: {
+        type: Number,
+        default: 0
+      },
+      noOfRatings: {
+        type: Number,
+        default: 0
+      }
+    },
+    miniBiography: {
+      type: String
     }
-  },
-  { timestamps: true }
-);
+}, { timestamps: true });
+
+instructorSchema.methods.incrementNoOfRatings = function() {
+  this.Rating.noOfRatings += 1;
+  return this.Rating.noOfRatings;
+};
 
 const Instructor = mongoose.model("Instructor", instructorSchema);
 module.exports = Instructor;

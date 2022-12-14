@@ -1,5 +1,4 @@
 const IndividualTrainee = require("../Models/individualTraineeModel");
-const Reviews = require('../Models/reviewsModel')
 
 //LOGIN
 const login = async (req, res) => {

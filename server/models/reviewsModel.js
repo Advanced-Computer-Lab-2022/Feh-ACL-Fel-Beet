@@ -1,18 +1,28 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const reviewsSchema = new Schema(
-  {
-    Body: {
-        type: String,
-        default: "",
-    },
-    belongsTo: {
-        type: String,
-        required: true
-    }
+const reviewsSchema = new Schema({
+  Title:{
+    type: String,
+    required: true
+  },
+  Body: {
+    type: String,
+    default: "",
+  },
+  Rating:{
+    type: Number
+  },
+  writtenBy: {
+    type: Schema.Types.ObjectId,
+    required: true
+  },
+  belongsTo: {
+    type: Schema.Types.ObjectId,
+    ref: "course",
+    required: true
   }
-);
+}, { timestamps: true });
 
 const Reviews = mongoose.model("Reviews", reviewsSchema)
 module.exports = Reviews

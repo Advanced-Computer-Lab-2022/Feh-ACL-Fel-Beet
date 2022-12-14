@@ -1,5 +1,5 @@
 const CorporateTrainee = require("../Models/corporateTraineeModel");
-const Reviews = require("../Models/reviewsModel")
+const Reviews = require("../Models/reviewsModel");
 
 //LOGIN
 const login = async (req, res) => {
@@ -45,23 +45,7 @@ const viewRatingsAndReviews = async (req, res) => {
   }
 }
 
-// ADD CORPORATE TRAINEE
-const add = async (req, res) => {
-  const { Username, Password } = req.body;
-
-  try {
-    const corporateTrainee = await CorporateTrainee.create({
-      Username,
-      Password,
-    });
-    res.status(200).json(corporateTrainee);
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
-};
-
 module.exports = {
-  add,
   login,
   viewRatingsAndReviews,
   writeReview

@@ -1,6 +1,47 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+const questions = new Schema({
+  Question: {
+      type: String
+  },
+  Choices: {
+      type: [String]
+  },
+  Answer: {
+      type: String
+  }
+});
+
+const exercises = new Schema({
+  Name: {
+      type: String,
+      required: true
+  },
+  Questions: {
+      type: [questions],
+  },
+  Grade: {
+      type: Number
+  }
+});
+
+const subtitles = new Schema({
+  Title: {
+      type: String,
+      required: true
+  },
+  Hours: {
+      type: Number
+  },
+  shortSummary: {
+    type: String
+  },
+  Exercises: {
+    type: [exercises]
+  }
+});
+
 const coursesSchema = new Schema(
   {
     Name: {
@@ -29,47 +70,33 @@ const coursesSchema = new Schema(
       required: true,
     },
     Rating: {
+      totalRating: {
         type: Number,
-        required: true,
-        default: 0,
+        default: 0
       },
-      Reviews: {
-        type: [
-          {
-            text: String,
-            value: String,
-            reviewerIndi: {
-              type: Schema.Types.ObjectId,
-              ref: "individualTrainee",
-            },
-            reviewerCorp: {
-              type: Schema.Types.ObjectId,
-              ref: "CorporateTrainee",
-            },
-          },
-        ],
-        required: true,
-        default: [],
-      },
-    Subs: {
-      type: String,
-      required: true,
+      noOfRatings: {
+        type: Number,
+        default: 0
+      }
     },
-    Exercises: {
-      type: String,
-      required: true,
+    Promotion: {
+      price: Number,
+      endDate: Date
     },
-    Hours_subs: {
-      type: String,
-      required: true,
-    },
-    Link: {
-      type: String,
-      required: true,
-    },
-  },
-  { timestamps: true }
+    Subtitles: {
+      type: [subtitles]
+    }
+  }, { timestamps: true }
 );
+
+exercises.methods.calculateGrade = function() {
+  this.Grade = this.Question.length;
+};
+
+coursesSchema.methods.incrementNoOfRatings = function() {
+  this.Rating.noOfRatings += 1;
+  return this.Rating.noOfRatings;
+};
 
 const Course = mongoose.model("Course", coursesSchema);
 module.exports = Course;

@@ -10,7 +10,7 @@ const Home = () => {
     
   useEffect(() => {
     const fetchCourses = async () => {
-      const response = await fetch('http://localhost:5000/course/allCourses')
+      const response = await fetch('http://localhost:4000/course/allCourses')
       const json = await response.json()
       console.log(response)
 

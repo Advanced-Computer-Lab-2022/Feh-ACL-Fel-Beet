@@ -9,9 +9,6 @@ function CourseCreation() {
     const [Hours, setHours] = useState('');
     const [Rating, setRating] = useState('');
     const [Subs, setSubs] = useState('');
-    const [Exercises, setExercises] = useState('');
-    const [Hours_subs, setHours_subs] = useState('');
-    const [Link, setLink] = useState('');
     const [error, setError] = useState('')
 
     const handleSubmit = async (e) => {
@@ -26,12 +23,9 @@ function CourseCreation() {
             Hours,
             Rating,
             Subs,
-            Exercises,
-            Hours_subs,
-            Link    
         }
 
-        const response = await fetch('http://localhost:5000/post', {
+        const response = await fetch('http://localhost:4000/create', {
             method: 'POST',
             body: JSON.stringify(data),
             headers: {'Content-Type': 'application/json'}
@@ -51,9 +45,6 @@ function CourseCreation() {
             setHours('');
             setRating('');
             setSubs('');
-            setExercises('');
-            setHours_subs('');
-            setLink('');
             setError(null);
             console.log("Course added");
         }
@@ -79,12 +70,6 @@ function CourseCreation() {
             <input type="text" onChange={(e) => setRating(e.target.value)} value={Rating}></input>
             <label><br></br>Subs </label>
             <input type="text" onChange={(e) => setSubs(e.target.value)} value={Subs}></input>
-            <label><br></br>Exercises </label>
-            <input type="text" onChange={(e) => setExercises(e.target.value)} value={Exercises}></input>
-            <label><br></br>Hours_subs </label>
-            <input type="text" onChange={(e) => setHours_subs(e.target.value)} value={Hours_subs}></input>
-            <label><br></br>Link </label>
-            <input type="text" onChange={(e) => setLink(e.target.value)} value={Link}></input>
             <br></br><button>Add Course </button>
             {error && <div className="error">{error}</div>}
         </form>

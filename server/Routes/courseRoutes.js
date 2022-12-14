@@ -10,7 +10,8 @@ const {
   filterByPrice,
   filterBySubject,
   filterByID,
-  updateCourse
+  updateCourse,
+  addToSubtitles
   } = require('../Controllers/courseController')
 
 // VIEW ALL COURSES
@@ -24,8 +25,9 @@ router.post('/findByPrice', filterByPrice)
 router.post('/findBySubject', filterBySubject)
 router.post('/findByID', filterByID)
 // DELETE COURSE
-router.delete('/delete/:id', deleteCourse)
+router.delete('/delete/:id', deleteCourse);
 // UPDATE COURSE
-router.patch('/edit/:id', updateCourse)
+router.patch('/edit/:id', updateCourse);
+
 
 module.exports = router;

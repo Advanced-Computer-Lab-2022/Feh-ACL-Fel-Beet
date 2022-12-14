@@ -14,21 +14,21 @@ function ManualUserAdditionForm({type}) {
 
         switch(type){
             case "admin":
-                response = await fetch('http://localhost:5000/admin/add', {
+                response = await fetch('http://localhost:4000/admin/add', {
                     method: 'POST',
                     body: JSON.stringify(data),
                     headers: {'Content-Type': 'application/json'}
                 })
                 break;
             case "instructor":
-                response = await fetch('http://localhost:5000/instructor/add', {
+                response = await fetch('http://localhost:4000/instructor/add', {
                     method: 'POST',
                     body: JSON.stringify(data),
                     headers: {'Content-Type': 'application/json'}
                 })
                 break;
             case "corporate trainee":
-                response = await fetch('http://localhost:5000/corporateTrainee/add', {
+                response = await fetch('http://localhost:4000/corporateTrainee/add', {
                     method: 'POST',
                     body: JSON.stringify(data),
                     headers: {'Content-Type': 'application/json'}
