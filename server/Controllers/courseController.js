@@ -1,6 +1,28 @@
 const Course = require("../Models/courseModel");
 const mongoose = require('mongoose');
 
+
+
+// search for course by title,subject,instructor
+const searchCourse = async (req, res) => {
+  const { Name, Professor, Subject } = req.body
+
+  if (Name != undefined) {
+      const course = await Course.find({ Name: Name })
+      return res.status(200).json({ course })
+  }
+  else if (Subject != undefined) {
+      const course = await Course.find({ Subject: Subject }).sort({ price: 1 })
+      return res.status(200).json({ course })
+  }
+  else if (Professor != undefined) {
+      const course = await Course.find({ Professor: Professor  }).sort({ price: 1 })
+      return res.status(200).json({ course })
+  }
+
+}
+
+
 // FILTER COURSE METHODS
 // INSTRUCTOR
 const filterByInstructor = async (req, res) => {
@@ -28,44 +50,21 @@ const filterByName = async (req, res) => {
 };
 // PRICE
 const filterByPrice = async (req, res) => {
-  const { Price } = req.body;
+  const course = await Course.find({}).sort({ Price: 1 })
+  return res.status(200).json({ course })
+}
 
-  const course = await Course.find({ Price: Price });
 
-  if (!course) {
-    return res.status(404).json({ error: "No courses for you" });
-  }
-
-  res.status(200).json(course);
-};
+const filterByRating = async (req, res) => {
+  const course = await Course.find({}).sort({ Rating:-1 })
+  return res.status(200).json({ course })
+}
 // SUBJECT
 const filterBySubject = async (req, res) => {
-  const { Subject } = req.body;
+  const course = await Course.find({}).sort({ Subject:1 })
+  return res.status(200).json({ course })
+}
 
-  const course = await Course.find({ Subject: Subject });
-
-  if (!course) {
-    return res.status(404).json({ error: "No courses for you" });
-  }
-
-  res.status(200).json(course);
-};
-// ID
-const filterByID = async (req, res) => {
-  const { id } = req.params;
-
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(404).json({ error: "No such course found", id });
-  }
-
-  const course = await Course.findById(id);
-
-  if (!course) {
-    return res.status(404).json({ error: "No such course; Incorrect ID" });
-  }
-
-  res.status(200).json(course);
-};
 
 // GET ALL COURSES
 const getCourses = async (req, res) => {
@@ -147,6 +146,7 @@ module.exports = {
   filterByName,
   filterByPrice,
   filterBySubject,
-  filterByID,
-  updateCourse
+  updateCourse,
+  searchCourse,
+  filterByRating
 };
