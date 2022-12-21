@@ -2,18 +2,24 @@ const IndividualTrainee = require("../Models/individualTraineeModel");
 const CorporateTrainee = require("../Models/corporateTraineeModel");
 const Instructor = require("../Models/instructorModel");
 const Course = require("../Models/courseModel");
-const Reviews = require("../Models/reviewsModel");
+const Reviews = require("../models/reviewsModel");
 
 // Rate Instructor
 const rateInstructor = async (req, res) => {
     const { traineeId, instructorId } = req.params;
     const { Rating } = req.body;
+    let totalRating = 0;
 
     const instructor = await Instructor.findById(instructorId); 
     if(instructor) {
-      const noOfRatings = instructor.incrementNoOfRatings();
-      const rating = (Rating+instructor.Rating.totalRating)/noOfRatings;
-      await Instructor.findByIdAndUpdate(instructorId, { Rating: {totalRating: rating, noOfRatings: noOfRatings} })
+      const r = instructor.ratingsCalc.push(Rating);
+      const noOfRatings = instructor.noOfRatings();
+      instructor.ratingsCalc.map(rating => {
+        totalRating += rating;
+      });
+      const realRating = totalRating/noOfRatings;
+
+      await Instructor.findByIdAndUpdate(instructorId, { Rating: realRating, ratingsCalc: instructor.ratingsCalc })
     } else {
       res.status(400).json("No such instructor exists");
     }
@@ -33,12 +39,18 @@ const rateInstructor = async (req, res) => {
 const rateCourse = async (req, res) => {
   const { traineeId, courseId } = req.params;
   const { Rating } = req.body;
+  let totalRating = 0;
 
   const course = await Course.findById(courseId); 
   if(course) {
-    const noOfRatings = course.incrementNoOfRatings();
-    const rating = (Rating+course.Rating.totalRating)/noOfRatings;
-    await Course.findByIdAndUpdate(courseId, { Rating: {totalRating: rating, noOfRatings: noOfRatings} })
+    course.ratingsCalc.push(Rating);
+    const noOfRatings = course.noOfRatings();
+    course.ratingsCalc.map(rating => {
+      totalRating += rating;
+    });
+    const realRating = totalRating/noOfRatings;
+
+    await Course.findByIdAndUpdate(courseId, { Rating: realRating });
   } else {
     res.status(400).json("No such course exists");
   }

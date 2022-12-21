@@ -19,7 +19,6 @@ const reviewsSchema = new Schema({
   },
   belongsTo: {
     type: Schema.Types.ObjectId,
-    ref: "course",
     required: true
   }
 }, { timestamps: true });

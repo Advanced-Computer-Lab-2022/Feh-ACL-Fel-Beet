@@ -27,6 +27,13 @@ const individualTraineeSchema = new Schema({
     Gender: {
         type: String,
         required: true
+    },
+    Progress: {
+        type: Number
+    },
+    Wallet: {
+        type: Number,
+        default: 0
     }
 }, { timestamps: true});
 

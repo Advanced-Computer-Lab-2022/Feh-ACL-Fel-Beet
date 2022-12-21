@@ -34,7 +34,7 @@ const subtitles = new Schema({
   Hours: {
       type: Number
   },
-  shortSummary: {
+  Description: {
     type: String
   },
   Exercises: {
@@ -53,10 +53,6 @@ const coursesSchema = new Schema(
       type: String,
       required: true,
     },
-    Country: {
-      type: String,
-      required: true,
-    },
     Subject: {
       type: String,
       required: true,
@@ -67,21 +63,21 @@ const coursesSchema = new Schema(
     },
     Hours: {
       type: Number,
-      required: true,
+    },
+    ratingsCalc: {
+      type: [Number],
+      default: []
     },
     Rating: {
-      totalRating: {
-        type: Number,
-        default: 0
-      },
-      noOfRatings: {
-        type: Number,
-        default: 0
-      }
-    },
+      type: Number,
+      default: 5
+    },  
     Promotion: {
       price: Number,
       endDate: Date
+    },
+    shortSummary: {
+      type: String
     },
     Subtitles: {
       type: [subtitles]
@@ -93,9 +89,9 @@ exercises.methods.calculateGrade = function() {
   this.Grade = this.Question.length;
 };
 
-coursesSchema.methods.incrementNoOfRatings = function() {
-  this.Rating.noOfRatings += 1;
-  return this.Rating.noOfRatings;
+coursesSchema.methods.noOfRatings = function() {
+  noOfRatings = this.ratingsCalc.length;
+  return noOfRatings;
 };
 
 const Course = mongoose.model("Course", coursesSchema);

@@ -20,24 +20,26 @@ const instructorSchema = new Schema({
     Gender: {
       type: String,
     },
+    ratingsCalc: {
+      type: [Number],
+      default: []
+    },
     Rating: {
-      totalRating: {
-        type: Number,
-        default: 0
-      },
-      noOfRatings: {
-        type: Number,
-        default: 0
-      }
+      type: Number,
+      default: 5
     },
     miniBiography: {
       type: String
+    },
+    Courses: {
+      type: [Schema.Types.ObjectId],
+      default: []
     }
 }, { timestamps: true });
 
-instructorSchema.methods.incrementNoOfRatings = function() {
-  this.Rating.noOfRatings += 1;
-  return this.Rating.noOfRatings;
+instructorSchema.methods.noOfRatings = function() {
+  noOfRatings = this.ratingsCalc.length;
+  return noOfRatings;
 };
 
 const Instructor = mongoose.model("Instructor", instructorSchema);

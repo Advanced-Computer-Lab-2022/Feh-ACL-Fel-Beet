@@ -1,10 +1,11 @@
 const express = require('express')
 const router = express.Router()
-const { login, viewRatingsAndReviews, writeReview } = require('../Controllers/corporateTraineeController')
+const { rateInstructor, rateCourse } = require('../Controllers/traineeController');
 
+// Rate an instructor
+router.post('/rateInstructor/:traineeId/:instructorId', rateInstructor)
 
-router.post('/login', login)
-router.post('/viewRatingsAndReviews/:id', viewRatingsAndReviews)
-router.post('/writeReview', writeReview)
+// Rate a course
+router.post('/rateCourse/:traineeId/:courseId', rateCourse);
 
 module.exports = router

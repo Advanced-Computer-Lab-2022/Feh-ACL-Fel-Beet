@@ -28,6 +28,4 @@ const sendMail = async (emailAddress, subject, message) => {
     }
 }
 
-sendMail('ziad.amer06@gmail.com', "Hope this works", "It works!");
-
 module.exports = sendMail;

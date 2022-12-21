@@ -1,11 +1,15 @@
 const express = require('express');
 const router = express.Router();
-const { login, editInstructor, viewRatingsAndReviews, writeReview } = require('../Controllers/instructorController');
+const { editProfile, viewInstructorReviews, viewCourseReviews } = require('../Controllers/instructorController');
 
-router.post('/login', login)
-router.post('/writeReview', writeReview)
-router.patch('/edit/:id', editInstructor)
-router.get('/viewReviewsAndRatings/:id', viewRatingsAndReviews)
+// Edit Profile
+router.patch('/edit/:id', editProfile)
+
+// View reviews & ratings
+router.get('/viewReviews/:id', viewInstructorReviews)
+
+// View course reviews & ratings
+router.get('/viewCourseReview/:id', viewCourseReviews);
 
 
 module.exports = router;

@@ -1,22 +1,19 @@
 require("dotenv").config({ path: "./config.env" });
+
 const express = require("express");
 const port = process.env.PORT || 4000;
 const app = express();
 const cors = require("cors");
 const mongoose = require("mongoose");
-const session = require("express-session");
+
 //MIDDLEWARE
 app.use(express.json());
-app.use(
-  session({
-    secret: "stalk",
-  })
-);
 app.use(cors({ origin: "*" }));
 app.use((req, res, next) => {
   console.log(req.path, req.method);
   next();
 });
+
 //ROUTES
 const courseRoutes = require("./Routes/courseRoutes");
 const adminRoutes = require("./Routes/adminRoutes");
