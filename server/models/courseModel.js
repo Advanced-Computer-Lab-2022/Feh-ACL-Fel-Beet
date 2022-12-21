@@ -37,6 +37,9 @@ const subtitles = new Schema({
   Description: {
     type: String
   },
+  VideoUrl: {
+    type : String
+  },
   Exercises: {
     type: [exercises]
   }
@@ -78,6 +81,9 @@ const coursesSchema = new Schema(
     },
     shortSummary: {
       type: String
+    },
+    VideoUrl: {
+      type : String
     },
     Subtitles: {
       type: [subtitles]

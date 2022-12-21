@@ -4,14 +4,17 @@ const Instructor = require("../Models/instructorModel");
 
 // search for course by title,subject,instructor
 const searchAndFilter = async (req, res) => {
-  const { searchItem, realRating, subject, maxPrice } = req.body
+  const { searchItem, subject } = req.body
 
+  const maxPrice = req.body.price | 500000000000000
+  const realRating = req.body.realRating | 0
   const courses = await Course.find(
     {
         $and: [
             { Rating: { $gte: realRating }},
             { Subject: { $in: subject } },
-            { Price: { $lte: maxPrice } }, {
+            { Price: { $lte: maxPrice } }, 
+            {
                 $or: [
                     { Name: new RegExp(searchItem, 'i') },
                     { Subject: new RegExp(searchItem, 'i') },
