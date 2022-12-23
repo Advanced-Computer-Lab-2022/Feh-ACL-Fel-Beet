@@ -1,0 +1,14 @@
+Users
+	individual (registering as an individual)
+		username, password, email, first name, last name, gender (optional)
+	corporate
+		doesnt buy courses, requests access
+Admin
+	create instructor
+	create corporate trainnee
+	create other admins
+	set course promotions
+	helpdesk management
+	can refund to trainnees
+	view course requests from corporate trainnees
+

@@ -26,7 +26,7 @@ const searchAndFilter = async (req, res) => {
             }
         ]
     }).exec().catch(() => res.status(400).send("database exploded"));
-    res.status(200).json(courses);
+    res.send(courses);
   }
 
 // GET ALL COURSES
@@ -51,24 +51,25 @@ const getCourse = async (req, res) => {
 
 // CREATE COURSE
 const createCourse = async (req, res) => {
-  const { instructId } = req.params
   const {
     Name,
     Subject,
     Price,
     shortSummary,
-    Subtitles
+    videoUrl,
+    id
   } = req.body;
 
   try {
-    const instructor = await Instructor.findById(instructId);
+    const instructor = await Instructor.findById(id);
+    console.log(instructor)
     const course = await Course.create({
       Name,
       Professor: `${instructor.firstName} ${instructor.lastName}`,
       Subject,
       Price,
       shortSummary,
-      Subtitles
+      videoUrl,
     });
     instructor.Courses.push(course._id);
     res.status(200).json(course);

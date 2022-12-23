@@ -19,7 +19,7 @@ router.get('/allCourses', getCourses);
 router.get('/getCourse/:id', getCourse);
 
 // CREATE COURSE
-router.post('/create/:instructId', createCourse);
+router.post('/create', createCourse);
 
 // DELETE COURSE
 router.delete('/delete/:id', deleteCourse);
@@ -28,7 +28,7 @@ router.delete('/delete/:id', deleteCourse);
 router.patch('/editCourse/:id', updateCourse);
 
 // Search according to name, subject and instructor & filter according to subject, rating and price
-router.get('/search', searchAndFilter);
+router.post('/search', searchAndFilter);
 
 // Add a new subtitle to the list of subtitles
 router.post('/addSub/:id', addSubtitle);

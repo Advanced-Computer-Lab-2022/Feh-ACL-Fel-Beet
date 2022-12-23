@@ -56,16 +56,17 @@ header a {
   font-size: 0.9em;
   color: #555;
 }
-.course-details span {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  cursor: pointer;
-  background: #151515;
-  padding: 6px;
-  border-radius: 50%;
-  color: #333;
+
+.course-details:hover {
+  background-color: rgb(221, 221, 221);
+  transition: 0.5s ease all;
 }
+
+.course-details:active {
+  background-color: rgb(187, 187, 187);
+  transition: 0.5s ease all;
+}
+
 h4 {
   border: 1px black solid;
   padding: 5px;
