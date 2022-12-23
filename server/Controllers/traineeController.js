@@ -3,6 +3,9 @@ const CorporateTrainee = require("../Models/corporateTraineeModel");
 const Instructor = require("../Models/instructorModel");
 const Course = require("../Models/courseModel");
 const Reviews = require("../models/reviewsModel");
+const Requests = require('../models/requestsModel');
+
+//---------------FUNCTIONS THAT BELONG TO BOTH TYPES OF TRAINEES-------------------
 
 // Rate Instructor
 const rateInstructor = async (req, res) => {
@@ -64,6 +67,9 @@ const rateCourse = async (req, res) => {
   }
 };
 
+//--------------------------------------------------------------------------------------------------------------
+
+//------------------FUNCTIONS THAT BELONG TO INDIVIDUAL TRAINEES-----------------------------------------------
 const registerCourse = async (req, res) => {
   const { traineeId, courseId } = req.params;
 
@@ -73,9 +79,55 @@ const registerCourse = async (req, res) => {
   res.status(200).json(trainee.Courses);
 }
 
+const requestRefund = async (req, res) => {
+  const { id } = req.params;
+  const course = req.body.course;
+
+  const trainee = await IndividualTrainee.findById(id);
+  const request = await Requests.create({Type: "Financial", Course: course, belongTo: trainee.Username});
+  if(request) {
+    res.status(200).json(request);
+  } else {
+    res.status(400).json("Request not created!");
+  }  
+}
+
+const getWallet = async (req, res) => {
+  const { id } = req.params;
+
+  const trainee = await IndividualTrainee.findById(id);
+  if(trainee) {
+    res.status(200).json(trainee.Wallet);
+  } else {
+    res.status(400).json("No such trainee!");
+  }
+}
+
+//--------------------------------------------------------------------------------------------------------------
+
+//-------------------------FUNCTIONS THAT BELONG CORPORATE TRAINEES---------------------------------------------
+
+const requestCourseAccess = async (req, res) => {
+  const { id } = req.params;
+  const course = req.body.course;
+
+  const trainee = await CorporateTrainee.findById(id);
+  const request = await Requests.create({Type: "Course Access", Course: course, belongTo: trainee.Username});
+  if(request) {
+    res.status(200).json(request);
+  } else {
+    res.status(400).json("Request not created!");
+  }  
+}
+
+//--------------------------------------------------------------------------------------------------------------
+
 module.exports = {
     rateCourse,
     rateInstructor,
-    registerCourse
+    registerCourse,
+    requestRefund,
+    requestCourseAccess,
+    getWallet
 }
 

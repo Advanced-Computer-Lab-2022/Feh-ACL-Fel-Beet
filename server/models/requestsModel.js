@@ -10,6 +10,9 @@ const requestSchema = new Schema({
     },
     AcceptedStatus: {
         type: Boolean
+    },
+    belongsTo: {
+        type: String
     }
 });
 

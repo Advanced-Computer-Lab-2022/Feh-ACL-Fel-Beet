@@ -7,9 +7,9 @@ const listOfSubjects = ['Hardware', 'CS', 'Math'];
 // search for course by title,subject,instructor
 const searchAndFilter = async (req, res) => {
   const { searchItem } = req.body
-  const maxPrice = req.body.maxPrice | Infinity;
-  const realRating = req.body.realRating | 0;
-  const subject = req.body.subject | listOfSubjects;
+  const maxPrice = req.body.maxPrice || Infinity;
+  const realRating = req.body.realRating || 0;
+  const subject = req.body.subject || listOfSubjects;
 
   const courses = await Course.find(
     {

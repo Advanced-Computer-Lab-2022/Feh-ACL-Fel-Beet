@@ -28,8 +28,9 @@ const login = async (req, res) => {
         res.status(400).json("You don't have an account!")
     }
 
+    const id = user._id;
     if(await bcrypt.compare(Password, user.Password)){
-        const token = jwt.sign({ Username }, jwtSecret);
+        const token = jwt.sign({ id }, jwtSecret);
         res.cookie('jwt', token, { httpOnly: true });
         res.status(200).json(type);
     } else {

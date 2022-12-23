@@ -23,6 +23,10 @@ const corporateTraineeSchema = new Schema({
     },
     Gender: {
         type: String
+    },
+    Progress: {
+        type: Number,
+        default: 0
     }
 }, { timestamps: true});
 
