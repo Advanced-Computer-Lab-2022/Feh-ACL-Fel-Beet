@@ -1,25 +1,26 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // pages & components
-import Home from './pages/Home'
-import Navbar from './components/Navbar'
-import LandingPage from './pages/LandingPage';
-import RegistrationPage from './pages/RegistrationPage';
-function App() {
+import Home from "./pages/Home";
+import Navbar from "./components/Navbar";
+import LandingPage from "./pages/LandingPage";
+import RegistrationPage from "./pages/RegistrationPage";
+import LoginPage from "./pages/LoginPage";
+import CourseCreation from "./pages/CourseCreation";
 
+function App() {
   return (
     <div className="App">
+      
       <BrowserRouter>
-          <Routes>
-            <Route 
-              path="/" 
-              element={<LandingPage />} 
-            />
-            <Route
-              path="/registration-page"
-              element={<RegistrationPage />}
-            />
-          </Routes>
+      <Navbar />
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/registration-page" element={<RegistrationPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/add-course" element={<CourseCreation />} />
+        </Routes>
       </BrowserRouter>
     </div>
   );

@@ -7,9 +7,9 @@ const listOfSubjects = ['Hardware', 'CS', 'Math'];
 // search for course by title,subject,instructor
 const searchAndFilter = async (req, res) => {
   const { searchItem } = req.body
-  const maxPrice = req.body.maxPrice | Infinity;
-  const realRating = req.body.realRating | 0;
-  const subject = req.body.subject | listOfSubjects;
+  const maxPrice = req.body.maxPrice || Infinity;
+  const realRating = req.body.realRating || 0;
+  const subject = req.body.subject || listOfSubjects;
 
   const courses = await Course.find(
     {
@@ -26,7 +26,7 @@ const searchAndFilter = async (req, res) => {
             }
         ]
     }).exec().catch(() => res.status(400).send("database exploded"));
-    res.status(200).json(courses);
+    res.send(courses);
   }
 
 // GET ALL COURSES
@@ -51,24 +51,25 @@ const getCourse = async (req, res) => {
 
 // CREATE COURSE
 const createCourse = async (req, res) => {
-  const { instructId } = req.params
   const {
     Name,
     Subject,
     Price,
     shortSummary,
-    Subtitles
+    videoUrl,
+    id
   } = req.body;
 
   try {
-    const instructor = await Instructor.findById(instructId);
+    const instructor = await Instructor.findById(id);
+    console.log(instructor)
     const course = await Course.create({
       Name,
       Professor: `${instructor.firstName} ${instructor.lastName}`,
       Subject,
       Price,
       shortSummary,
-      Subtitles
+      videoUrl,
     });
     instructor.Courses.push(course._id);
     res.status(200).json(course);

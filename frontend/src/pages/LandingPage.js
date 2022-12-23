@@ -1,19 +1,18 @@
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
 
 const LandingPage = () => {
+    const navigate = useNavigate();
     return(
         <div className="body">
-            <div className="title">
-                <h1 className="mainTitle">SabOOra</h1>
-            </div>
-            <div className="loginOptions">
-                <button className="button1">Log In</button>
-                <Link to="/registration-page">
-                    <button className="button1">Register</button>
-                </Link>
-                <button className="button1">Enter as Guest</button>
-            </div>
+            <Stack direction={'row'} spacing={1} margin={3}>
+                <Button variant="contained" onClick={() => navigate('./login')}>Login</Button>
+                <Button variant="contained" onClick={() => navigate('./registration-page')}>Register</Button>
+                <Button variant="contained" onClick={() => navigate('./home')}>Continue As A Guest</Button>
+            </Stack>
         </div>
     )
 }
