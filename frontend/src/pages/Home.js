@@ -12,7 +12,10 @@ const Home = () => {
     const fetchCourses = async () => {
       const response = await fetch('http://localhost:4000/course/allCourses')
       const json = await response.json()
-      console.log(response)
+      for(let i = 0; i < json.length; i++){
+        json[i].totalRating = json[i].Rating.totalRating;
+        json[i].noOfRatings = json[i].Rating.noOfRatings;
+      }
 
       if (response.ok) {
         setCourses(json)
