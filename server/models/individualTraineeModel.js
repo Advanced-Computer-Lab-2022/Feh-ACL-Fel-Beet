@@ -28,6 +28,10 @@ const individualTraineeSchema = new Schema({
         type: String,
         required: true
     },
+    Courses: {
+        type: [String],
+        default: []
+    },
     Progress: {
         type: Number
     },

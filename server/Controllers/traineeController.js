@@ -12,8 +12,7 @@ const rateInstructor = async (req, res) => {
 
     const instructor = await Instructor.findById(instructorId); 
     if(instructor) {
-      const r = instructor.ratingsCalc.push(Rating);
-      const noOfRatings = instructor.noOfRatings();
+      const noOfRatings = instructor.ratingsCalc.push(Rating);
       instructor.ratingsCalc.map(rating => {
         totalRating += rating;
       });
@@ -43,8 +42,7 @@ const rateCourse = async (req, res) => {
 
   const course = await Course.findById(courseId); 
   if(course) {
-    course.ratingsCalc.push(Rating);
-    const noOfRatings = course.noOfRatings();
+    const noOfRatings = course.ratingsCalc.push(Rating);
     course.ratingsCalc.map(rating => {
       totalRating += rating;
     });
@@ -66,8 +64,18 @@ const rateCourse = async (req, res) => {
   }
 };
 
+const registerCourse = async (req, res) => {
+  const { traineeId, courseId } = req.params;
+
+  const course = await Course.findById(courseId);
+  course.incrementNoOfEnrolled();
+  const trainee = await IndividualTrainee.findByIdAndUpdate(traineeId, {"$push": {Courses: course.Name}});
+  res.status(200).json(trainee.Courses);
+}
+
 module.exports = {
     rateCourse,
-    rateInstructor
+    rateInstructor,
+    registerCourse
 }
 

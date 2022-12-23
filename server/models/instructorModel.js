@@ -34,6 +34,10 @@ const instructorSchema = new Schema({
     Courses: {
       type: [Schema.Types.ObjectId],
       default: []
+    },
+    Wallet: {
+      type: Number,
+      default: 0
     }
 }, { timestamps: true });
 

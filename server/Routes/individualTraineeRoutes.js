@@ -1,13 +1,13 @@
-const express = require("express");
-const router = express.Router();
-const {
-  rateInstructor,
-  rateCourse,
-} = require("../Controllers/traineeController");
+const express = require('express')
+const router = express.Router()
+const { rateInstructor, rateCourse, registerCourse } = require('../Controllers/traineeController')
 
 router.post("/rateInstructor/:traineeId/:instructorId", rateInstructor);
 
 // Rate a course
 router.post("/rateCourse/:traineeId/:courseId", rateCourse);
 
-module.exports = router;
+// Register to a new course
+router.post('/registerCourse/:traineeId/:courseId', registerCourse);
+
+module.exports = router

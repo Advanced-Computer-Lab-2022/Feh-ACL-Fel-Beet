@@ -85,6 +85,10 @@ const coursesSchema = new Schema(
     VideoUrl: {
       type : String
     },
+    noOfEnrolled: {
+      type: Number,
+      default: 0
+    },
     Subtitles: {
       type: [subtitles]
     }
@@ -95,9 +99,8 @@ exercises.methods.calculateGrade = function() {
   this.Grade = this.Question.length;
 };
 
-coursesSchema.methods.noOfRatings = function() {
-  noOfRatings = this.ratingsCalc.length;
-  return noOfRatings;
+coursesSchema.methods.incrementNoOfEnrolled = function() {
+  noOfEnrolled = this.noOfEnrolled++;
 };
 
 const Course = mongoose.model("Course", coursesSchema);
