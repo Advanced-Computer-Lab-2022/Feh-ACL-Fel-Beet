@@ -174,7 +174,7 @@ const requestCourseAccess = async (req, res) => {
   }
 };
 
-export const getCorporateProfile = async (req, res) => {
+const getCorporateProfile = async (req, res) => {
   const { id } = req.params;
 
   const trainee = await CorporateTrainee.findById(id);

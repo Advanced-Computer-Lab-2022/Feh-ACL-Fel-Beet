@@ -22,6 +22,6 @@ router.get("/viewReviews/:id", viewInstructorReviews);
 router.get("/viewCourseReview/:id", viewCourseReviews);
 
 // View reported problems
-route.get("/viewProblems", viewReports);
+router.get("/viewProblems", viewReports);
 
 module.exports = router;
