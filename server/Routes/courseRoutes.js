@@ -16,7 +16,7 @@ const {
 router.get('/allCourses', getCourses);
 
 // Get a specific course
-router.get('/getCourse/:id', getCourse);
+router.post('/getCourse', getCourse);
 
 // CREATE COURSE
 router.post('/create', createCourse);

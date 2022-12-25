@@ -7,6 +7,7 @@ import LandingPage from "./pages/LandingPage";
 import RegistrationPage from "./pages/RegistrationPage";
 import LoginPage from "./pages/LoginPage";
 import CourseCreation from "./pages/CourseCreation";
+import ViewCourse from "./pages/ViewCourse";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/registration-page" element={<RegistrationPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/add-course" element={<CourseCreation />} />
+          <Route path='/viewCourse' element={<ViewCourse />} />
         </Routes>
       </BrowserRouter>
     </div>

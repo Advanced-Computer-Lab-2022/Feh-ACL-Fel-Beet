@@ -88,7 +88,7 @@ function CourseCreation() {
         ></TextField> */}
 
         <Button onClick={handleSubmit} variant="contained">
-          Add Course{" "}
+          Add Course
         </Button>
       </Stack>
       {error && <div className="error">{error}</div>}
