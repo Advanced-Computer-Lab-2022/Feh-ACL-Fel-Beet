@@ -32,9 +32,13 @@ const individualTraineeSchema = new Schema({
         type: [String],
         default: []
     },
-    Progress: {
-        type: Number
-    },
+    Progress: [{
+        Course: String,
+        Percentage: {
+            type: Number,
+            default: 0
+        }
+    }],
     Wallet: {
         type: Number,
         default: 0

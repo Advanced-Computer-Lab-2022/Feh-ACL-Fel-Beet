@@ -12,7 +12,7 @@ const requestSchema = new Schema({
         type: Boolean
     },
     belongsTo: {
-        type: String
+        type: Schema.Types.ObjectId
     }
 });
 

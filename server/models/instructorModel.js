@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const instructorSchema = new Schema({
+const instructorSchema = new Schema(
+  {
     Username: {
       type: String,
       required: true,
@@ -22,26 +23,28 @@ const instructorSchema = new Schema({
     },
     ratingsCalc: {
       type: [Number],
-      default: []
+      default: [],
     },
     Rating: {
       type: Number,
-      default: 5
+      default: 5,
     },
     miniBiography: {
-      type: String
+      type: String,
     },
     Courses: {
       type: [Schema.Types.ObjectId],
-      default: []
+      default: [],
     },
     Wallet: {
       type: Number,
-      default: 0
-    }
-}, { timestamps: true });
+      default: 0,
+    },
+  },
+  { timestamps: true }
+);
 
-instructorSchema.methods.noOfRatings = function() {
+instructorSchema.methods.noOfRatings = function () {
   noOfRatings = this.ratingsCalc.length;
   return noOfRatings;
 };

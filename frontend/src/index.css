@@ -3,7 +3,7 @@
 
 /* layout */
 :root {
-  --primary: #1aac83;
+  --primary: #e10017;
   --error: #e7195a;
 }
 body {
@@ -12,7 +12,7 @@ body {
   font-family: "Poppins";
 }
 header {
-  background: #fff;
+  background: var(--primary);
 }
 header .container {
   max-width: 1400px;
@@ -23,7 +23,8 @@ header .container {
   justify-content: space-between;
 }
 header a {
-  color: #333;
+  color: rgb(255, 255, 255);
+  margin-left: 2%;
   text-decoration: none;
 }
 .pages{
@@ -53,6 +54,7 @@ header a {
 }
 .course-details p {
   margin: 0;
+  padding-block: 0.15rem;
   font-size: 0.9em;
   color: #555;
 }

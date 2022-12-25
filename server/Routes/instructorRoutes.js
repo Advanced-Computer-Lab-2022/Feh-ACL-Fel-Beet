@@ -1,15 +1,27 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const { editProfile, viewInstructorReviews, viewCourseReviews } = require('../Controllers/instructorController');
+const {
+  getProfile,
+  editProfile,
+  viewInstructorReviews,
+  viewCourseReviews,
+  viewReports,
+} = require("../Controllers/instructorController");
+const { route } = require("./individualTraineeRoutes");
+
+// View profile
+router.get("/profile", getProfile);
 
 // Edit Profile
-router.patch('/edit/:id', editProfile)
+router.patch("/edit/:id", editProfile);
 
 // View reviews & ratings
-router.get('/viewReviews/:id', viewInstructorReviews)
+router.get("/viewReviews/:id", viewInstructorReviews);
 
 // View course reviews & ratings
-router.get('/viewCourseReview/:id', viewCourseReviews);
+router.get("/viewCourseReview/:id", viewCourseReviews);
 
+// View reported problems
+route.get("/viewProblems", viewReports);
 
 module.exports = router;

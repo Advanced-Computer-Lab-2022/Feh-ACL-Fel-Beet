@@ -12,11 +12,11 @@ const CourseDetails = ({ course }) => {
       </p>
       <p>
         <strong>Total Rating: </strong>
-        {course.totalRating}
+        {course.Rating}
       </p>
-      <p>
-        <strong>Number of Ratings: </strong>
-        {course.noOfRatings}
+            <p>
+        <strong>Number of Enrolled Students: </strong>
+        {course.noOfEnrolled}
       </p>
       <p>
         <strong>Price: </strong>
