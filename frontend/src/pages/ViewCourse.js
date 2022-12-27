@@ -3,6 +3,8 @@ import { useLocation } from "react-router-dom";
 import axios from "axios";
 import { useEffect } from "react";
 import ReactPlayer from "react-player";
+import CourseDetails from "../components/CourseDetails";
+import Grid from "@mui/material/Grid";
 
 export default function ViewCourse() {
   const location = useLocation();
@@ -20,24 +22,12 @@ export default function ViewCourse() {
 
   return (
     <div>
+      <Grid container>
+        <Grid item xs={4} className="course-information">
+          <CourseDetails course={courseData} key={courseData._id} />
+        </Grid>
+      </Grid>
       <ReactPlayer url={courseData.VideoUrl}></ReactPlayer>
-      <h4>{courseData.Name}</h4>
-      <p>
-        <strong>Total Hours: </strong>
-        {courseData.Hours}
-      </p>
-      <p>
-        <strong>Total Rating: </strong>
-        {courseData.Rating}
-      </p>
-      <p>
-        <strong>Number of Enrolled Students: </strong>
-        {courseData.noOfEnrolled}
-      </p>
-      <p>
-        <strong>Price: </strong>
-        {courseData.Price}
-      </p>
     </div>
   );
 }

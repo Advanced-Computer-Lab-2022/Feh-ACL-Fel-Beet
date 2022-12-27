@@ -14,12 +14,10 @@ body {
 header {
   background: var(--primary);
 }
-
 header a {
   color: rgb(255, 255, 255);
   text-decoration: none;
 }
-
 .pages{
   max-width: 1400px;
   padding: 20px;
@@ -61,9 +59,6 @@ header a {
   transition: 0.5s ease all;
 }
 
-h4 {
-  padding: 5px;
-}
 
 /* Landing Page */
 .landing-page{

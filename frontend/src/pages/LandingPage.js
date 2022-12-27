@@ -18,7 +18,7 @@ const LandingPage = () => {
                 </Grid>
             </Grid>
             <Stack container spacing={2} direction="column">
-                <Button justifyContent="center" variant="contained" onClick={() => navigate('./login')}>Login</Button>
+                <Button variant="contained" onClick={() => navigate('./login')}>Login</Button>
                 <Button variant="contained" onClick={() => navigate('./registration-page')}>Register</Button>
                 <Button variant="contained" onClick={() => navigate('./home')}>Continue As A Guest</Button>
             </Stack>

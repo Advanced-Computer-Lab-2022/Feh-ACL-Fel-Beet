@@ -9,6 +9,7 @@ const {
   getIndividualProfile,
   editProfile,
   requestRefund,
+  findTrainee
 } = require("../Controllers/traineeController");
 
 // Get Profile
@@ -34,5 +35,8 @@ router.get("/viewReports", viewProblems);
 
 // Request a refund
 router.post("/requestRefund/:id", requestRefund);
+
+//Find a trainee
+router.post("/findTrainee", findTrainee)
 
 module.exports = router;

@@ -8,6 +8,28 @@ const Problems = require("../models/problemModel");
 
 //---------------FUNCTIONS THAT BELONG TO BOTH TYPES OF TRAINEES-------------------
 
+// Return a trainee's information
+const findTrainee = async(req, res) => {
+  const {username} = req.body;
+  let userDetails;
+  if (await IndividualTrainee.findOne({ Username: Username })){
+    userDetails = (await IndividualTrainee.findOne({ Username: Username }));
+  }
+  else if (await CorporateTrainee.findOne({ Username: Username })){
+    userDetails = (await IndividualTrainee.findOne({ Username: Username }));
+  }
+  else if (await IndividualTrainee.findOne({ Username: Username })){
+    userDetails = (await IndividualTrainee.findOne({ Username: Username }));
+  }
+  else if (await IndividualTrainee.findOne({ Username: Username })){
+    userDetails = (await IndividualTrainee.findOne({ Username: Username }));
+  }
+  else{
+    userDetails = {};
+  }
+  res.status(400).userDetails;
+}
+
 // Rate Instructor
 const rateInstructor = async (req, res) => {
   const { traineeId, instructorId } = req.params;
@@ -198,4 +220,5 @@ module.exports = {
   report,
   viewProblems,
   editProfile,
+  findTrainee
 };
