@@ -33,6 +33,10 @@ header a {
   margin: 0 auto;
 }
 
+.title{
+  text-align: center;
+}
+
 /* homepage */
 .home {
   display: grid;
@@ -72,4 +76,20 @@ header a {
 h4 {
   border: 1px black solid;
   padding: 5px;
+}
+
+/* Landing Page */
+.landing-page{
+  display: grid;
+  margin-left: 25%;
+  margin-right: 25%;
+  width: 50%;
+}
+
+/* Login Page */
+.LoginContent{
+  display: grid;
+  margin-left: 25%;
+  margin-right: 25%;
+  width: 50%;
 }

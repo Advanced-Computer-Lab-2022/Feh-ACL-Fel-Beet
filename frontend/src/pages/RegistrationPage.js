@@ -11,6 +11,8 @@ import Button from "@mui/material/Button";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
 import axios from "axios";
 
 const RegistrationPage = () => {
@@ -49,59 +51,70 @@ const RegistrationPage = () => {
   return (
     <div className="RegistrationPage">
       <div className="RegistrationContent">
-        <Stack direction={"column"} spacing={1} width={"50%"} margin={"20px"}>
-          <TextField
-            variant="outlined"
-            label="Username"
-            value={Username}
-            onChange={(e) => setUsername(e.target.value)}
-          ></TextField>
-          <TextField
-            variant="outlined"
-            label="Password"
-            value={Password}
-            onChange={(e) => setPassword(e.target.value)}
-          ></TextField>
-          <TextField
-            variant="outlined"
-            label="Email"
-            value={Email}
-            onChange={(e) => setEmail(e.target.value)}
-          ></TextField>
-          <TextField
-            variant="outlined"
-            label="First Name"
-            value={FirstName}
-            onChange={(e) => setFirstName(e.target.value)}
-          ></TextField>
-          <TextField
-            variant="outlined"
-            label="Last Name"
-            value={LastName}
-            onChange={(e) => setLastName(e.target.value)}
-          ></TextField>
+        <Grid container justifyContent="center">
+            <Grid item xs={4} justifyContent="center">
+              <Box className="title">
+                  <h1>Create an Account</h1>
+              </Box>
+            </Grid>
+          </Grid>
+        <Grid container justifyContent="center">
+          <Grid item xs={5}>
+            <Stack direction={"column"} spacing={1} margin={"20px"}>
+            <TextField
+              variant="outlined"
+              label="Username"
+              value={Username}
+              onChange={(e) => setUsername(e.target.value)}
+            ></TextField>
+            <TextField
+              variant="outlined"
+              label="Password"
+              value={Password}
+              onChange={(e) => setPassword(e.target.value)}
+            ></TextField>
+            <TextField
+              variant="outlined"
+              label="Email"
+              value={Email}
+              onChange={(e) => setEmail(e.target.value)}
+            ></TextField>
+            <TextField
+              variant="outlined"
+              label="First Name"
+              value={FirstName}
+              onChange={(e) => setFirstName(e.target.value)}
+            ></TextField>
+            <TextField
+              variant="outlined"
+              label="Last Name"
+              value={LastName}
+              onChange={(e) => setLastName(e.target.value)}
+            ></TextField>
 
-          <FormControl>
-            <FormLabel id="demo-radio-buttons-group-label">Gender</FormLabel>
-            <RadioGroup
-              aria-labelledby="demo-radio-buttons-group-label"
-              defaultValue="female"
-              name="radio-buttons-group"
-              onChange={(e) => setGender(e.target.value)}
-              value={Gender}
-            >
-              <FormControlLabel
-                value="Female"
-                control={<Radio />}
-                label="Female"
-              />
-              <FormControlLabel value="Male" control={<Radio />} label="Male" />
-            </RadioGroup>
-          </FormControl>
-          <Button variant={"contained"} onClick={handleSubmit}>
-            Submit
-          </Button>
-        </Stack>
+            <FormControl>
+              <FormLabel id="demo-radio-buttons-group-label">Gender</FormLabel>
+              <RadioGroup
+                aria-labelledby="demo-radio-buttons-group-label"
+                defaultValue="female"
+                name="radio-buttons-group"
+                onChange={(e) => setGender(e.target.value)}
+                value={Gender}
+              >
+                <FormControlLabel
+                  value="Female"
+                  control={<Radio />}
+                  label="Female"
+                />
+                <FormControlLabel value="Male" control={<Radio />} label="Male" />
+              </RadioGroup>
+            </FormControl>
+            <Button variant={"contained"} onClick={handleSubmit}>
+              Submit
+            </Button>
+          </Stack>
+          </Grid>
+        </Grid>
       </div>
     </div>
   );
