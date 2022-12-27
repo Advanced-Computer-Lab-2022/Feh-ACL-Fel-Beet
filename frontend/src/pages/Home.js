@@ -15,6 +15,7 @@ import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import cookie from "react-cookies";
+import Grid from "@mui/material/Grid";  
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -96,53 +97,57 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="home">
-      <div className="courses">
-        {courses &&
-          courses.map((course) => (
-            <CourseDetails course={course} key={course._id} />
-          ))}
-      </div>
-      <Stack direction={"column"}>
-        <Search style={{ marginTop: "14%", marginRight: "20%" }}>
-          <SearchIconWrapper>
-            <SearchIcon />
-          </SearchIconWrapper>
-          <StyledInputBase
-            placeholder="Search…"
-            inputProps={{ "aria-label": "search" }}
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
+    <div>
+      <Grid container spacing={6}>
+        <Grid item className="courses" xs={8}>
+          {courses &&
+            courses.map((course) => (
+              <CourseDetails course={course} key={course._id} />
+            ))}
+        </Grid>
+      <Grid item xs = {3}>
+        <Stack direction={"column"} spacing={3}>
+          <Search style={{ marginTop: "14%", marginRight: "20%" }}>
+            <SearchIconWrapper>
+              <SearchIcon />
+            </SearchIconWrapper>
+            <StyledInputBase
+              placeholder="Search…"
+              inputProps={{ "aria-label": "search" }}
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          </Search>
+          <Rating
+            name="simple-controlled"
+            value={rating}
+            onChange={(event, newValue) => {
+              setRating(newValue);
+            }}
           />
-        </Search>
-        <Rating
-          name="simple-controlled"
-          value={rating}
-          onChange={(event, newValue) => {
-            setRating(newValue);
-          }}
-        />
-        <Slider
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
-          aria-label="Default"
-          valueLabelDisplay="auto"
-        />
-        <FormControl fullWidth>
-          <InputLabel id="demo-simple-select-label">Subject</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={subject}
-            label="Subject"
-            onChange={(e) => setSubject(e.target.value)}
-          >
-            <MenuItem value={"CS"}>CS</MenuItem>
-            <MenuItem value={"Hardware"}>Hardware</MenuItem>
-            <MenuItem value={"Math"}>Math</MenuItem>
-          </Select>
-        </FormControl>
-      </Stack>
+          <Slider
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+            aria-label="Default"
+            valueLabelDisplay="auto"
+          />
+          <FormControl fullWidth>
+            <InputLabel id="demo-simple-select-label">Subject</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={subject}
+              label="Subject"
+              onChange={(e) => setSubject(e.target.value)}
+            >
+              <MenuItem value={"CS"}>CS</MenuItem>
+              <MenuItem value={"Hardware"}>Hardware</MenuItem>
+              <MenuItem value={"Math"}>Math</MenuItem>
+            </Select>
+          </FormControl>
+        </Stack>
+      </Grid>
+      </Grid>
     </div>
   );
 };

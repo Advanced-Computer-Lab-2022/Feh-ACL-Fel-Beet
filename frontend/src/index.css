@@ -14,19 +14,12 @@ body {
 header {
   background: var(--primary);
 }
-header .container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 10px 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
+
 header a {
   color: rgb(255, 255, 255);
-  margin-left: 2%;
   text-decoration: none;
 }
+
 .pages{
   max-width: 1400px;
   padding: 20px;
@@ -38,11 +31,6 @@ header a {
 }
 
 /* homepage */
-.home {
-  display: grid;
-  grid-template-columns: 3fr 1fr;
-  gap: 100px;
-}
 .course-details {
   background: #fff;
   border-radius: 4px;
@@ -74,7 +62,6 @@ header a {
 }
 
 h4 {
-  border: 1px black solid;
   padding: 5px;
 }
 
