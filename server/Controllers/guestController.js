@@ -46,19 +46,23 @@ const logout = async (req, res) => {
 
 const signup = async (req, res) => {
   console.log(req.body);
-  const { Username, Password } = req.body;
+  const { Username, Email, Password } = req.body;
 
   // Check if username exists
   if (
     (await IndividualTrainee.findOne({ Username: Username })) ||
     (await CorporateTrainee.findOne({ Username: Username })) ||
     (await Instructor.findOne({ Username: Username })) ||
-    (await Admin.findOne({ Username: Username }))
-  ) {
-    res.status(400).json("Username already exists");
+    (await Admin.findOne({ Username: Username }))){
+      res.status(200).json("Username already exists");
+      console.log("Username exists");
+    }
+  else if(
+    (await IndividualTrainee.findOne({ Email: Email }))){
+      res.status(200).json("Email already exists");
+      console.log("Email exists");
   }
-
-  try {
+  else try {
     const salt = await bcrypt.genSalt();
     hashedPass = await bcrypt.hash(Password, salt);
     const individualTrainee = await IndividualTrainee.create({
@@ -67,9 +71,10 @@ const signup = async (req, res) => {
     });
     const token = jwt.sign({ Username }, jwtSecret);
     res.cookie("jwt", token, { httpOnly: true });
-    res.status(200).json(individualTrainee);
+    res.status(200).json("User Created!");
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    console.log(error);
+    res.status(400).json();
   }
 };
 

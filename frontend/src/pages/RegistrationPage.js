@@ -14,6 +14,9 @@ import FormLabel from "@mui/material/FormLabel";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import cookie from "react-cookies";
+import { useEffect } from "react";
 
 const RegistrationPage = () => {
   const [Username, setUsername] = useState("");
@@ -23,10 +26,12 @@ const RegistrationPage = () => {
   const [LastName, setLastName] = useState("");
   const [Gender, setGender] = useState("");
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {console.log(cookie.load('id'))}, [])
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("blah");
+    e.preventDefault(); 
 
     axios
       .post(
@@ -44,7 +49,23 @@ const RegistrationPage = () => {
         }
       )
       .then((res) => {
-        console.log(res);
+        setError(JSON.stringify(res.data));
+        if(res.data == "User Created!"){
+          console.log("here");
+          axios
+            .post("http://localhost:4000/guest/login", {
+              Username: Username,
+              Password: Password,
+            })
+            .then((res) => {
+              if (res.data) {
+                cookie.save("username", res.data.username, { path: "/" });
+                cookie.save("id", res.data.id, { path: "/" });
+                cookie.save("type", res.data.type, { path: "/" });
+                navigate("../home");
+              }
+            });
+        }
       });
   };
 
@@ -112,6 +133,9 @@ const RegistrationPage = () => {
             <Button variant={"contained"} onClick={handleSubmit}>
               Submit
             </Button>
+            <Box className="title" justifyContent="center">
+              <h4>{error}</h4>
+            </Box>
           </Stack>
           </Grid>
         </Grid>
