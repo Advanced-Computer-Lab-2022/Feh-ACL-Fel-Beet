@@ -1,6 +1,6 @@
 require("dotenv").config({ path: "./config.env" });
 
-const bodyParser = require('body-parser')
+const bodyParser = require("body-parser");
 const express = require("express");
 const port = process.env.PORT || 4000;
 const app = express();
@@ -8,9 +8,11 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 
 //MIDDLEWARE
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
 app.use(express.urlencoded());
 app.use(express.json());
 app.use(cors({ origin: "*" }));

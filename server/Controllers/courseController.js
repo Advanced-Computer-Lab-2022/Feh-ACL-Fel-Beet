@@ -48,7 +48,8 @@ const getCourse = async (req, res) => {
 
 // CREATE COURSE
 const createCourse = async (req, res) => {
-  const { Name, Subject, Price, shortSummary, VideoUrl, id } = req.body;
+  const { Name, Subject, Price, shortSummary, VideoUrl, id, Subtitles } =
+    req.body;
 
   try {
     const instructor = await Instructor.findById(id);
@@ -60,10 +61,12 @@ const createCourse = async (req, res) => {
       Price,
       shortSummary,
       VideoUrl,
+      Subtitles,
     });
     instructor.Courses.push(course._id);
     res.status(200).json(course);
   } catch (error) {
+    console.log("error is : " + error);
     res.status(400).json({ error: error.message });
   }
 };

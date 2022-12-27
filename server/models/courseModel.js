@@ -3,46 +3,41 @@ const Schema = mongoose.Schema;
 
 const questions = new Schema({
   Question: {
-      type: String
+    type: String
   },
   Choices: {
-      type: [String]
+    type: [String]
   },
   Answer: {
-      type: String
-  }
+    type: String
+  },
 });
 
-const exercises = new Schema({
+const exercise = new Schema({
   Name: {
-      type: String,
-      required: true
+    type: String
   },
   Questions: {
-      type: [questions],
+    type: [questions]
   },
-  Grade: {
-      type: Number
-  }
 });
 
 const subtitles = new Schema({
   Title: {
-      type: String,
-      required: true
+    type: String,
   },
   Hours: {
-      type: Number
+    type: Number,
   },
   Description: {
-    type: String
+    type: String,
   },
   VideoUrl: {
-    type : String
+    type: String,
   },
-  Exercises: {
-    type: [exercises]
-  }
+  Exercise: {
+    type: exercise,
+  },
 });
 
 const coursesSchema = new Schema(
@@ -69,37 +64,34 @@ const coursesSchema = new Schema(
     },
     ratingsCalc: {
       type: [Number],
-      default: []
+      default: [],
     },
     Rating: {
       type: Number,
-      default: 5
-    },  
+      default: 5,
+    },
     Promotion: {
       price: Number,
-      endDate: Date
+      endDate: Date,
     },
     shortSummary: {
-      type: String
+      type: String,
     },
     VideoUrl: {
-      type : String
+      type: String,
     },
     noOfEnrolled: {
       type: Number,
-      default: 0
+      default: 0,
     },
     Subtitles: {
-      type: [subtitles]
-    }
-  }, { timestamps: true }
+      type: [subtitles],
+    },
+  },
+  { timestamps: true }
 );
 
-exercises.methods.calculateGrade = function() {
-  this.Grade = this.Question.length;
-};
-
-coursesSchema.methods.incrementNoOfEnrolled = function() {
+coursesSchema.methods.incrementNoOfEnrolled = function () {
   noOfEnrolled = this.noOfEnrolled++;
 };
 
