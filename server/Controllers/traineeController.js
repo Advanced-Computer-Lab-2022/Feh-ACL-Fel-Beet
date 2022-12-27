@@ -1,3 +1,4 @@
+const mongoose = require("mongoose");
 const IndividualTrainee = require("../Models/individualTraineeModel");
 const CorporateTrainee = require("../Models/corporateTraineeModel");
 const Instructor = require("../Models/instructorModel");
@@ -120,13 +121,6 @@ const viewProblems = async (req, res) => {
   res.status(200).json(problems);
 };
 
-const editProfile = async (req, res) => {
-  const { id } = req.params;
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(400).json({ error: "No such trainee" });
-  }
-};
-
 //--------------------------------------------------------------------------------------------------------------
 
 //------------------FUNCTIONS THAT BELONG TO INDIVIDUAL TRAINEES-----------------------------------------------
@@ -171,6 +165,18 @@ const getIndividualProfile = async (req, res) => {
   }
 };
 
+const editIndividual = async (req, res) => {
+  const { id } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ error: "No such trainee" });
+  }
+
+  const trainee = await IndividualTrainee.findByIdAndUpdate(id, {
+    ...req.body,
+  });
+  res.status(200).json(trainee);
+};
+
 //--------------------------------------------------------------------------------------------------------------
 
 //-------------------------FUNCTIONS THAT BELONG CORPORATE TRAINEES---------------------------------------------
@@ -203,6 +209,18 @@ const getCorporateProfile = async (req, res) => {
   }
 };
 
+const editCorporate = async (req, res) => {
+  const { id } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ error: "No such trainee" });
+  }
+
+  const trainee = await CorporateTrainee.findByIdAndUpdate(id, {
+    ...req.body,
+  });
+  res.status(200).json(trainee);
+};
+
 //--------------------------------------------------------------------------------------------------------------
 
 module.exports = {
@@ -215,6 +233,7 @@ module.exports = {
   getCorporateProfile,
   report,
   viewProblems,
-  editProfile,
+  editIndividual,
+  editCorporate,
   findTrainee,
 };

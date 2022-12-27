@@ -1,3 +1,4 @@
+const bcrypt = require("bcrypt");
 const Admin = require("../Models/adminModel");
 const CorporateTrainee = require("../Models/corporateTraineeModel");
 const IndividualTrainee = require("../Models/individualTraineeModel");
@@ -19,7 +20,9 @@ const addAdmin = async (req, res) => {
   }
 
   try {
-    const admin = await Admin.create({ Username, Password });
+    const salt = await bcrypt.genSalt();
+    hashedPass = await bcrypt.hash(Password, salt);
+    const admin = await Admin.create({ Username, Password: hashedPass });
     res.status(200).json(admin);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -41,7 +44,12 @@ const addInstructor = async (req, res) => {
   }
 
   try {
-    const instructor = await Instructor.create({ Username, Password });
+    const salt = await bcrypt.genSalt();
+    hashedPass = await bcrypt.hash(Password, salt);
+    const instructor = await Instructor.create({
+      Username,
+      Password: hashedPass,
+    });
     res.status(200).json(instructor);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -63,9 +71,11 @@ const addCorporateTrainee = async (req, res) => {
   }
 
   try {
+    const salt = await bcrypt.genSalt();
+    hashedPass = await bcrypt.hash(Password, salt);
     const corporateTrainee = await CorporateTrainee.create({
       Username,
-      Password,
+      Password: hashedPass,
     });
     res.status(200).json(corporateTrainee);
   } catch (error) {

@@ -6,11 +6,11 @@ const {
   viewInstructorReviews,
   viewCourseReviews,
   viewReports,
+  report,
 } = require("../Controllers/instructorController");
-const { route } = require("./individualTraineeRoutes");
 
 // View profile
-router.get("/profile", getProfile);
+router.get("/profile/:id", getProfile);
 
 // Edit Profile
 router.patch("/edit/:id", editProfile);
@@ -23,5 +23,8 @@ router.get("/viewCourseReview/:id", viewCourseReviews);
 
 // View reported problems
 router.get("/viewProblems", viewReports);
+
+// Report a problem
+router.post("/report/:id", report);
 
 module.exports = router;

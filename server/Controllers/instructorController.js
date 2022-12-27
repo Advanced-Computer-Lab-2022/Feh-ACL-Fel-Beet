@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Instructor = require("../Models/instructorModel");
 const Reviews = require("../models/reviewsModel");
+const Problems = require("../models/problemModel");
 
 // View Ratings & Reviews
 const viewInstructorReviews = async (req, res) => {
@@ -55,8 +56,15 @@ const editProfile = async (req, res) => {
 };
 
 const viewReports = async (req, res) => {
-  const problems = Reports.find();
+  const problems = await Problems.find();
   res.status(200).json(problems);
+};
+
+const report = async (req, res) => {
+  const { id } = req.params;
+
+  const problem = await Problems.create({ ...req.body, belongTo: id });
+  res.status(200).json(problem);
 };
 
 module.exports = {
@@ -65,4 +73,5 @@ module.exports = {
   viewInstructorReviews,
   viewCourseReviews,
   viewReports,
+  report,
 };

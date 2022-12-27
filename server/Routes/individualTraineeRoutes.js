@@ -7,7 +7,7 @@ const {
   report,
   viewProblems,
   getIndividualProfile,
-  editProfile,
+  editIndividual,
   requestRefund,
   findTrainee
 } = require("../Controllers/traineeController");
@@ -16,13 +16,13 @@ const {
 router.get("/profile/:id", getIndividualProfile);
 
 // Edit profile
-router.patch("/editProfile/:id", editProfile);
+router.patch("/edit/:id", editIndividual);
 
 // Rate an instructor
 router.post("/rateInstructor/:traineeId/:instructorId", rateInstructor);
 
 // Rate a course
-router.post("/rateCourse/:traineeId", rateCourse);
+router.post("/rateCourse/:traineeId/:courseId", rateCourse);
 
 // Register to a new course
 router.post("/registerCourse/:traineeId/:courseId", registerCourse);
