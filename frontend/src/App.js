@@ -12,16 +12,15 @@ import ViewCourse from "./pages/ViewCourse";
 function App() {
   return (
     <div className="App">
-      
       <BrowserRouter>
-      <Navbar />
+        <Navbar />
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/home" element={<Home />} />
           <Route path="/registration-page" element={<RegistrationPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/add-course" element={<CourseCreation />} />
-          <Route path='/viewCourse' element={<ViewCourse />} />
+          <Route path="/viewCourse" element={<ViewCourse />} />
         </Routes>
       </BrowserRouter>
     </div>
