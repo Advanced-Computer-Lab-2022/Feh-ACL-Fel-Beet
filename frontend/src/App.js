@@ -8,6 +8,7 @@ import RegistrationPage from "./pages/RegistrationPage";
 import LoginPage from "./pages/LoginPage";
 import CourseCreation from "./pages/CourseCreation";
 import ViewCourse from "./pages/ViewCourse";
+import UserCreation from "./components/UserCreation";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/add-course" element={<CourseCreation />} />
           <Route path="/viewCourse" element={<ViewCourse />} />
+          <Route path="/addUser" element={<UserCreation />} />
         </Routes>
       </BrowserRouter>
     </div>

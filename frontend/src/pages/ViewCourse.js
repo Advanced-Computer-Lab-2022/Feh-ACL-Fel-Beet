@@ -24,7 +24,7 @@ export default function ViewCourse() {
     <div>
       <Grid container>
         <Grid item xs={4} className="course-information">
-          <CourseDetails course={courseData} key={courseData._id} />
+          <CourseDetails course={courseData} curr={1} key={courseData._id} />
         </Grid>
       </Grid>
       <ReactPlayer url={courseData.VideoUrl}></ReactPlayer>

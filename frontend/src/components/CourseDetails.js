@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const CourseDetails = ({ course }) => {
+const CourseDetails = ({ course, curr }) => {
   const navigate = useNavigate();
   return (
     <div
@@ -30,7 +30,7 @@ const CourseDetails = ({ course }) => {
       </p>
       <p>
         <strong>Price: </strong>
-        {course.Price}
+        {course.Price * curr}
       </p>
     </div>
   );
