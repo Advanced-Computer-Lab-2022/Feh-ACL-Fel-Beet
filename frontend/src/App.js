@@ -8,6 +8,7 @@ import RegistrationPage from "./pages/RegistrationPage";
 import LoginPage from "./pages/LoginPage";
 import CourseCreation from "./pages/CourseCreation";
 import ViewCourse from "./pages/ViewCourse";
+import Admin from "./pages/Admin";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/add-course" element={<CourseCreation />} />
           <Route path="/viewCourse" element={<ViewCourse />} />
+          <Route path="/adminHome" element={<Admin />} />
         </Routes>
       </BrowserRouter>
     </div>

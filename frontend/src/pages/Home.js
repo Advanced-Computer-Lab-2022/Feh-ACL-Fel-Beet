@@ -107,10 +107,13 @@ const Home = () => {
         </Grid>
       <Grid item xs = {3}>
         <Stack direction={"column"} spacing={3}>
-          <Search style={{ marginTop: "14%", marginRight: "20%" }}>
+          <h2>Filter Courses</h2>
+          <h4>Search by name</h4>
+          <Search style={{ marginTop: "5%", marginRight: "20%" }}>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
+            
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ "aria-label": "search" }}
@@ -118,6 +121,7 @@ const Home = () => {
               onChange={(e) => setSearch(e.target.value)}
             />
           </Search>
+          <h4>Select Rating</h4>
           <Rating
             name="simple-controlled"
             value={rating}
@@ -125,6 +129,7 @@ const Home = () => {
               setRating(newValue);
             }}
           />
+          <h4>Select Price</h4>
           <Slider
             value={price}
             onChange={(e) => setPrice(e.target.value)}

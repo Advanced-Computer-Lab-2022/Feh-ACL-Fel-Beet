@@ -39,6 +39,7 @@ const Navbar = () => {
             <Grid item xs={4}></Grid>
           </Grid>
         </Link>
+        <UserDetails user={user}/>
       </div>
     </header>
   );
