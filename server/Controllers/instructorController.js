@@ -31,7 +31,7 @@ const viewCourseReviews = async (req, res) => {
 };
 
 const getProfile = async (req, res) => {
-  const { id } = req.params;
+  const { id } = req.body;
 
   const instructor = await Instructor.findById(id);
   if (instructor) {

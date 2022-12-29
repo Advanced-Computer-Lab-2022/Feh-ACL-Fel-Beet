@@ -9,11 +9,11 @@ const {
   getIndividualProfile,
   editIndividual,
   requestRefund,
-  findTrainee
+  findTrainee,
 } = require("../Controllers/traineeController");
 
 // Get Profile
-router.get("/profile/:id", getIndividualProfile);
+router.post("/profile", getIndividualProfile);
 
 // Edit profile
 router.patch("/edit/:id", editIndividual);
@@ -37,6 +37,6 @@ router.get("/viewReports", viewProblems);
 router.post("/requestRefund/:id", requestRefund);
 
 //Find a trainee
-router.post("/findTrainee", findTrainee)
+router.post("/findTrainee", findTrainee);
 
 module.exports = router;

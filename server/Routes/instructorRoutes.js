@@ -10,7 +10,7 @@ const {
 } = require("../Controllers/instructorController");
 
 // View profile
-router.get("/profile/:id", getProfile);
+router.post("/profile", getProfile);
 
 // Edit Profile
 router.patch("/edit/:id", editProfile);

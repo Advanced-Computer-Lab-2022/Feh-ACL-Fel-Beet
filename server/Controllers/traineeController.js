@@ -157,7 +157,7 @@ const requestRefund = async (req, res) => {
 };
 
 const getIndividualProfile = async (req, res) => {
-  const { id } = req.params;
+  const { id } = req.body;
 
   const trainee = await IndividualTrainee.findById(id);
   if (trainee) {
