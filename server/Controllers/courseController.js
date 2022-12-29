@@ -56,7 +56,7 @@ const createCourse = async (req, res) => {
     console.log(instructor);
     const course = await Course.create({
       Name,
-      Professor: `${instructor.firstName} ${instructor.lastName}`,
+      Professor: `${instructor.Username}`,
       Subject,
       Price,
       shortSummary,

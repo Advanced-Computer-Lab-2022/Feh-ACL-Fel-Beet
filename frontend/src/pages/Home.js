@@ -14,8 +14,7 @@ import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-import cookie from "react-cookies";
-import Grid from "@mui/material/Grid";  
+import Grid from "@mui/material/Grid";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -66,6 +65,28 @@ const Home = () => {
   const [price, setPrice] = useState(50);
   const [subject, setSubject] = useState("");
 
+  const [country, setCountry] = useState("");
+  const [currency, setCurrency] = useState(1);
+
+  const myHeaders = new Headers();
+  myHeaders.append("apikey", "O3O2B4qh5oNVmuBQLytmfHb4ZK2jaeWf");
+
+  const requestOptions = {
+    method: "GET",
+    redirect: "follow",
+    headers: myHeaders,
+  };
+
+  useEffect(() => {
+    fetch(
+      `https://api.apilayer.com/exchangerates_data/convert?to=${country}&from=EGP&amount=100`,
+      requestOptions
+    )
+      .then((response) => response.json())
+      .then((result) => setCurrency(result.info.rate))
+      .catch((error) => console.log("error", error));
+  }, [country]);
+
   useEffect(() => {
     axios
       .post("http://localhost:4000/course/search", {
@@ -102,56 +123,74 @@ const Home = () => {
         <Grid item className="courses" xs={8}>
           {courses &&
             courses.map((course) => (
-              <CourseDetails course={course} key={course._id} />
+              <CourseDetails course={course} curr={currency} key={course._id} />
             ))}
         </Grid>
-      <Grid item xs = {3}>
-        <Stack direction={"column"} spacing={3}>
-          <h2>Filter Courses</h2>
+        <Grid item xs={3}>
+          <Stack direction={"column"} spacing={3}>
+            <h2>Filter Courses</h2>
           <h4>Search by name</h4>
           <Search style={{ marginTop: "5%", marginRight: "20%" }}>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              
             <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ "aria-label": "search" }}
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
-          </Search>
-          <h4>Select Rating</h4>
+                placeholder="Search…"
+                inputProps={{ "aria-label": "search" }}
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
+            </Search>
+            <h4>Select Rating</h4>
           <Rating
-            name="simple-controlled"
-            value={rating}
-            onChange={(event, newValue) => {
-              setRating(newValue);
-            }}
-          />
-          <h4>Select Price</h4>
+              name="simple-controlled"
+              value={rating}
+              onChange={(event, newValue) => {
+                setRating(newValue);
+              }}
+            />
+            <h4>Select Price</h4>
           <Slider
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
-            aria-label="Default"
-            valueLabelDisplay="auto"
-          />
-          <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">Subject</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={subject}
-              label="Subject"
-              onChange={(e) => setSubject(e.target.value)}
-            >
-              <MenuItem value={"CS"}>CS</MenuItem>
-              <MenuItem value={"Hardware"}>Hardware</MenuItem>
-              <MenuItem value={"Math"}>Math</MenuItem>
-            </Select>
-          </FormControl>
-        </Stack>
-      </Grid>
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+              aria-label="Default"
+              valueLabelDisplay="auto"
+            />
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label">Subject</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={subject}
+                label="Subject"
+                onChange={(e) => setSubject(e.target.value)}
+              >
+                <MenuItem value={"CS"}>CS</MenuItem>
+                <MenuItem value={"Hardware"}>Hardware</MenuItem>
+                <MenuItem value={"Math"}>Math</MenuItem>
+              </Select>
+            </FormControl>
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label1">Country</InputLabel>
+              <Select
+                labelId="demo-simple-select-label1"
+                id="demo-simple-select1"
+                value={country}
+                label="Country"
+                onChange={(e) => setCountry(e.target.value)}
+              >
+                <MenuItem value={"USD"}>USA</MenuItem>
+                <MenuItem value={"EGP"}>Egypt</MenuItem>
+                <MenuItem value={"EUR"}>Europe</MenuItem>
+                <MenuItem value={"CAD"}>Canada</MenuItem>
+                <MenuItem value={"GBP"}>UK</MenuItem>
+                <MenuItem value={"CNY"}>China</MenuItem>
+                <MenuItem value={"JPY"}>Japan</MenuItem>
+              </Select>
+            </FormControl>
+          </Stack>
+        </Grid>
       </Grid>
     </div>
   );
