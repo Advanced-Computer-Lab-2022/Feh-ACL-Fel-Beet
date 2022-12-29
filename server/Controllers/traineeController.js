@@ -11,6 +11,7 @@ const Problems = require("../models/problemModel");
 
 // Return a trainee's information
 const findTrainee = async (req, res) => {
+  console.log("here1");
   const { Username } = req.body;
   let userDetails;
   if (await IndividualTrainee.findOne({ Username: Username })) {
@@ -24,7 +25,8 @@ const findTrainee = async (req, res) => {
   } else {
     userDetails = {};
   }
-  res.status(400).userDetails;
+  console.log(userDetails);
+  res.status(200).json(userDetails);
 };
 
 // Rate Instructor
