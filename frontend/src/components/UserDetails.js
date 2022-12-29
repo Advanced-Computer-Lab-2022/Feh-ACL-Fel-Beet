@@ -3,9 +3,11 @@ import { useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Grid"
 import Button from "@mui/material/Button";
 import axios from "axios"
+import { Link } from "react-router-dom";
 
 const UserDetails = ({ user }) => {
   const navigate = useNavigate();
+
   const logOut = () => {
     axios.get("http://localhost:4000/guest/logout").then(console.log("logged out"));
   }
@@ -30,9 +32,11 @@ const UserDetails = ({ user }) => {
             </Button>
           </Grid>
           <Grid item xs={12} margin={1}>
-            <Button variant="contained" onClick={logOut}>
-                    View Profile
+            <Link to="/home">
+            <Button variant="contained">
+                    Go Home
             </Button>
+            </Link>
           </Grid>
         </Grid>
       </Grid>
