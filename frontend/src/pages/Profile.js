@@ -2,6 +2,7 @@ import { Typography, TextField, Button } from "@mui/material";
 import { useState, useEffect } from "react";
 import cookie from "react-cookies";
 import axios from "axios";
+import Navbar from "../components/Navbar";
 
 export default function Profile() {
   const [username, setUsername] = useState("");
@@ -30,6 +31,7 @@ export default function Profile() {
 
   return (
     <div>
+      <Navbar />
       <Typography variant="h4">Credentials</Typography>
       <Typography variant="body">Username:</Typography>
       <Typography variant="body">{username}</Typography>

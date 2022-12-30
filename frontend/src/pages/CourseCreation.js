@@ -6,6 +6,7 @@ import axios from "axios";
 import cookie from "react-cookies";
 import AddExercise from "../components/AddExercise";
 import React from "react";
+import Navbar from "../components/Navbar";
 
 function CourseCreation() {
   const [Name, setName] = useState("");
@@ -148,169 +149,172 @@ function CourseCreation() {
   };
 
   return (
-    <form className="courseCreationForm" onSubmit={handleSubmit}>
-      <Stack
-        width={"75%"}
-        marginLeft="auto"
-        marginRight="auto"
-        marginBottom={2}
-        spacing={1.5}
-      >
-        <h3>Create a New Course</h3>
-        <Typography>Name </Typography>
-        <TextField
-          type="text"
-          onChange={(e) => setName(e.target.value)}
-          value={Name}
-        ></TextField>
-        <Typography>Subject </Typography>
-        <TextField
-          type="text"
-          onChange={(e) => setSubject(e.target.value)}
-          value={Subject}
-        ></TextField>
-        <Typography>Price </Typography>
-        <TextField
-          type="text"
-          onChange={(e) => setPrice(e.target.value)}
-          value={Price}
-        ></TextField>
-
-        <Typography>Course Outline</Typography>
-        <TextField
-          multiline
-          rows={4}
-          type="text"
-          onChange={(e) => setCourseOutline(e.target.value)}
-          value={courseOutline}
-        ></TextField>
-
-        <Typography>Video Preview Link</Typography>
-        <TextField
-          type="text"
-          onChange={(e) => setVideoPreview(e.target.value)}
-          value={videoPreview}
-        ></TextField>
-
-        <Typography>Subtitle 1</Typography>
-        <Stack direction={"row"} spacing={2}>
+    <div>
+      <Navbar />
+      <form className="courseCreationForm" onSubmit={handleSubmit}>
+        <Stack
+          width={"75%"}
+          marginLeft="auto"
+          marginRight="auto"
+          marginBottom={2}
+          spacing={1.5}
+        >
+          <h3>Create a New Course</h3>
+          <Typography>Name </Typography>
           <TextField
             type="text"
-            onChange={(e) => {
-              setSubtitleTitle1(e.target.value);
-            }}
-            //setSubtitles(current => [...current, 'Carl']);
-            value={subtitleTitle1}
+            onChange={(e) => setName(e.target.value)}
+            value={Name}
           ></TextField>
-          <TextField
-            value={videoUrl1}
-            onChange={(e) => setVideoUrl1(e.target.value)}
-          ></TextField>
-          <Button
-            variant="contained"
-            onClick={() => {
-              setOpen1(true);
-            }}
-          >
-            Add Exercise
-          </Button>
-        </Stack>
-
-        <Typography>Subtitle 2</Typography>
-        <Stack direction={"row"} spacing={2}>
+          <Typography>Subject </Typography>
           <TextField
             type="text"
-            onChange={(e) => {
-              setSubtitleTitle2(e.target.value);
-            }}
-            value={subtitleTitle2}
+            onChange={(e) => setSubject(e.target.value)}
+            value={Subject}
           ></TextField>
-          <TextField
-            value={videoUrl2}
-            onChange={(e) => setVideoUrl2(e.target.value)}
-          ></TextField>
-          <Button
-            variant="contained"
-            onClick={() => {
-              setOpen2(true);
-            }}
-          >
-            Add Exercise
-          </Button>
-        </Stack>
-
-        <Typography>Subtitle 3</Typography>
-        <Stack direction={"row"} spacing={2}>
+          <Typography>Price </Typography>
           <TextField
             type="text"
-            onChange={(e) => {
-              setSubtitleTitle3(e.target.value);
-            }}
-            //setSubtitles(current => [...current, 'Carl']);
-            value={subtitleTitle3}
+            onChange={(e) => setPrice(e.target.value)}
+            value={Price}
           ></TextField>
+
+          <Typography>Course Outline</Typography>
           <TextField
-            value={videoUrl3}
-            onChange={(e) => setVideoUrl3(e.target.value)}
+            multiline
+            rows={4}
+            type="text"
+            onChange={(e) => setCourseOutline(e.target.value)}
+            value={courseOutline}
           ></TextField>
-          <Button
-            variant="contained"
-            onClick={() => {
-              setOpen3(true);
-            }}
-          >
-            Add Exercise
+
+          <Typography>Video Preview Link</Typography>
+          <TextField
+            type="text"
+            onChange={(e) => setVideoPreview(e.target.value)}
+            value={videoPreview}
+          ></TextField>
+
+          <Typography>Subtitle 1</Typography>
+          <Stack direction={"row"} spacing={2}>
+            <TextField
+              type="text"
+              onChange={(e) => {
+                setSubtitleTitle1(e.target.value);
+              }}
+              //setSubtitles(current => [...current, 'Carl']);
+              value={subtitleTitle1}
+            ></TextField>
+            <TextField
+              value={videoUrl1}
+              onChange={(e) => setVideoUrl1(e.target.value)}
+            ></TextField>
+            <Button
+              variant="contained"
+              onClick={() => {
+                setOpen1(true);
+              }}
+            >
+              Add Exercise
+            </Button>
+          </Stack>
+
+          <Typography>Subtitle 2</Typography>
+          <Stack direction={"row"} spacing={2}>
+            <TextField
+              type="text"
+              onChange={(e) => {
+                setSubtitleTitle2(e.target.value);
+              }}
+              value={subtitleTitle2}
+            ></TextField>
+            <TextField
+              value={videoUrl2}
+              onChange={(e) => setVideoUrl2(e.target.value)}
+            ></TextField>
+            <Button
+              variant="contained"
+              onClick={() => {
+                setOpen2(true);
+              }}
+            >
+              Add Exercise
+            </Button>
+          </Stack>
+
+          <Typography>Subtitle 3</Typography>
+          <Stack direction={"row"} spacing={2}>
+            <TextField
+              type="text"
+              onChange={(e) => {
+                setSubtitleTitle3(e.target.value);
+              }}
+              //setSubtitles(current => [...current, 'Carl']);
+              value={subtitleTitle3}
+            ></TextField>
+            <TextField
+              value={videoUrl3}
+              onChange={(e) => setVideoUrl3(e.target.value)}
+            ></TextField>
+            <Button
+              variant="contained"
+              onClick={() => {
+                setOpen3(true);
+              }}
+            >
+              Add Exercise
+            </Button>
+          </Stack>
+
+          <Button onClick={handleSubmit} variant="contained">
+            Add Course
           </Button>
         </Stack>
-
-        <Button onClick={handleSubmit} variant="contained">
-          Add Course
-        </Button>
-      </Stack>
-      <AddExercise
-        open={open1}
-        setOpen={setOpen1}
-        questions={questionsE1}
-        setQuestions={setQuestionsE1}
-        choices1={choices1E1}
-        setChoices1={setChoices1E1}
-        choices2={choices2E1}
-        setChoices2={setChoices2E1}
-        choices3={choices3E1}
-        setChoices3={setChoices3E1}
-        correctChoices={correctChoicesE1}
-        setCorrectChoices={setCorrectChoicesE1}
-      />
-      <AddExercise
-        open={open2}
-        setOpen={setOpen2}
-        questions={questionsE2}
-        setQuestions={setQuestionsE2}
-        choices1={choices1E2}
-        setChoices1={setChoices1E2}
-        choices2={choices2E2}
-        setChoices2={setChoices2E2}
-        choices3={choices3E2}
-        setChoices3={setChoices3E2}
-        correctChoices={correctChoicesE2}
-        setCorrectChoices={setCorrectChoicesE2}
-      />
-      <AddExercise
-        open={open3}
-        setOpen={setOpen3}
-        questions={questionsE3}
-        setQuestions={setQuestionsE3}
-        choices1={choices1E3}
-        setChoices1={setChoices1E3}
-        choices2={choices2E3}
-        setChoices2={setChoices2E3}
-        choices3={choices3E3}
-        setChoices3={setChoices3E3}
-        correctChoices={correctChoicesE3}
-        setCorrectChoices={setCorrectChoicesE3}
-      />
-      {error && <div className="error">{error}</div>}
-    </form>
+        <AddExercise
+          open={open1}
+          setOpen={setOpen1}
+          questions={questionsE1}
+          setQuestions={setQuestionsE1}
+          choices1={choices1E1}
+          setChoices1={setChoices1E1}
+          choices2={choices2E1}
+          setChoices2={setChoices2E1}
+          choices3={choices3E1}
+          setChoices3={setChoices3E1}
+          correctChoices={correctChoicesE1}
+          setCorrectChoices={setCorrectChoicesE1}
+        />
+        <AddExercise
+          open={open2}
+          setOpen={setOpen2}
+          questions={questionsE2}
+          setQuestions={setQuestionsE2}
+          choices1={choices1E2}
+          setChoices1={setChoices1E2}
+          choices2={choices2E2}
+          setChoices2={setChoices2E2}
+          choices3={choices3E2}
+          setChoices3={setChoices3E2}
+          correctChoices={correctChoicesE2}
+          setCorrectChoices={setCorrectChoicesE2}
+        />
+        <AddExercise
+          open={open3}
+          setOpen={setOpen3}
+          questions={questionsE3}
+          setQuestions={setQuestionsE3}
+          choices1={choices1E3}
+          setChoices1={setChoices1E3}
+          choices2={choices2E3}
+          setChoices2={setChoices2E3}
+          choices3={choices3E3}
+          setChoices3={setChoices3E3}
+          correctChoices={correctChoicesE3}
+          setCorrectChoices={setCorrectChoicesE3}
+        />
+        {error && <div className="error">{error}</div>}
+      </form>
+    </div>
   );
 }
 

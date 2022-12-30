@@ -11,15 +11,16 @@ import ViewCourse from "./pages/ViewCourse";
 import Admin from "./pages/Admin";
 import UserCreation from "./components/UserCreation";
 import Profile from "./pages/Profile";
+import InstructorCourses from "./pages/InstructorCourses";
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Navbar />
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/myCourses" element={<InstructorCourses />} />
           <Route path="/registration-page" element={<RegistrationPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/add-course" element={<CourseCreation />} />

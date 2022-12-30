@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import ReactPlayer from "react-player";
 import CourseDetails from "../components/CourseDetails";
 import Grid from "@mui/material/Grid";
+import Navbar from "../components/Navbar";
 
 export default function ViewCourse() {
   const location = useLocation();
@@ -22,6 +23,7 @@ export default function ViewCourse() {
 
   return (
     <div>
+      <Navbar />
       <Grid container>
         <Grid item xs={4} className="course-information">
           <CourseDetails course={courseData} curr={1} key={courseData._id} />
