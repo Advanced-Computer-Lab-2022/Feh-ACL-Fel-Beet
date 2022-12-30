@@ -121,6 +121,7 @@ const Home = () => {
     <div>
       <Grid container spacing={6}>
         <Grid item className="courses" xs={8}>
+          <h1 className="title"> All Courses </h1>
           {courses &&
             courses.map((course) => (
               <CourseDetails course={course} curr={currency} key={course._id} />
@@ -172,7 +173,7 @@ const Home = () => {
               </Select>
             </FormControl>
             <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label1">Country</InputLabel>
+              <InputLabel id="demo-simple-select-label1">Currency</InputLabel>
               <Select
                 labelId="demo-simple-select-label1"
                 id="demo-simple-select1"

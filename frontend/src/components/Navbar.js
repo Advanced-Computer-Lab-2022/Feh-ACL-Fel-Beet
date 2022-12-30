@@ -37,18 +37,18 @@ const Navbar = () => {
   return (
     <header>
       <div className="navbar">
-        <Link to="/">
-          <Grid container justifyContent="left" padding={2} alignItems="center">
-            <Grid item xs={4}>
-              <h2 className="title">Saboora</h2>
-              <Button variant="text">My Courses</Button>
+          <Grid container justifyContent="center" padding={0} alignItems="center">
+            <Link to="/">
+              <Grid item xs={4}>
+                <h2 className="title">Saboora</h2>
+              </Grid>
+            </Link>
+            <Grid item xs={6}>
             </Grid>
-            <Grid item xs={4}></Grid>
-            <Grid item xs={4}>
+            <Grid item xs={3}>
               <UserDetails user={user} />
             </Grid>
           </Grid>
-        </Link>
       </div>
     </header>
   );
