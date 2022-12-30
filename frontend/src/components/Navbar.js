@@ -39,17 +39,17 @@ const Navbar = () => {
   return (
     <header>
       <div className="navbar">
-        <Link to="/">
-          <Grid container justifyContent="left" padding={2} alignItems="center">
+        <Grid container justifyContent="center" padding={0} alignItems="center">
+          <Link to="/">
             <Grid item xs={4}>
               <h2 className="title">Saboora</h2>
             </Grid>
-            <Grid item xs={4}></Grid>
-            <Grid item xs={4}>
-              <UserDetails user={user} />
-            </Grid>
+          </Link>
+          <Grid item xs={6}></Grid>
+          <Grid item xs={3}>
+            <UserDetails user={user} />
           </Grid>
-        </Link>
+        </Grid>
       </div>
     </header>
   );

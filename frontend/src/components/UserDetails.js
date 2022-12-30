@@ -4,6 +4,7 @@ import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import Cookies from "js-cookie";
 
 const UserDetails = ({ user }) => {
   const navigate = useNavigate();
@@ -11,11 +12,15 @@ const UserDetails = ({ user }) => {
   const logOut = () => {
     axios
       .get("http://localhost:4000/guest/logout")
-      .then(console.log("logged out"));
+      .then((res) => {
+        console.log("logged out");
+        console.log(res.data);
+        Cookies.set("username", "");
+      });
   };
   return (
     <div className="user-details" style={{ cursor: "pointer" }}>
-      <Grid container>
+      <Grid container alignItems="center" margin={1}>
         <Grid item xs={6} justifyContent="center">
           <Grid item xs={4} margin={1}>
             {user.FirstName} <span> </span> {user.LastName}
@@ -37,6 +42,11 @@ const UserDetails = ({ user }) => {
           <Grid item xs={12} margin={1}>
             <Link to="/home">
               <Button variant="contained">Go Home</Button>
+            </Link>
+          </Grid>
+          <Grid item xs={12} margin={1}>
+            <Link to="/home">
+              <Button variant="contained">My Courses</Button>
             </Link>
           </Grid>
         </Grid>
