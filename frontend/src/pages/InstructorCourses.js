@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Stack from "@mui/material/Stack";
+import cookie from "react-cookies";
 
 // components
 import CourseDetails from "../components/CourseDetails";
@@ -59,12 +60,13 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-const Home = () => {
+export default function InstructorCourses() {
   const [courses, setCourses] = useState(null);
   const [search, setSearch] = useState("");
   const [rating, setRating] = useState(0);
   const [price, setPrice] = useState(50);
   const [subject, setSubject] = useState("");
+  const id = cookie.load("id");
 
   const [country, setCountry] = useState("");
   const [currency, setCurrency] = useState(1);
@@ -90,8 +92,9 @@ const Home = () => {
 
   useEffect(() => {
     axios
-      .post("http://localhost:4000/course/search", {
+      .post("http://localhost:4000/course/searchInstructor", {
         searchItem: search,
+        id: id,
         realRating: rating,
         maxPrice: price,
         subject: subject,
@@ -103,7 +106,9 @@ const Home = () => {
 
   useEffect(() => {
     const fetchCourses = async () => {
-      const response = await fetch("http://localhost:4000/course/allCourses");
+      const response = await fetch(
+        "http://localhost:4000/course/getInstructorCourses"
+      );
       const json = await response.json();
       for (let i = 0; i < json.length; i++) {
         json[i].totalRating = json[i].Rating.totalRating;
@@ -123,7 +128,6 @@ const Home = () => {
       <Navbar />
       <Grid container spacing={6}>
         <Grid item className="courses" xs={8}>
-          <h1 className="title"> All Courses </h1>
           {courses &&
             courses.map((course) => (
               <CourseDetails course={course} curr={currency} key={course._id} />
@@ -175,7 +179,7 @@ const Home = () => {
               </Select>
             </FormControl>
             <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label1">Currency</InputLabel>
+              <InputLabel id="demo-simple-select-label1">Country</InputLabel>
               <Select
                 labelId="demo-simple-select-label1"
                 id="demo-simple-select1"
@@ -197,6 +201,4 @@ const Home = () => {
       </Grid>
     </div>
   );
-};
-
-export default Home;
+}

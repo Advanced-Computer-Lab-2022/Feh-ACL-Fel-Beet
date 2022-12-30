@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import UserDetails from "../components/UserDetails.js";
 import { useEffect, useState } from "react";
@@ -10,6 +10,8 @@ import { Button } from "@mui/material";
 const Navbar = () => {
   const [user, setUser] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchUser(Cookies.get("username"));
@@ -37,18 +39,17 @@ const Navbar = () => {
   return (
     <header>
       <div className="navbar">
-          <Grid container justifyContent="center" padding={0} alignItems="center">
-            <Link to="/">
-              <Grid item xs={4}>
-                <h2 className="title">Saboora</h2>
-              </Grid>
-            </Link>
-            <Grid item xs={6}>
+        <Grid container justifyContent="center" padding={0} alignItems="center">
+          <Link to="/">
+            <Grid item xs={4}>
+              <h2 className="title">Saboora</h2>
             </Grid>
-            <Grid item xs={3}>
-              <UserDetails user={user} />
-            </Grid>
+          </Link>
+          <Grid item xs={6}></Grid>
+          <Grid item xs={3}>
+            <UserDetails user={user} />
           </Grid>
+        </Grid>
       </div>
     </header>
   );

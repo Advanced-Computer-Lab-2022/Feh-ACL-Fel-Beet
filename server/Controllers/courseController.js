@@ -4,6 +4,14 @@ const Instructor = require("../Models/instructorModel");
 
 const listOfSubjects = ["Hardware", "CS", "Math"];
 
+const getInstructorCourses = async (req, res) => {
+  const id = req.body.id;
+
+  const instructor = await Instructor.findById(id);
+  const courses = await Course.find({ Name: { $in: instructor.Courses } });
+  res.status(200).json(courses);
+};
+
 // search for course by title,subject,instructor
 const searchAndFilter = async (req, res) => {
   const { searchItem } = req.body;
@@ -16,6 +24,35 @@ const searchAndFilter = async (req, res) => {
       { Rating: { $gte: realRating } },
       { Subject: { $in: subject } },
       { Price: { $lte: maxPrice } },
+      {
+        $or: [
+          { Name: new RegExp(searchItem, "i") },
+          { Subject: new RegExp(searchItem, "i") },
+          { Professor: new RegExp(searchItem, "i") },
+        ],
+      },
+    ],
+  })
+    .exec()
+    .catch(() => res.status(400).send("database exploded"));
+  res.send(courses);
+};
+
+const searchAndFilterInstructor = async (req, res) => {
+  const { searchItem, id } = req.body;
+  const maxPrice = req.body.maxPrice || Infinity;
+  const realRating = req.body.realRating || 0;
+  const subject = req.body.subject || listOfSubjects;
+
+  const instructor = await Instructor.findById(id);
+  const listOfCourses = instructor.Courses;
+
+  const courses = await Course.find({
+    $and: [
+      { Rating: { $gte: realRating } },
+      { Subject: { $in: subject } },
+      { Price: { $lte: maxPrice } },
+      { Name: { $in: listOfCourses } },
       {
         $or: [
           { Name: new RegExp(searchItem, "i") },
@@ -140,4 +177,6 @@ module.exports = {
   searchAndFilter,
   addSubtitle,
   updateSub,
+  searchAndFilterInstructor,
+  getInstructorCourses,
 };
