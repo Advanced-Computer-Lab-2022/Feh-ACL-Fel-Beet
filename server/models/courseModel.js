@@ -3,22 +3,22 @@ const Schema = mongoose.Schema;
 
 const questions = new Schema({
   Question: {
-    type: String
+    type: String,
   },
   Choices: {
-    type: [String]
+    type: [String],
   },
   Answer: {
-    type: String
+    type: String,
   },
 });
 
 const exercise = new Schema({
   Name: {
-    type: String
+    type: String,
   },
   Questions: {
-    type: [questions]
+    type: [questions],
   },
 });
 
@@ -68,7 +68,6 @@ const coursesSchema = new Schema(
     },
     Rating: {
       type: Number,
-      default: 5,
     },
     Promotion: {
       price: Number,

@@ -27,13 +27,12 @@ const instructorSchema = new Schema(
     },
     Rating: {
       type: Number,
-      default: 5,
     },
     miniBiography: {
       type: String,
     },
     Courses: {
-      type: [Schema.Types.ObjectId],
+      type: [String],
       default: [],
     },
     Wallet: {

@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useCookies, withCookies } from "react-cookie";
 import axios from "axios";
 import Cookies from "js-cookie";
+import { Button } from "@mui/material";
 
 const Navbar = () => {
   const [user, setUser] = useState("");
@@ -40,12 +41,14 @@ const Navbar = () => {
           <Grid container justifyContent="left" padding={2} alignItems="center">
             <Grid item xs={4}>
               <h2 className="title">Saboora</h2>
+              <Button variant="text">My Courses</Button>
             </Grid>
             <Grid item xs={4}></Grid>
-            <Grid item xs={4}><UserDetails user={user}/></Grid>
+            <Grid item xs={4}>
+              <UserDetails user={user} />
+            </Grid>
           </Grid>
         </Link>
-        
       </div>
     </header>
   );

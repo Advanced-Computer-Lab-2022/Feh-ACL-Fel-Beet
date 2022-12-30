@@ -63,7 +63,7 @@ const createCourse = async (req, res) => {
       VideoUrl,
       Subtitles,
     });
-    instructor.Courses.push(course._id);
+    await Instructor.findByIdAndUpdate(id, { $push: { Courses: Name } });
     res.status(200).json(course);
   } catch (error) {
     console.log("error is : " + error);
