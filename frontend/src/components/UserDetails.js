@@ -45,7 +45,7 @@ const UserDetails = ({ user }) => {
             </Link>
           </Grid>
           <Grid item xs={12} margin={1}>
-            <Link to="/home">
+            <Link to="/traineeCourses">
               <Button variant="contained">My Courses</Button>
             </Link>
           </Grid>

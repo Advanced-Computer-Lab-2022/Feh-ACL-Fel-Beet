@@ -27,7 +27,15 @@ export default function LoginPage() {
           cookie.save("username", res.data.username, { path: "/" });
           cookie.save("id", res.data.id, { path: "/" });
           cookie.save("type", res.data.type, { path: "/" });
-          navigate("../home");
+          if(res.data.type == "Indiviual Trainee" || res.data.type=="Corporate Trainee"){
+            navigate("../home");
+          }
+          if(res.data.type=="Instructor"){
+            navigate("../instructorHome");
+          }
+          if(res.data.type=="Admin"){
+            navigate("../adminHome");
+          }
         }
       });
   }
@@ -60,7 +68,7 @@ export default function LoginPage() {
                   onChange={(e) => setPassword(e.target.value)}
                 ></TextField>
                 <Button variant="contained" onClick={handleSubmit}>
-                  Login
+                  Log In
                 </Button>
               </Stack>
             </Grid>

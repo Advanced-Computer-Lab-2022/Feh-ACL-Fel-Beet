@@ -11,6 +11,7 @@ import ViewCourse from "./pages/ViewCourse";
 import Admin from "./pages/Admin";
 import UserCreation from "./components/UserCreation";
 import Profile from "./pages/Profile";
+import MyCourses from "./pages/MyCourses";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/viewCourse" element={<ViewCourse />} />
           <Route path="/addUser" element={<UserCreation />} />
           <Route path="/adminHome" element={<Admin />} />
+          <Route path="/traineeCourses" element={<MyCourses />} />
           <Route path="/profile" element={<Profile />} />
         </Routes>
       </BrowserRouter>

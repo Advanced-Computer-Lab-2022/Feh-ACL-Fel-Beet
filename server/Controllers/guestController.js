@@ -40,7 +40,6 @@ const login = async (req, res) => {
 };
 
 const logout = async (req, res) => {
-  console.log("logout");
   res.cookie("jwt", "", { httpOnly: true, maxAge: 1 });
   res.status(200).json("Logged out successfully");
 };
