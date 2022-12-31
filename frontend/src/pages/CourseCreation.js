@@ -7,6 +7,9 @@ import cookie from "react-cookies";
 import AddExercise from "../components/AddExercise";
 import React from "react";
 import Navbar from "../components/Navbar";
+import { Link } from "@mui/material";
+import { Checkbox, FormGroup } from "@mui/material";
+import FormControlLabel from "@mui/material/FormControlLabel";
 
 function CourseCreation() {
   const [Name, setName] = useState("");
@@ -265,6 +268,20 @@ function CourseCreation() {
               Add Exercise
             </Button>
           </Stack>
+
+          <FormGroup>
+            <FormControlLabel
+              control={<Checkbox />}
+              label={
+                <div>
+                  <span>I accept the </span>
+                  <Link href="/TermsAndConditions">terms of use</Link>
+                  <span> and </span>
+                  <Link href="/TermsAndConditions">privacy policy</Link>
+                </div>
+              }
+            />
+          </FormGroup>
 
           <Button onClick={handleSubmit} variant="contained">
             Add Course

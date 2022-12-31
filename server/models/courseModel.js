@@ -68,6 +68,7 @@ const coursesSchema = new Schema(
     },
     Rating: {
       type: Number,
+      default: 5,
     },
     Promotion: {
       price: Number,

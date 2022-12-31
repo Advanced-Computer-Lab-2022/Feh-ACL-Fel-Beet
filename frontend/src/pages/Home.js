@@ -119,8 +119,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
-      <Navbar />
+    <div style={{margin: '20px'}}>
       <Grid container spacing={6}>
         <Grid item className="courses" xs={8}>
           <h1 className="title"> All Courses </h1>
