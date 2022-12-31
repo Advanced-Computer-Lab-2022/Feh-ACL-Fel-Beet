@@ -17,11 +17,10 @@ const LandingPage = () => {
                     </Box>
                 </Grid>
             </Grid>
-            <Stack container spacing={2} direction="column">
+            <Stack spacing={2} direction="column">
                 <Button variant="contained" onClick={() => navigate('./login')}>Trainees Login</Button>
                 <Button variant="contained" onClick={() => navigate('./registration-page')}>Trainees Register</Button>
                 <Button variant="contained" onClick={() => navigate('./home')}>Continue As A Guest Trainee</Button>
-
                 <Button variant="contained" onClick={() => navigate('./login')}>Instructors Login</Button>
             </Stack>
         </div>

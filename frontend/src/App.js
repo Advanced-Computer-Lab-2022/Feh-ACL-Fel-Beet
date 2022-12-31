@@ -12,6 +12,7 @@ import Admin from "./pages/Admin";
 import UserCreation from "./components/UserCreation";
 import Profile from "./pages/Profile";
 import MyCourses from "./pages/MyCourses";
+import InstructorCourses from "./pages/InstructorCourses";
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/home" element={<Home />} />
-          <Route path="/myCourses" element={<InstructorCourses />} />
+          <Route path="/instructorHome" element={<InstructorCourses />} />
           <Route path="/registration-page" element={<RegistrationPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/add-course" element={<CourseCreation />} />

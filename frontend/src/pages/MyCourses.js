@@ -9,6 +9,7 @@ import InputBase from "@mui/material/InputBase";
 import axios from "axios";
 import Grid from "@mui/material/Grid";
 import Cookies from "js-cookie";
+import Navbar from "../components/Navbar";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -62,7 +63,7 @@ const MyCourses = () => {
     setLoading(true);
     axios
       .post(
-        "http://localhost:4000/individualTrainee/findTrainee",
+        "http://localhost:4000/admin/findUser",
         {
           Username: username,
         },
@@ -101,6 +102,7 @@ useEffect(() => {
 
   return (
     <div>
+      <Navbar />
       <Grid container spacing={6}>
         <Grid item className="courses" xs={8}>
           <h1 className="title"> My Courses </h1>
