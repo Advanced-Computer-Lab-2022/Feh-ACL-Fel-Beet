@@ -17,6 +17,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import cookie from "react-cookies";
 import { useEffect } from "react";
+import Checkbox from "@mui/material/Checkbox";
 
 const RegistrationPage = () => {
   const [Username, setUsername] = useState("");
@@ -26,14 +27,26 @@ const RegistrationPage = () => {
   const [LastName, setLastName] = useState("");
   const [Gender, setGender] = useState("");
   const [error, setError] = useState(null);
+  const [confirmtc, setConfirmTC] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {console.log(cookie.load('id'))}, [])
 
+  const tcToggle = (e) => {
+    e.preventDefault();
+    if(confirmtc == false){
+      setConfirmTC(true);
+    }
+    else{
+      setConfirmTC(false);
+    }
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault(); 
 
-    axios
+    if(confirmtc){
+      axios
       .post(
         "http://localhost:4000/guest/signup",
         {
@@ -67,6 +80,11 @@ const RegistrationPage = () => {
             });
         }
       });
+    }
+    else{
+      setError("You must accept the terms and conditions!");
+    }
+    
   };
 
   return (
@@ -130,6 +148,12 @@ const RegistrationPage = () => {
                 <FormControlLabel value="Male" control={<Radio />} label="Male" />
               </RadioGroup>
             </FormControl>
+            <Box>
+              terms and conditions
+            </Box>
+            <Checkbox onClick={tcToggle} checked={confirmtc}>
+                I accept the terms and conditions above
+            </Checkbox>
             <Button variant={"contained"} onClick={handleSubmit}>
               Submit
             </Button>
