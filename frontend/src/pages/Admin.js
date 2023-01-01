@@ -6,7 +6,6 @@ import Navbar from "../components/Navbar";
 const Admin = () => {
   return (
     <div className="UserCreation">
-      <Navbar />
       <UserCreation />
     </div>
   );

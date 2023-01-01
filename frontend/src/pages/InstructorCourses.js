@@ -104,7 +104,6 @@ useEffect(() => {
 
   return (
     <div>
-      <Navbar />
       <Grid container margin={2}>
         <Grid item className="courses" xs={8}>
           <h1 className="title"> Currently Teaching: </h1>

@@ -28,13 +28,15 @@ export default function LoginPage() {
           cookie.save("id", res.data.id, { path: "/" });
           cookie.save("type", res.data.type, { path: "/" });
           cookie.save("currency", 1);
-          if(res.data.type == "Indiviual Trainee" || res.data.type=="Corporate Trainee"){
+          console.log(res.data);
+          console.log(res.data.type);
+          if(res.data.type === "Individual Trainee" || res.data.type==="Corporate Trainee"){
             navigate("../home");
           }
-          if(res.data.type=="Instructor"){
+          if(res.data.type==="Instructor"){
             navigate("../instructorHome");
           }
-          if(res.data.type=="Admin"){
+          if(res.data.type==="Admin"){
             navigate("../adminHome");
           }
         }

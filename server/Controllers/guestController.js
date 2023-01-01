@@ -14,7 +14,7 @@ const login = async (req, res) => {
   let user;
   if (await IndividualTrainee.findOne({ Username: Username })) {
     user = await IndividualTrainee.findOne({ Username: Username });
-    type = "Indiviual Trainee";
+    type = "Individual Trainee";
   } else if (await CorporateTrainee.findOne({ Username: Username })) {
     user = await CorporateTrainee.findOne({ Username: Username });
     type = "Corporate Trainee";

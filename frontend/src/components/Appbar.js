@@ -22,8 +22,13 @@ const settings = ["Profile", "Logout"];
 function GudAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [userType, setUserType] = React.useState("");
   const navigate = useNavigate();
 
+  React.useEffect(() => {
+    setUserType(Cookies.get("type"));
+  }, []);
+  
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -41,7 +46,14 @@ function GudAppBar() {
         navigate("../");
       });
     } else if (page) {
-      navigate(`/${page.replace(/\s+/g, "")}`);
+      console.log(page);
+      if(userType == "Instructor" && page =="My Courses"){
+        console.log(userType);
+        navigate("/instructorHome");
+      }
+      else{
+        navigate(`/${page.replace(/\s+/g, "")}`);
+      }
     }
   };
 
