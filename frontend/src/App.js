@@ -13,11 +13,16 @@ import UserCreation from "./components/UserCreation";
 import Profile from "./pages/Profile";
 import MyCourses from "./pages/MyCourses";
 import InstructorCourses from "./pages/InstructorCourses";
+import Appbar from "./components/Appbar";
+import TermsAndConditions from "./pages/TermsAndConditions";
+import TraineeTermsAndConditions from "./pages/TraineeTerms";
+import Exercise from "./pages/SolveExercise";
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
+        <Appbar />
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/home" element={<Home />} />
@@ -30,6 +35,9 @@ function App() {
           <Route path="/adminHome" element={<Admin />} />
           <Route path="/traineeCourses" element={<MyCourses />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="TermsAndConditions" element={<TermsAndConditions />} />
+          <Route path="TraineeTermsAndConditions" element={<TraineeTermsAndConditions />} />
+          <Route path="exercise" element={<Exercise />} />
         </Routes>
       </BrowserRouter>
     </div>

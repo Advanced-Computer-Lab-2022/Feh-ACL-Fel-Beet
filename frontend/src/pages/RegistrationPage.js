@@ -17,7 +17,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import cookie from "react-cookies";
 import { useEffect } from "react";
-import Checkbox from "@mui/material/Checkbox";
+import { Checkbox, FormGroup } from "@mui/material";
+import { Link } from "@mui/material";
 
 const RegistrationPage = () => {
   const [Username, setUsername] = useState("");
@@ -30,7 +31,9 @@ const RegistrationPage = () => {
   const [confirmtc, setConfirmTC] = useState(false);
   const navigate = useNavigate();
 
-  useEffect(() => {console.log(cookie.load('id'))}, [])
+  useEffect(() => {
+    console.log(cookie.load("id"));
+  }, []);
 
   const tcToggle = (e) => {
     e.preventDefault();
@@ -43,7 +46,7 @@ const RegistrationPage = () => {
   }
 
   const handleSubmit = (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
 
     if(confirmtc){
       axios
@@ -63,7 +66,7 @@ const RegistrationPage = () => {
       )
       .then((res) => {
         setError(JSON.stringify(res.data));
-        if(res.data == "User Created!"){
+        if (res.data == "User Created!") {
           console.log("here");
           axios
             .post("http://localhost:4000/guest/login", {
@@ -91,76 +94,89 @@ const RegistrationPage = () => {
     <div className="RegistrationPage">
       <div className="RegistrationContent">
         <Grid container justifyContent="center">
-            <Grid item xs={4} justifyContent="center">
-              <Box className="title">
-                  <h1>Create an Account</h1>
-              </Box>
-            </Grid>
+          <Grid item xs={4} justifyContent="center">
+            <Box className="title">
+              <h1>Create an Account</h1>
+            </Box>
           </Grid>
+        </Grid>
         <Grid container justifyContent="center">
           <Grid item xs={5}>
             <Stack direction={"column"} spacing={1} margin={"20px"}>
-            <TextField
-              variant="outlined"
-              label="Username"
-              value={Username}
-              onChange={(e) => setUsername(e.target.value)}
-            ></TextField>
-            <TextField
-              variant="outlined"
-              label="Password"
-              value={Password}
-              onChange={(e) => setPassword(e.target.value)}
-            ></TextField>
-            <TextField
-              variant="outlined"
-              label="Email"
-              value={Email}
-              onChange={(e) => setEmail(e.target.value)}
-            ></TextField>
-            <TextField
-              variant="outlined"
-              label="First Name"
-              value={FirstName}
-              onChange={(e) => setFirstName(e.target.value)}
-            ></TextField>
-            <TextField
-              variant="outlined"
-              label="Last Name"
-              value={LastName}
-              onChange={(e) => setLastName(e.target.value)}
-            ></TextField>
+              <TextField
+                variant="outlined"
+                label="Username"
+                value={Username}
+                onChange={(e) => setUsername(e.target.value)}
+              ></TextField>
+              <TextField
+                variant="outlined"
+                label="Password"
+                value={Password}
+                onChange={(e) => setPassword(e.target.value)}
+              ></TextField>
+              <TextField
+                variant="outlined"
+                label="Email"
+                value={Email}
+                onChange={(e) => setEmail(e.target.value)}
+              ></TextField>
+              <TextField
+                variant="outlined"
+                label="First Name"
+                value={FirstName}
+                onChange={(e) => setFirstName(e.target.value)}
+              ></TextField>
+              <TextField
+                variant="outlined"
+                label="Last Name"
+                value={LastName}
+                onChange={(e) => setLastName(e.target.value)}
+              ></TextField>
 
-            <FormControl>
-              <FormLabel id="demo-radio-buttons-group-label">Gender</FormLabel>
-              <RadioGroup
-                aria-labelledby="demo-radio-buttons-group-label"
-                defaultValue="female"
-                name="radio-buttons-group"
-                onChange={(e) => setGender(e.target.value)}
-                value={Gender}
-              >
+              <FormControl>
+                <FormLabel id="demo-radio-buttons-group-label">
+                  Gender
+                </FormLabel>
+                <RadioGroup
+                  aria-labelledby="demo-radio-buttons-group-label"
+                  defaultValue="female"
+                  name="radio-buttons-group"
+                  onChange={(e) => setGender(e.target.value)}
+                  value={Gender}
+                >
+                  <FormControlLabel
+                    value="Female"
+                    control={<Radio />}
+                    label="Female"
+                  />
+                  <FormControlLabel
+                    value="Male"
+                    control={<Radio />}
+                    label="Male"
+                  />
+                </RadioGroup>
+              </FormControl>
+              <FormGroup>
                 <FormControlLabel
-                  value="Female"
-                  control={<Radio />}
-                  label="Female"
+                  control={<Checkbox onClick={tcToggle} checked={confirmtc}/>}
+                  label={
+                    <div>
+                      <span>I accept the </span>
+                      <Link href="/TraineeTermsAndConditions">terms of use</Link>
+                      <span> and </span>
+                      <Link href="/TraineeTermsAndConditions">privacy policy</Link>
+                    </div>
+                  }
                 />
-                <FormControlLabel value="Male" control={<Radio />} label="Male" />
-              </RadioGroup>
-            </FormControl>
-            <Box>
-              terms and conditions
-            </Box>
-            <Checkbox onClick={tcToggle} checked={confirmtc}>
-                I accept the terms and conditions above
-            </Checkbox>
-            <Button variant={"contained"} onClick={handleSubmit}>
-              Submit
-            </Button>
-            <Box className="title" justifyContent="center">
-              <h4>{error}</h4>
-            </Box>
-          </Stack>
+              </FormGroup>
+              <Button variant={"contained"} onClick={handleSubmit}>
+                Submit
+              </Button>
+              <Box className="title" justifyContent="center">
+                <h4>{error}</h4>
+              </Box>
+            </Stack>
           </Grid>
         </Grid>
       </div>
