@@ -101,6 +101,7 @@ export default function Profile() {
           ></TextField>
           <TextField
             label={"Password"}
+            type={"password"}
             value={password}
             onChange={e => setPassword(e.target.value)}
           ></TextField>
