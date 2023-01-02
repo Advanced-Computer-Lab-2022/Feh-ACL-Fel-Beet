@@ -12,23 +12,27 @@ const {
   findTrainee,
 } = require("../Controllers/traineeController");
 
+const { forgotPassword } = require("../Helpers/Nodemailer");
+
+router.post("/forgotPass", forgotPassword);
+
 // Get Profile
 router.post("/profile", getIndividualProfile);
 
 // Edit profile
-router.patch("/edit/:id", editIndividual);
+router.post("/edit", editIndividual);
 
 // Rate an instructor
-router.post("/rateInstructor/:traineeId/:instructorId", rateInstructor);
+router.post("/rateInstructor", rateInstructor);
 
 // Rate a course
-router.post("/rateCourse/:traineeId/:courseId", rateCourse);
+router.post("/rateCourse", rateCourse);
 
 // Register to a new course
 router.post("/registerCourse/:traineeId/:courseId", registerCourse);
 
 // Report a problem
-router.post("/report/:id", report);
+router.post("/report", report);
 
 // View problems
 router.get("/viewReports", viewProblems);

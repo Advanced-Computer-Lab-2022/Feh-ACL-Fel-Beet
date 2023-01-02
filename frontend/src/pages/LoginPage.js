@@ -14,7 +14,9 @@ export default function LoginPage() {
   const [Password, setPassword] = React.useState("");
   const navigate = useNavigate();
 
-  useEffect(() => {console.log(cookie.load('id'))}, [])
+  useEffect(() => {
+    console.log(cookie.load("id"));
+  }, []);
 
   function handleSubmit(e) {
     axios
@@ -22,14 +24,27 @@ export default function LoginPage() {
         Username: Username,
         Password: Password,
       })
-      .then((res) => {
+      .then(res => {
         if (res.data) {
           cookie.save("username", res.data.username, { path: "/" });
           cookie.save("id", res.data.id, { path: "/" });
           cookie.save("type", res.data.type, { path: "/" });
-          navigate("../home");
+          console.log(cookie.load("type"));
+          if (cookie.load("type") == "Admin") {
+            navigate("../adminhome");
+          } else {
+            navigate("../home");
+          }
         }
       });
+  }
+
+  function forgotPass() {
+    axios
+      .post("http://localhost:4000/individualTrainee/forgotPass", {
+        Username: Username,
+      })
+      .then(alert("An email has been sent to you"));
   }
 
   return (
@@ -39,26 +54,34 @@ export default function LoginPage() {
           <Grid container justifyContent="center">
             <Grid item xs={4} justifyContent="center">
               <Box className="title">
-                  <h1>Log In</h1>
+                <h1>Log In</h1>
               </Box>
             </Grid>
           </Grid>
           <Grid container justifyContent="center" padding={4}>
             <Grid item xs={6}>
-              <Stack direction={"column"} spacing={1} width={"100%"} justifyContent="center">
+              <Stack
+                direction={"column"}
+                spacing={1}
+                width={"100%"}
+                justifyContent="center"
+              >
                 <TextField
                   variant="outlined"
                   label="Username"
                   value={Username}
-                  onChange={(e) => setUsername(e.target.value)}
+                  onChange={e => setUsername(e.target.value)}
                 ></TextField>
                 <TextField
                   variant="outlined"
                   type={"password"}
                   label="Password"
                   value={Password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={e => setPassword(e.target.value)}
                 ></TextField>
+                <Button variant="text" onClick={forgotPass}>
+                  Forgot My Password
+                </Button>
                 <Button variant="contained" onClick={handleSubmit}>
                   Login
                 </Button>

@@ -16,7 +16,6 @@ import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import Grid from "@mui/material/Grid";
-import Navbar from "../components/Navbar";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -125,7 +124,6 @@ export default function InstructorCourses() {
 
   return (
     <div>
-      <Navbar />
       <Grid container spacing={6}>
         <Grid item className="courses" xs={8}>
           {courses &&

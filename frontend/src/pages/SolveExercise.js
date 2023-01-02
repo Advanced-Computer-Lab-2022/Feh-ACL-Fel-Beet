@@ -1,6 +1,5 @@
 import * as React from "react";
 import Button from "@mui/material/Button";
-import axios from "axios";
 import Stack from "@mui/material/Stack";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
@@ -8,7 +7,6 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import { Typography } from "@mui/material";
-import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
 const Exercise = () => {

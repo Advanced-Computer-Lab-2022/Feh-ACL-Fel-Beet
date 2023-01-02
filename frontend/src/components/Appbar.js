@@ -17,24 +17,24 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 const pages = ["My Courses", "About Us"];
-const settings = ["Profile", "Logout"];
+const settings = ["Profile", "Report", "Logout"];
 
 function GudAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const navigate = useNavigate();
 
-  const handleOpenNavMenu = (event) => {
+  const handleOpenNavMenu = event => {
     setAnchorElNav(event.currentTarget);
   };
-  const handleOpenUserMenu = (event) => {
+  const handleOpenUserMenu = event => {
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleCloseNavMenu = (page) => {
+  const handleCloseNavMenu = page => {
     setAnchorElNav(null);
     if (page && page == "Logout") {
-      axios.get("http://localhost:4000/guest/logout").then((res) => {
+      axios.get("http://localhost:4000/guest/logout").then(res => {
         console.log("logged out");
         console.log(res.data);
         Cookies.set("username", "");
@@ -53,12 +53,11 @@ function GudAppBar() {
     <AppBar position="static" color="success">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
           <Typography
             variant="h6"
             noWrap
             component="a"
-            href="/"
+            href="/home"
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -69,7 +68,7 @@ function GudAppBar() {
               textDecoration: "none",
             }}
           >
-            LOGO
+            Saboora
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -101,7 +100,7 @@ function GudAppBar() {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map((page) => (
+              {pages.map(page => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
@@ -128,7 +127,7 @@ function GudAppBar() {
             LOGO
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
+            {pages.map(page => (
               <Button
                 key={page}
                 onClick={() => {
@@ -163,7 +162,7 @@ function GudAppBar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
+              {settings.map(setting => (
                 <MenuItem
                   key={setting}
                   onClick={() => {

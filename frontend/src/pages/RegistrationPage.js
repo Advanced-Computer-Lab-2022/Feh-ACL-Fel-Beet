@@ -1,7 +1,4 @@
-import Navbar from "../components/Navbar";
 import { useState } from "react";
-import Dropdown from "react-bootstrap/Dropdown";
-import DropdownButton from "react-bootstrap/DropdownButton";
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import * as React from "react";
@@ -146,9 +143,13 @@ const RegistrationPage = () => {
                   label={
                     <div>
                       <span>I accept the </span>
-                      <Link href="/TraineeTermsAndConditions">terms of use</Link>
+                      <Link href="/TraineeTermsAndConditions">
+                        terms of use
+                      </Link>
                       <span> and </span>
-                      <Link href="/TraineeTermsAndConditions">privacy policy</Link>
+                      <Link href="/TraineeTermsAndConditions">
+                        privacy policy
+                      </Link>
                     </div>
                   }
                 />

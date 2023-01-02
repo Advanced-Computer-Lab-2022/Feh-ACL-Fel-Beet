@@ -15,7 +15,6 @@ import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import Grid from "@mui/material/Grid";
-import Navbar from "../components/Navbar";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -119,7 +118,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div style={{margin: '20px'}}>
+    <div style={{ margin: "20px" }}>
       <Grid container spacing={6}>
         <Grid item className="courses" xs={8}>
           <h1 className="title"> All Courses </h1>
@@ -174,7 +173,7 @@ const Home = () => {
               </Select>
             </FormControl>
             <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label1">Currency</InputLabel>
+              <InputLabel id="demo-simple-select-label1">Country</InputLabel>
               <Select
                 labelId="demo-simple-select-label1"
                 id="demo-simple-select1"

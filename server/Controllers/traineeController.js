@@ -6,6 +6,7 @@ const Course = require("../Models/courseModel");
 const Reviews = require("../models/reviewsModel");
 const Requests = require("../models/requestsModel");
 const Problems = require("../models/problemModel");
+const bcrypt = require("bcrypt");
 
 //---------------FUNCTIONS THAT BELONG TO BOTH TYPES OF TRAINEES-------------------
 
@@ -31,22 +32,25 @@ const findTrainee = async (req, res) => {
 
 // Rate Instructor
 const rateInstructor = async (req, res) => {
-  const { traineeId, instructorId } = req.params;
+  const { traineeId, username } = req.body;
   const { Rating } = req.body;
   let totalRating = 0;
 
-  const instructor = await Instructor.findById(instructorId);
+  const instructor = await Instructor.findOne({ Username: username });
   if (instructor) {
     const noOfRatings = instructor.ratingsCalc.push(Rating);
-    instructor.ratingsCalc.map((rating) => {
+    instructor.ratingsCalc.map(rating => {
       totalRating += rating;
     });
     const realRating = totalRating / noOfRatings;
 
-    await Instructor.findByIdAndUpdate(instructorId, {
-      Rating: realRating,
-      ratingsCalc: instructor.ratingsCalc,
-    });
+    await Instructor.findOneAndUpdate(
+      { Username: username },
+      {
+        Rating: realRating,
+        ratingsCalc: instructor.ratingsCalc,
+      }
+    );
   } else {
     res.status(400).json("No such instructor exists");
   }
@@ -55,14 +59,14 @@ const rateInstructor = async (req, res) => {
     const review = await Reviews.create({
       ...req.body,
       writtenBy: traineeId,
-      belongsTo: instructorId,
+      belongsTo: username,
     });
     res.status(200).json(review);
   } else if (await CorporateTrainee.findById(traineeId)) {
     const review = await Reviews.create({
       ...req.body,
       writtenBy: traineeId,
-      belongsTo: instructorId,
+      belongsTo: username,
     });
     res.status(200).json(review);
   } else {
@@ -72,22 +76,25 @@ const rateInstructor = async (req, res) => {
 
 // Rate Course
 const rateCourse = async (req, res) => {
-  const { traineeId, courseId } = req.params;
+  const { traineeId, courseName } = req.body;
   const { Rating } = req.body;
   let totalRating = 0;
 
-  const course = await Course.findById(courseId);
+  const course = await Course.findOne({ Name: courseName });
   if (course) {
     const noOfRatings = course.ratingsCalc.push(Rating);
-    course.ratingsCalc.map((rating) => {
+    course.ratingsCalc.map(rating => {
       totalRating += rating;
     });
     const realRating = totalRating / noOfRatings;
 
-    await Course.findByIdAndUpdate(courseId, {
-      Rating: realRating,
-      ratingsCalc: course.ratingsCalc,
-    });
+    await Course.findOneAndUpdate(
+      { Name: courseName },
+      {
+        Rating: realRating,
+        ratingsCalc: course.ratingsCalc,
+      }
+    );
   } else {
     res.status(400).json("No such course exists");
   }
@@ -96,14 +103,14 @@ const rateCourse = async (req, res) => {
     const review = await Reviews.create({
       ...req.body,
       writtenBy: traineeId,
-      belongsTo: courseId,
+      belongsTo: courseName,
     });
     res.status(200).json(review);
   } else if (await CorporateTrainee.findById(traineeId)) {
     const review = await Reviews.create({
       ...req.body,
       writtenBy: traineeId,
-      belongsTo: courseId,
+      belongsTo: courseName,
     });
     res.status(200).json(review);
   } else {
@@ -112,7 +119,7 @@ const rateCourse = async (req, res) => {
 };
 
 const report = async (req, res) => {
-  const { id } = req.params;
+  const { id } = req.body;
 
   const problem = await Problems.create({ ...req.body, belongTo: id });
   res.status(200).json(problem);
@@ -168,13 +175,18 @@ const getIndividualProfile = async (req, res) => {
 };
 
 const editIndividual = async (req, res) => {
-  const { id } = req.params;
+  const { id } = req.body;
+  const password = req.body.Password;
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).json({ error: "No such trainee" });
   }
 
+  const salt = await bcrypt.genSalt();
+  const hashedPass = await bcrypt.hash(password, salt);
+
   const trainee = await IndividualTrainee.findByIdAndUpdate(id, {
     ...req.body,
+    Password: hashedPass,
   });
   res.status(200).json(trainee);
 };

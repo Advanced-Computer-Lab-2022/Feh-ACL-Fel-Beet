@@ -2,7 +2,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // pages & components
 import Home from "./pages/Home";
-import Navbar from "./components/Navbar";
 import LandingPage from "./pages/LandingPage";
 import RegistrationPage from "./pages/RegistrationPage";
 import LoginPage from "./pages/LoginPage";
@@ -16,6 +15,8 @@ import Appbar from "./components/Appbar";
 import TermsAndConditions from "./pages/TermsAndConditions";
 import TraineeTermsAndConditions from "./pages/TraineeTerms";
 import Exercise from "./pages/SolveExercise";
+import ChangePassword from "./pages/ChangePassword";
+import Report from "./pages/Report";
 
 function App() {
   return (
@@ -25,7 +26,7 @@ function App() {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/home" element={<Home />} />
-          <Route path="/instructorHome" element={<InstructorCourses />} />
+          <Route path="/myCourses" element={<InstructorCourses />} />
           <Route path="/registration-page" element={<RegistrationPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/add-course" element={<CourseCreation />} />
@@ -34,8 +35,13 @@ function App() {
           <Route path="/adminHome" element={<Admin />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="TermsAndConditions" element={<TermsAndConditions />} />
-          <Route path="TraineeTermsAndConditions" element={<TraineeTermsAndConditions />} />
+          <Route
+            path="TraineeTermsAndConditions"
+            element={<TraineeTermsAndConditions />}
+          />
           <Route path="exercise" element={<Exercise />} />
+          <Route path="changePassword" element={<ChangePassword />} />
+          <Route path="report" element={<Report />} />
         </Routes>
       </BrowserRouter>
     </div>

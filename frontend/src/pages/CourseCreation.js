@@ -6,7 +6,6 @@ import axios from "axios";
 import cookie from "react-cookies";
 import AddExercise from "../components/AddExercise";
 import React from "react";
-import Navbar from "../components/Navbar";
 import { Link } from "@mui/material";
 import { Checkbox, FormGroup } from "@mui/material";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -17,6 +16,8 @@ function CourseCreation() {
   const [Price, setPrice] = useState("");
   const [videoPreview, setVideoPreview] = useState("");
   const [courseOutline, setCourseOutline] = useState("");
+  const [promotion, setPromotion] = useState(1);
+  const [promotionDate, setPromotionDate] = useState("");
 
   const [questionsE1, setQuestionsE1] = React.useState(["", "", ""]);
   const [choices1E1, setChoices1E1] = React.useState(["", "", "", "", ""]);
@@ -42,6 +43,10 @@ function CourseCreation() {
   const [subtitleTitle2, setSubtitleTitle2] = useState("");
   const [subtitleTitle3, setSubtitleTitle3] = useState("");
 
+  const [description1, setDescription1] = useState("");
+  const [description2, setDescription2] = useState("");
+  const [description3, setDescription3] = useState("");
+
   const [videoUrl1, setVideoUrl1] = useState("");
   const [videoUrl2, setVideoUrl2] = useState("");
   const [videoUrl3, setVideoUrl3] = useState("");
@@ -58,7 +63,7 @@ function CourseCreation() {
     const subtitle1 = {
       Title: subtitleTitle1,
       Hours: "",
-      Description: "",
+      Description: description1,
       VideoUrl: videoUrl1,
       Exercise: {
         Name: "",
@@ -85,7 +90,7 @@ function CourseCreation() {
     const subtitle2 = {
       Title: subtitleTitle2,
       Hours: "",
-      Description: "",
+      Description: description2,
       VideoUrl: videoUrl2,
       Exercise: {
         Name: "",
@@ -112,7 +117,7 @@ function CourseCreation() {
     const subtitle3 = {
       Title: subtitleTitle3,
       Hours: "",
-      Description: "",
+      Description: description3,
       VideoUrl: videoUrl3,
       Exercise: {
         Name: "",
@@ -142,6 +147,8 @@ function CourseCreation() {
         VideoUrl: videoPreview,
         Subject: Subject,
         Price: Price,
+        promotion: promotion,
+        endDate: promotionDate,
         shortSummary: courseOutline,
         id: id,
         Subtitles: [subtitle1, subtitle2, subtitle3],
@@ -153,7 +160,6 @@ function CourseCreation() {
 
   return (
     <div>
-      <Navbar />
       <form className="courseCreationForm" onSubmit={handleSubmit}>
         <Stack
           width={"75%"}
@@ -181,7 +187,18 @@ function CourseCreation() {
             onChange={(e) => setPrice(e.target.value)}
             value={Price}
           ></TextField>
-
+          <Stack direction={"row"} spacing={2}>
+            <Typography>Promotion</Typography>
+            <TextField
+              type="text"
+              onChange={(e) => setPromotion(e.target.value)}
+            ></TextField>
+            <Typography>End Date</Typography>
+            <TextField
+              type="date"
+              onChange={(e) => setPromotionDate(e.target.value)}
+            ></TextField>
+          </Stack>
           <Typography>Course Outline</Typography>
           <TextField
             multiline
@@ -199,7 +216,8 @@ function CourseCreation() {
           ></TextField>
 
           <Typography>Subtitle 1</Typography>
-          <Stack direction={"row"} spacing={2}>
+          <Stack spacing={2}>
+            <Typography>Title</Typography>
             <TextField
               type="text"
               onChange={(e) => {
@@ -208,6 +226,13 @@ function CourseCreation() {
               //setSubtitles(current => [...current, 'Carl']);
               value={subtitleTitle1}
             ></TextField>
+            <Typography>Description</Typography>
+            <TextField
+              multiline
+              value={description1}
+              onChange={(e) => setDescription1(e.target.value)}
+            ></TextField>
+            <Typography>Video Preview Link</Typography>
             <TextField
               value={videoUrl1}
               onChange={(e) => setVideoUrl1(e.target.value)}
@@ -223,7 +248,8 @@ function CourseCreation() {
           </Stack>
 
           <Typography>Subtitle 2</Typography>
-          <Stack direction={"row"} spacing={2}>
+          <Stack spacing={2}>
+            <Typography>Title</Typography>
             <TextField
               type="text"
               onChange={(e) => {
@@ -231,6 +257,13 @@ function CourseCreation() {
               }}
               value={subtitleTitle2}
             ></TextField>
+            <Typography>Description</Typography>
+            <TextField
+              multiline
+              value={description2}
+              onChange={(e) => setDescription2(e.target.value)}
+            ></TextField>
+            <Typography>Video Preview Link</Typography>
             <TextField
               value={videoUrl2}
               onChange={(e) => setVideoUrl2(e.target.value)}
@@ -246,7 +279,8 @@ function CourseCreation() {
           </Stack>
 
           <Typography>Subtitle 3</Typography>
-          <Stack direction={"row"} spacing={2}>
+          <Stack spacing={2}>
+            <Typography>Title</Typography>
             <TextField
               type="text"
               onChange={(e) => {
@@ -255,6 +289,13 @@ function CourseCreation() {
               //setSubtitles(current => [...current, 'Carl']);
               value={subtitleTitle3}
             ></TextField>
+            <Typography>Description</Typography>
+            <TextField
+              multiline
+              value={description3}
+              onChange={(e) => setDescription3(e.target.value)}
+            ></TextField>
+            <Typography>Video Preview Link</Typography>
             <TextField
               value={videoUrl3}
               onChange={(e) => setVideoUrl3(e.target.value)}

@@ -23,7 +23,7 @@ router.post("/rateInstructor/:traineeId/:instructorId", rateInstructor);
 router.post("/rateCourse/:traineeId/:courseId", rateCourse);
 
 // Report a problem
-router.post("/report/:id", report);
+router.post("/report", report);
 
 // View problems
 router.get("/viewReports", viewProblems);

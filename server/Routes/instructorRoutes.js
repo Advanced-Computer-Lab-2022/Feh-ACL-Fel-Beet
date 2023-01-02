@@ -13,7 +13,7 @@ const {
 router.post("/profile", getProfile);
 
 // Edit Profile
-router.patch("/edit/:id", editProfile);
+router.post("/edit", editProfile);
 
 // View reviews & ratings
 router.get("/viewReviews/:id", viewInstructorReviews);
@@ -25,6 +25,6 @@ router.get("/viewCourseReview/:id", viewCourseReviews);
 router.get("/viewProblems", viewReports);
 
 // Report a problem
-router.post("/report/:id", report);
+router.post("/report", report);
 
 module.exports = router;

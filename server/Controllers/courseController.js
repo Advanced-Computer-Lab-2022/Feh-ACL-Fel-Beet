@@ -85,17 +85,28 @@ const getCourse = async (req, res) => {
 
 // CREATE COURSE
 const createCourse = async (req, res) => {
-  const { Name, Subject, Price, shortSummary, VideoUrl, id, Subtitles } =
-    req.body;
+  const {
+    Name,
+    Subject,
+    Price,
+    promotion,
+    endDate,
+    shortSummary,
+    VideoUrl,
+    id,
+    Subtitles,
+  } = req.body;
 
   try {
     const instructor = await Instructor.findById(id);
     console.log(instructor);
+    const newPrice = Price - Price * (promotion / 100);
     const course = await Course.create({
       Name,
       Professor: `${instructor.Username}`,
       Subject,
-      Price,
+      Price: newPrice,
+      Promotion: { price: promotion, endDate: endDate },
       shortSummary,
       VideoUrl,
       Subtitles,

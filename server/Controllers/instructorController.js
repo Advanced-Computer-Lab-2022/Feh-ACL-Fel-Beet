@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const Instructor = require("../Models/instructorModel");
 const Reviews = require("../models/reviewsModel");
 const Problems = require("../models/problemModel");
+const bcrypt = require("bcrypt");
 
 // View Ratings & Reviews
 const viewInstructorReviews = async (req, res) => {
@@ -22,7 +23,7 @@ const viewCourseReviews = async (req, res) => {
   try {
     const instructor = await Instructor.findById(id);
     const listOfCourses = instructor.Courses;
-    listOfCourses.map(async (courseId) => {
+    listOfCourses.map(async courseId => {
       reviews.push(await Reviews.find({ belongsTo: courseId }));
     });
   } catch (error) {
@@ -42,12 +43,19 @@ const getProfile = async (req, res) => {
 };
 
 const editProfile = async (req, res) => {
-  const { id } = req.params;
+  const { id } = req.body;
+  const password = req.body.Password;
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).json({ error: "No such instructor" });
   }
 
-  const instructor = await Instructor.findByIdAndUpdate(id, { ...req.body });
+  const salt = await bcrypt.genSalt();
+  const hashedPass = await bcrypt.hash(password, salt);
+
+  const instructor = await Instructor.findByIdAndUpdate(id, {
+    ...req.body,
+    Password: hashedPass,
+  });
   if (!instructor) {
     return res.status(400).json({ error: "No such instructor" });
   }
@@ -61,7 +69,7 @@ const viewReports = async (req, res) => {
 };
 
 const report = async (req, res) => {
-  const { id } = req.params;
+  const { id } = req.body;
 
   const problem = await Problems.create({ ...req.body, belongTo: id });
   res.status(200).json(problem);

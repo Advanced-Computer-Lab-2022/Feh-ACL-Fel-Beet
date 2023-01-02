@@ -5,7 +5,6 @@ import { useEffect } from "react";
 import ReactPlayer from "react-player";
 import CourseDetails from "../components/CourseDetails";
 import Grid from "@mui/material/Grid";
-import Navbar from "../components/Navbar";
 import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
@@ -15,6 +14,7 @@ import Typography from "@mui/material/Typography";
 import Rating from "@mui/material/Rating";
 import { TextField } from "@mui/material";
 import Stack from "@mui/material/Stack";
+import cookie from "react-cookies";
 
 export default function ViewCourse() {
   const location = useLocation();
@@ -25,6 +25,13 @@ export default function ViewCourse() {
   const [rating, setRating] = React.useState(0);
   const [reviewTitle, setReviewTitle] = React.useState("");
   const [reviewDescription, setReviewDescription] = React.useState("");
+
+  const [ratingCourse, setRatingCourse] = React.useState(0);
+  const [reviewTitleCourse, setReviewTitleCourse] = React.useState("");
+  const [reviewDescriptionCourse, setReviewDescriptionCourse] =
+    React.useState("");
+
+  const traineeId = cookie.load("id");
 
   useEffect(() => {
     axios
@@ -39,8 +46,36 @@ export default function ViewCourse() {
     setVideo(course.Subtitles[idx].VideoUrl);
   }
 
+  async function handleInstructorReview() {
+    await axios
+      .post("http://localhost:4000/individualTrainee/rateInstructor", {
+        traineeId,
+        username: course.Professor,
+        Rating: rating,
+        Title: reviewTitle,
+        Body: reviewDescription,
+      })
+      .then((res) => {
+        alert("Review posted");
+      });
+  }
+
+  async function handleCourseReview() {
+    await axios
+      .post("http://localhost:4000/individualTrainee/rateCourse", {
+        traineeId,
+        courseName: course.Name,
+        Rating: ratingCourse,
+        Title: reviewTitleCourse,
+        Body: reviewDescriptionCourse,
+      })
+      .then((res) => {
+        alert("Review posted");
+      });
+  }
+
   return (
-    <div style={{margin: '20px'}}>
+    <div style={{ margin: "20px" }}>
       <Grid container>
         <Grid item xs={4} className="course-information">
           <CourseDetails course={courseData} curr={1} key={courseData._id} />
@@ -85,15 +120,6 @@ export default function ViewCourse() {
             setRating(newValue);
           }}
         />
-
-        <Typography component="legend">Rate Course</Typography>
-        <Rating
-          name="simple-controlled"
-          value={rating}
-          onChange={(event, newValue) => {
-            setRating(newValue);
-          }}
-        />
         <TextField
           label={"Review Title"}
           value={reviewTitle}
@@ -110,7 +136,37 @@ export default function ViewCourse() {
           }}
           rows={4}
         />
-        <Button variant={"contained"}>Submit Review</Button>
+        <Button variant={"contained"} onClick={handleInstructorReview}>
+          Submit Review
+        </Button>
+
+        <Typography component="legend">Rate Course</Typography>
+        <Rating
+          name="simple-controlled"
+          value={ratingCourse}
+          onChange={(event, newValue) => {
+            setRatingCourse(newValue);
+          }}
+        />
+        <TextField
+          label={"Review Title"}
+          value={reviewTitleCourse}
+          onChange={(e) => {
+            setReviewTitleCourse(e.target.value);
+          }}
+        />
+        <TextField
+          multiline
+          label={"Review Description"}
+          value={reviewDescriptionCourse}
+          onChange={(e) => {
+            setReviewDescriptionCourse(e.target.value);
+          }}
+          rows={4}
+        />
+        <Button variant={"contained"} onClick={handleCourseReview}>
+          Submit Review
+        </Button>
       </Stack>
     </div>
   );
