@@ -8,6 +8,8 @@ import { styled } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
 import axios from "axios";
 import Grid from "@mui/material/Grid";
+import Cookies from "js-cookie";
+import Navbar from "../components/Navbar";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -53,12 +55,11 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 const MyCourses = () => {
   const [user, setUser] = useState(null);
-  const [instructorCourses, setInstructorCourses] = useState([]);
-  const [instructorCoursesFinal, setInstructorCoursesFinal] = useState([]);
+  const [traineeCourses, setTraineeCourses] = useState([]);
+  const [traineeCoursesFinal, setTraineeCoursesFinal] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [currency, setCurrency] = useState();
 
-  const fetchUser = username => {
+  const fetchUser = (username) => {
     setLoading(true);
     axios
       .post(
@@ -70,44 +71,44 @@ const MyCourses = () => {
           headers: { "Content-Type": "application/json" },
         }
       )
-      .then(res => {
+      .then((res) => {
         setUser(res.data);
         console.log(res.data);
         setLoading(false);
       });
   };
 
-  const fetchCourses = async () => {
-    fetchUser(Cookies.get("username"));
-    setInstructorCourses(user.courses);
+const fetchCourses = async () => {
+    fetchUser(Cookies.get("username"))
+    setTraineeCourses(user.courses);
     const response = await fetch("http://localhost:4000/course/allCourses");
     const json = await response.json();
     let finalCourses = [];
     for (let i = 0; i < json.length; i++) {
-      for (let j = 0; j < instructorCourses.length; j++) {
-        if (instructorCourses[j].Name == json[i].Name) {
-          finalCourses.append(json[i]);
+        for(let j =0; j < traineeCourses.length; j++){
+            if(traineeCourses[j].Name == json[i].Name){
+                finalCourses.append(json[i]);
+            }
         }
-      }
     }
     if (response.ok) {
-      setInstructorCoursesFinal(finalCourses);
+        setTraineeCoursesFinal(finalCourses);
     }
-  };
+};
 
-  useEffect(() => {
+useEffect(() => {
     fetchCourses();
-    setCurrency(Cookies.get("currency"));
-  }, []);
+}, []);
 
   return (
     <div>
+      <Navbar />
       <Grid container spacing={6}>
         <Grid item className="courses" xs={8}>
-          <h1 className="title"> Currently Teaching: </h1>
-          {instructorCoursesFinal &&
-            instructorCoursesFinal.map(course => (
-              <CourseDetails course={course} curr={currency} key={course._id} />
+          <h1 className="title"> My Courses </h1>
+          {traineeCoursesFinal &&
+            traineeCoursesFinal.map((course) => (
+              <CourseDetails course={course} curr={1} key={course._id} />
             ))}
         </Grid>
       </Grid>

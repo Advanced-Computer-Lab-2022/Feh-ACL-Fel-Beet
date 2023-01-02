@@ -100,6 +100,25 @@ const viewReports = async (req, res) => {
   res.status(200).json(problems);
 };
 
+// Return a User's information
+const findUser = async (req, res) => {
+  const { Username } = req.body;
+  let userDetails = {};
+  let type = {type: ""};
+  if (await IndividualTrainee.findOne({ Username: Username })) {
+    userDetails = await IndividualTrainee.findOne({ Username: Username });
+  } else if (await CorporateTrainee.findOne({ Username: Username })) {
+    userDetails = await CorporateTrainee.findOne({ Username: Username });
+  } else if (await Instructor.findOne({ Username: Username })) {
+    userDetails = await Instructor.findOne({ Username: Username });
+  } else if (await Admin.findOne({ Username: Username })) {
+    userDetails = await Admin.findOne({ Username: Username });
+  } else {
+    userDetails = {};
+  }
+  res.status(200).json(userDetails);
+};
+
 const setProblemStatus = async (req, res) => {};
 
 module.exports = {
@@ -108,4 +127,5 @@ module.exports = {
   addCorporateTrainee,
   setPromotion,
   viewReports,
+  findUser,
 };

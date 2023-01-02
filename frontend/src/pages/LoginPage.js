@@ -83,7 +83,7 @@ export default function LoginPage() {
                   Forgot My Password
                 </Button>
                 <Button variant="contained" onClick={handleSubmit}>
-                  Login
+                  Log In
                 </Button>
               </Stack>
             </Grid>

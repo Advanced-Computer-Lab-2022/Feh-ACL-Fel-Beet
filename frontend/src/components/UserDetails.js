@@ -6,7 +6,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
 
-const UserDetails = ({ user }) => {
+const UserDetails = ({ user, type }) => {
   const navigate = useNavigate();
 
   const logOut = () => {
@@ -16,12 +16,14 @@ const UserDetails = ({ user }) => {
         console.log("logged out");
         console.log(res.data);
         Cookies.set("username", "");
+        navigate("../");
       });
   };
   return (
     <div className="user-details" style={{ cursor: "pointer" }}>
       <Grid container alignItems="center" margin={1}>
         <Grid item xs={6} justifyContent="center">
+          {type}
           <Grid item xs={4} margin={1}>
             {user.FirstName} <span> </span> {user.LastName}
           </Grid>

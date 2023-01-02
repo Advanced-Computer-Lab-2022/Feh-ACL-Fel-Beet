@@ -9,7 +9,6 @@ const {
   getIndividualProfile,
   editIndividual,
   requestRefund,
-  findTrainee,
 } = require("../Controllers/traineeController");
 
 const { forgotPassword } = require("../Helpers/Nodemailer");
@@ -39,8 +38,5 @@ router.get("/viewReports", viewProblems);
 
 // Request a refund
 router.post("/requestRefund/:id", requestRefund);
-
-//Find a trainee
-router.post("/findTrainee", findTrainee);
 
 module.exports = router;

@@ -25,16 +25,28 @@ const RegistrationPage = () => {
   const [LastName, setLastName] = useState("");
   const [Gender, setGender] = useState("");
   const [error, setError] = useState(null);
+  const [confirmtc, setConfirmTC] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     console.log(cookie.load("id"));
   }, []);
 
+  const tcToggle = (e) => {
+    e.preventDefault();
+    if(confirmtc == false){
+      setConfirmTC(true);
+    }
+    else{
+      setConfirmTC(false);
+    }
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    axios
+    if(confirmtc){
+      axios
       .post(
         "http://localhost:4000/guest/signup",
         {
@@ -68,6 +80,11 @@ const RegistrationPage = () => {
             });
         }
       });
+    }
+    else{
+      setError("You must accept the terms and conditions!");
+    }
+    
   };
 
   return (
@@ -139,7 +156,7 @@ const RegistrationPage = () => {
               </FormControl>
               <FormGroup>
                 <FormControlLabel
-                  control={<Checkbox />}
+                  control={<Checkbox onClick={tcToggle} checked={confirmtc}/>}
                   label={
                     <div>
                       <span>I accept the </span>

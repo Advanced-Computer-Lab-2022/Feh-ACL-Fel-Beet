@@ -14,7 +14,7 @@ const login = async (req, res) => {
   let user;
   if (await IndividualTrainee.findOne({ Username: Username })) {
     user = await IndividualTrainee.findOne({ Username: Username });
-    type = "Indiviual Trainee";
+    type = "Individual Trainee";
   } else if (await CorporateTrainee.findOne({ Username: Username })) {
     user = await CorporateTrainee.findOne({ Username: Username });
     type = "Corporate Trainee";
@@ -40,7 +40,6 @@ const login = async (req, res) => {
 };
 
 const logout = async (req, res) => {
-  console.log("logout");
   res.cookie("jwt", "", { httpOnly: true, maxAge: 1 });
   res.status(200).json("Logged out successfully");
 };

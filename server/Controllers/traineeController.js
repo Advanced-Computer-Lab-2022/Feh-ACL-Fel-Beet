@@ -10,26 +10,6 @@ const bcrypt = require("bcrypt");
 
 //---------------FUNCTIONS THAT BELONG TO BOTH TYPES OF TRAINEES-------------------
 
-// Return a trainee's information
-const findTrainee = async (req, res) => {
-  console.log("here1");
-  const { Username } = req.body;
-  let userDetails;
-  if (await IndividualTrainee.findOne({ Username: Username })) {
-    userDetails = await IndividualTrainee.findOne({ Username: Username });
-  } else if (await CorporateTrainee.findOne({ Username: Username })) {
-    userDetails = await IndividualTrainee.findOne({ Username: Username });
-  } else if (await IndividualTrainee.findOne({ Username: Username })) {
-    userDetails = await IndividualTrainee.findOne({ Username: Username });
-  } else if (await IndividualTrainee.findOne({ Username: Username })) {
-    userDetails = await IndividualTrainee.findOne({ Username: Username });
-  } else {
-    userDetails = {};
-  }
-  console.log(userDetails);
-  res.status(200).json(userDetails);
-};
-
 // Rate Instructor
 const rateInstructor = async (req, res) => {
   const { traineeId, username } = req.body;
@@ -249,5 +229,4 @@ module.exports = {
   viewProblems,
   editIndividual,
   editCorporate,
-  findTrainee,
 };

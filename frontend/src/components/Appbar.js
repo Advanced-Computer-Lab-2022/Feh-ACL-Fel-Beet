@@ -22,6 +22,7 @@ const settings = ["Profile", "Report", "Logout"];
 function GudAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [userType, setUserType] = React.useState("");
   const navigate = useNavigate();
 
   const handleOpenNavMenu = event => {
@@ -41,7 +42,13 @@ function GudAppBar() {
         navigate("../");
       });
     } else if (page) {
-      navigate(`/${page.replace(/\s+/g, "")}`);
+      console.log(page);
+      if (userType == "Instructor" && page == "My Courses") {
+        console.log(userType);
+        navigate("/instructorHome");
+      } else {
+        navigate(`/${page.replace(/\s+/g, "")}`);
+      }
     }
   };
 
@@ -68,7 +75,7 @@ function GudAppBar() {
               textDecoration: "none",
             }}
           >
-            Saboora
+            SabOOra
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
