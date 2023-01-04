@@ -55,6 +55,9 @@ The platform was implemented with a typical frontend-backend architecture. The d
 - Course Page
 ![Course Page](./usage%20images/Course.png)
 
+### Code style
+No specific code style was used, but there is a strong emphasis in the project on decent indentation and whitespaces; good commenting is also highly requested.
+
 ### Code Examples
 #### Frontend 
 - Main routing Code
@@ -196,7 +199,7 @@ module.exports = {
 
 
 ### Usage Video
-![How to Use Saboora](https://youtu.be/5y7CAVE8IY0)
+[![Watch the video](https://img.youtube.com/vi/5y7CAVE8IY0/hqdefault.jpg)](https://www.youtube.com/watch?v=5y7CAVE8IY0)
 
 ### Frontend Tools and Frameworks
 ##### [React:](https://opensource.fb.com/projects/react/)
@@ -211,6 +214,24 @@ MongoDB is a NoSQL distributed database designed to be used with distributed app
 Node.js is an event-driven runtime for JavaScript that works to run scripts outside of a web application and helps manage connections in a scalable manner.
 ##### [Express.js:](https://nodejs.org/en/about/)
 Express.js is a web framework designed to be used with Node to create web app servers. It comes with many useful features preinstalled and is very flexible and scalable.
+
+### Installation
+Users trying to contribute to the project should make sure to have NPM installed since the project uses Node, Mongoose, React, Axios, and other frameworks managed by NPM.
+
+### API Reference
+No external APIs were used. The project itself uses Mongoose to coordinate between the Node server and MongoDB, and Axios to help route from the React-based front end to the server.
+
+### Tests
+Testing was primarily done through Postman for backend functionalities related to the database. Some tests can be seen below:
+- Testing login functionality:
+![Login Test](https://user-images.githubusercontent.com/39414099/210558767-ddadeab6-89da-4c28-b211-d4f9aa446a0f.png)
+
+- Testing signup functionality:
+![Signup Test](https://user-images.githubusercontent.com/39414099/210560431-a31ea0f3-31cc-445a-8811-7e2b7be9597f.png)
+
+- Testing admin's power to create new admins:
+![Adming add in admin test](https://user-images.githubusercontent.com/39414099/210561217-3f79cad6-fafb-408b-9039-a21b9da14845.png)
+
 
 ### Development Roadmap
 Typical development occurs on a sprint basis. At the beginning of each sprint, requirements are added to the to-do list and distributed to the developers that would be most useful in executing them. At the end of the sprint, completed requirements are assessed, and non-completed ones are pushed to the requirements for the next sprint.
