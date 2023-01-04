@@ -4,7 +4,35 @@
 This project was made to showcase our collaborative skills at using Git and Github, and develop our programming skills in web development
 
 ### Build status:
-- Alpha 0.1: Essential features completed and operational
+Alpha 0.1: The following features are missing from the build or need attending to:
+- Instructors cannot be rated by users and cannot view those ratings
+- Instructors cannot be reviewed by users and cannto view those reviews
+- Instructors cannot view reviews and ratings on courses they teach
+- Users can't sort courses by number of enrolled students when viewing all courses
+- All courses can be accessed by all users without restrictions
+- Trainees are unable to enter their credit card details to add credits to their online wallet
+- Trainees are unable to purchase courses
+- Instructors don't get paid for courses they teach
+- Trainees can't see how much of a course they've completed
+- Trainees can't take notes alongside a video they're watching for a course
+- Trainees can't download their notes as PDF from the site
+- Trainees don't receive a certificate for completing a course (by email or locally)
+- Refund system is purely through the admin-based report system and isn't automated
+- Trainees can't see courses they're enrolled in on their profile page
+- Trainees can't see previously reported issues and their follow ups
+- Admins can't see currently reported problems
+- Admins can't resolve reported problems or follow up on them with the reporting user
+- Admins can't view course requests from corporate trainees
+- Admins can't grant corporate trainees access to specific courses
+- Admins can't edit course details while courses are live
+- Authentication rework is required: all users can access all content regardless of login status
+- Registration text not preserved when visiting T&C page
+- Not all currencies available on the web page
+- Currency preferences not saved to user profile
+- Country preferences not saved to user profile
+- Password reset email system need implementation
+- Color palette on site is inconsistent and needs revision
+
 
 ### Theme
 This project is an online learning system, where users can log on and register for courses, as well as complete exercises for those courses. They can also receive a certificate when they complete the course. Instructors and corporate trainees can also use the platform, where corporate trainees complete courses preassigned to them, and instructors grade and assess trainees themselves.
@@ -17,7 +45,7 @@ The platform was implemented with a typical frontend-backend architecture. The d
 - Effectively construct an application usign MongoDB, Express, Node, and React
 - Complete client specific requirements to finish a project
 
-### Usage Examples
+### Screenshots
 - Login Page 
 ![Login Page](./usage%20images/Login.png)
 - Home Page with All Courses View
@@ -26,6 +54,149 @@ The platform was implemented with a typical frontend-backend architecture. The d
 ![Profile Page](./usage%20images/Profile%20View.png)
 - Course Page
 ![Course Page](./usage%20images/Course.png)
+
+### Code Examples
+#### Frontend 
+- Main routing Code
+```js
+function App() {
+  return (
+    <div className="App">
+      <BrowserRouter>
+        <Appbar />
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/myCourses" element={<InstructorCourses />} />
+          <Route path="/registration-page" element={<RegistrationPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/add-course" element={<CourseCreation />} />
+          <Route path="/viewCourse" element={<ViewCourse />} />
+          <Route path="/addUser" element={<UserCreation />} />
+          <Route path="/adminHome" element={<Admin />} />
+          <Route path="/traineeCourses" element={<MyCourses />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="TermsAndConditions" element={<TermsAndConditions />} />
+          <Route
+            path="TraineeTermsAndConditions"
+            element={<TraineeTermsAndConditions />}
+          />
+          <Route path="exercise" element={<Exercise />} />
+          <Route path="changePassword" element={<ChangePassword />} />
+          <Route path="report" element={<Report />} />
+        </Routes>
+      </BrowserRouter>
+    </div>
+  );
+}
+```
+- Example of component: Password Changing
+```js
+export default function ChangePassword() {
+  const [newPass, setNewPass] = React.useState("");
+  const id = cookie.load("id");
+  const navigate = useNavigate();
+
+  function handleClick() {
+    axios
+      .post("http://localhost:4000/individualTrainee/edit", {
+        id,
+        Password: newPass,
+      })
+      .then(navigate("../home"));
+  }
+
+  return (
+    <div>
+      <Grid container justifyContent="center" padding={4}>
+        <Stack
+          direction={"column"}
+          spacing={1}
+          width={"30%"}
+          justifyContent="center"
+          marginTop={5}
+        >
+          <TextField
+            label="New Password"
+            type={"password"}
+            onChange={e => setNewPass(e.target.value)}
+          ></TextField>
+          <Button variant="contained" onClick={handleClick}>
+            Save
+          </Button>
+        </Stack>
+      </Grid>
+    </div>
+  );
+}
+```
+#### Backend
+
+- Backend: Main routing function
+```js
+//ROUTES
+const courseRoutes = require("./Routes/courseRoutes");
+const adminRoutes = require("./Routes/adminRoutes");
+const instructorRoutes = require("./Routes/instructorRoutes");
+const corporateTraineeRoutes = require("./Routes/corporateTraineeRoutes");
+const individualTraineeRoutes = require("./Routes/individualTraineeRoutes");
+const guestRoutes = require("./Routes/guestRoutes");
+app.use("/course", courseRoutes);
+app.use("/admin", adminRoutes);
+app.use("/instructor", instructorRoutes);
+app.use("/corporateTrainee", corporateTraineeRoutes);
+app.use("/individualTrainee", individualTraineeRoutes);
+app.use("/guest", guestRoutes);
+
+//DB CONNECTION & LISTENING TO PORT
+mongoose
+  .connect(process.env.ATLAS_URI)
+  .then(() => {
+    console.log("Connected to MongoDB.");
+    app.listen(port, () => {
+      console.log("Listening on port", port);
+    });
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+```
+
+- Backend: User finding function
+```js
+const findUser = async (req, res) => {
+  const { Username } = req.body;
+  let userDetails = {};
+  let type = {type: ""};
+  if (await IndividualTrainee.findOne({ Username: Username })) {
+    userDetails = await IndividualTrainee.findOne({ Username: Username });
+  } else if (await CorporateTrainee.findOne({ Username: Username })) {
+    userDetails = await CorporateTrainee.findOne({ Username: Username });
+  } else if (await Instructor.findOne({ Username: Username })) {
+    userDetails = await Instructor.findOne({ Username: Username });
+  } else if (await Admin.findOne({ Username: Username })) {
+    userDetails = await Admin.findOne({ Username: Username });
+  } else {
+    userDetails = {};
+  }
+  res.status(200).json(userDetails);
+};
+
+const setProblemStatus = async (req, res) => {};
+
+module.exports = {
+  addAdmin,
+  addInstructor,
+  addCorporateTrainee,
+  setPromotion,
+  viewReports,
+  findUser,
+};
+```
+
+
+### Usage Video
+![How to Use Saboora](https://youtu.be/5y7CAVE8IY0)
 
 ### Frontend Tools and Frameworks
 ##### [React:](https://opensource.fb.com/projects/react/)
@@ -45,11 +216,11 @@ Express.js is a web framework designed to be used with Node to create web app se
 Typical development occurs on a sprint basis. At the beginning of each sprint, requirements are added to the to-do list and distributed to the developers that would be most useful in executing them. At the end of the sprint, completed requirements are assessed, and non-completed ones are pushed to the requirements for the next sprint.
 
 ### Principal Contributors
-- Ziad Bahy
-- Omar Yehia
-- Yousef Korayem
-- Mohammed El Zalabany
-- Omar Farid
+- Ziad Bahy:
+- Omar Yehia:
+- Yousef Korayem:
+- Mohammed El Zalabany:
+- Omar Farid:
 
 ### Additional Credits and Acknowledgements
 - [MUI Docs: ](https://mui.com/material-ui/getting-started/overview/) The documentation for MUI was invaluable for this project.
