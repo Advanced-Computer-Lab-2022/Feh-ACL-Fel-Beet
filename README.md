@@ -219,7 +219,284 @@ Express.js is a web framework designed to be used with Node to create web app se
 Users trying to contribute to the project should make sure to have NPM installed since the project uses Node, Mongoose, React, Axios, and other frameworks managed by NPM.
 
 ### API Reference
-No external APIs were used. The project itself uses Mongoose to coordinate between the Node server and MongoDB, and Axios to help route from the React-based front end to the server.
+Some examples of the usage of our API to get docs from MongoDB to the backend server application are below:
+
+#### Creating a new admin
+```SQL
+POST /admin/createAdmin
+```
+
+```json
+{
+    "Username": "New Admin2",
+    "Password": "New Password2"
+}
+```
+
+##### Response:
+
+```json
+{
+    "Username": "New Admin2",
+    "Password": "$2b$10$bGB/eWTjUoHDAIYd.oz5uedvp.An.jsSAmRgs8fHV70YuZMyr2aW.",
+    "_id": "63b5b91ae31f35b8c501e2d4",
+    "createdAt": "2023-01-04T17:36:26.866Z",
+    "updatedAt": "2023-01-04T17:36:26.866Z",
+    "__v": 0
+}
+```
+
+#### Getting all courses
+```SQL
+GET /courses/allCourses
+```
+
+##### Response:
+
+```json
+{
+        "Promotion": {
+            "price": 50,
+            "endDate": "2023-10-12T00:00:00.000Z"
+        },
+        "_id": "63b40d865e5405b83dc3981f",
+        "Name": "Omar course",
+        "Professor": "ziko",
+        "Subject": "CS",
+        "Price": 25,
+        "ratingsCalc": [],
+        "Rating": 5,
+        "shortSummary": "Course outline",
+        "VideoUrl": "https://www.youtube.com/watch?v=V8Xnt8p01no&t=8s",
+        "noOfEnrolled": 0,
+        "Subtitles": [
+            {
+                "Title": "sub1",
+                "Hours": null,
+                "Description": "sub1 description",
+                "VideoUrl": "https://www.youtube.com/watch?v=ih9DQPbaYiE&t=6s",
+                "Exercise": {
+                    "Name": "",
+                    "Questions": [
+                        {
+                            "Question": "fail?",
+                            "Choices": [
+                                "no"
+                            ],
+                            "Answer": "4",
+                            "_id": "63b40d865e5405b83dc39822"
+                        },
+                        {
+                            "Question": "please give us a mark",
+                            "Choices": [
+                                "plz",
+                                "plz",
+                                "plz",
+                                "pleaaaaaase"
+                            ],
+                            "Answer": "4",
+                            "_id": "63b40d865e5405b83dc39823"
+                        },
+                        {
+                            "Question": "please ",
+                            "Choices": [
+                                "sure",
+                                "no",
+                                "no",
+                                "no"
+                            ],
+                            "Answer": "1",
+                            "_id": "63b40d865e5405b83dc39824"
+                        }
+                    ],
+                    "_id": "63b40d865e5405b83dc39821"
+                },
+                "_id": "63b40d865e5405b83dc39820"
+            },
+            {
+                "Title": "sub2 ",
+                "Hours": null,
+                "Description": "sub2 description",
+                "VideoUrl": "https://www.youtube.com/watch?v=0es7PkjoKBI&t=67s",
+                "Exercise": {
+                    "Name": "",
+                    "Questions": [
+                        {
+                            "Question": "",
+                            "Choices": [
+                                "",
+                                "",
+                                "",
+                                "",
+                                ""
+                            ],
+                            "Answer": "",
+                            "_id": "63b40d865e5405b83dc39827"
+                        },
+                        {
+                            "Question": "",
+                            "Choices": [
+                                "",
+                                "",
+                                "",
+                                "",
+                                ""
+                            ],
+                            "Answer": "",
+                            "_id": "63b40d865e5405b83dc39828"
+                        },
+                        {
+                            "Question": "",
+                            "Choices": [
+                                "",
+                                "",
+                                "",
+                                "",
+                                ""
+                            ],
+                            "Answer": "",
+                            "_id": "63b40d865e5405b83dc39829"
+                        }
+                    ],
+                    "_id": "63b40d865e5405b83dc39826"
+                },
+                "_id": "63b40d865e5405b83dc39825"
+            },
+            {
+                "Title": "",
+                "Hours": null,
+                "Description": "",
+                "VideoUrl": "",
+                "Exercise": {
+                    "Name": "",
+                    "Questions": [
+                        {
+                            "Question": "",
+                            "Choices": [
+                                "",
+                                "",
+                                "",
+                                "",
+                                ""
+                            ],
+                            "Answer": "",
+                            "_id": "63b40d865e5405b83dc3982c"
+                        },
+                        {
+                            "Question": "",
+                            "Choices": [
+                                "",
+                                "",
+                                "",
+                                "",
+                                ""
+                            ],
+                            "Answer": "",
+                            "_id": "63b40d865e5405b83dc3982d"
+                        },
+                        {
+                            "Question": "",
+                            "Choices": [
+                                "",
+                                "",
+                                "",
+                                "",
+                                ""
+                            ],
+                            "Answer": "",
+                            "_id": "63b40d865e5405b83dc3982e"
+                        }
+                    ],
+                    "_id": "63b40d865e5405b83dc3982b"
+                },
+                "_id": "63b40d865e5405b83dc3982a"
+            }
+        ],
+        "createdAt": "2023-01-03T11:12:06.122Z",
+        "updatedAt": "2023-01-03T11:12:06.122Z",
+        "__v": 0
+    },
+    ...
+```
+
+#### Submitting a help request as a corporate trainee
+```SQL
+POST /corporateTrainee/report
+```
+
+```json
+{
+    "Type" : "New Admin2's Problem",
+    "Body" : "Description of the progblem",
+    "Belongs To": "639620f7618f3aaedbbcdf41",
+    "Status": "Ongoing",
+    "Seen" : false
+}
+```
+
+##### Response:
+
+```json
+{
+    "Type": "New Admin2's Problem",
+    "Body": "Description of the progblem",
+    "Status": "Ongoing",
+    "Seen": false,
+    "_id": "63b5bdcb5cbfd5426361d52a",
+    "__v": 0
+}
+```
+
+#### View reported problems as an instructor
+```SQL
+GET /instructor/viewProblems
+```
+
+##### Response:
+
+```json
+{
+    [
+    {
+        "_id": "63b40b835e5405b83dc3957e",
+        "Type": "Technical",
+        "Body": "Hello",
+        "Seen": false,
+        "__v": 0
+    },
+    {
+        "_id": "63b5bdcb5cbfd5426361d52a",
+        "Type": "New Admin2's Problem",
+        "Body": "Description of the progblem",
+        "Status": "Ongoing",
+        "Seen": false,
+        "__v": 0
+    }
+]
+}
+```
+
+#### Log in to your account as a user
+```SQL
+POST /guest/login
+```
+
+```json
+{
+    "Username": "New Admin2",
+    "Password": "New Password2"
+}
+```
+
+##### Response:
+
+```json
+{
+    "username": "New Admin2",
+    "id": "63b5b91ae31f35b8c501e2d4",
+    "type": "Admin"
+}
+```
 
 ### Tests
 Testing was primarily done through Postman for backend functionalities related to the database. Some tests can be seen below:
